@@ -1,0 +1,99 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><title>UP.PRO — Wireframes: Nutrição</title>
+<meta name="design_doc_mode" content="canvas">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Inter:wght@400;600;700&display=swap');
+*{box-sizing:border-box}
+body{margin:0;background:#eeeeea;font-family:'Patrick Hand',cursive}
+.frame{position:absolute;background:#fff;border:2px solid #1a1a1a;border-radius:4px;box-shadow:4px 4px 0 rgba(0,0,0,.08)}
+.frame h3{position:absolute;top:-34px;left:0;font-family:Inter,sans-serif;font-weight:700;font-size:15px;color:#1a1a1a;margin:0}
+.frame .tag{position:absolute;top:-34px;right:0;font-family:Inter,sans-serif;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.05em}
+.phone{width:280px;height:600px;padding:14px}
+.status{display:flex;justify-content:space-between;font-size:12px;padding:0 4px 8px;color:#555;font-family:Inter}
+.box{border:2px solid #1a1a1a;border-radius:8px}
+.dash{border:2px dashed #999;border-radius:8px}
+.ph{background:repeating-linear-gradient(45deg,#f2f2ee,#f2f2ee 6px,#e6e6e0 6px,#e6e6e0 12px)}
+.accent{background:#d5ff5f;border:2px solid #1a1a1a}
+.lbl{font-size:13px}
+.small{font-size:11px;color:#777;font-family:Inter}
+svg.icon{stroke:#1a1a1a;stroke-width:2;fill:none}
+</style></head>
+<body>
+
+<template id="__bundler_thumbnail"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="#eeeeea"/><g transform="translate(15,15)" fill="none" stroke="#1a1a1a" stroke-width="3"><rect width="70" height="70" rx="6"/><path d="M15 25 h40 M15 40 h40 M15 55 h25" stroke-linecap="round"/></g></svg></template>
+
+<div style="position:relative;width:2600px;height:900px;padding:80px">
+<h1 style="position:absolute;top:20px;left:80px;font-family:Inter,sans-serif;font-size:22px;color:#1a1a1a">Nutrição — 5 direções de wireframe</h1>
+
+<!-- A: Diário tipo lista, por refeição -->
+<div class="frame phone" style="left:80px;top:100px">
+<h3>A · Diário por refeição</h3><span class="tag">layout/estrutura</span>
+<div class="status"><span>9:41</span><span>◈ ▲ ■</span></div>
+<div class="box" style="padding:10px;margin-bottom:8px"><div class="lbl">1.240 / 1.800 kcal hoje</div><div class="box" style="height:10px;margin-top:6px"><div style="width:65%;height:100%;background:#d5ff5f"></div></div></div>
+<div class="box" style="padding:8px;margin-bottom:6px"><div class="lbl" style="font-weight:bold">Café da manhã</div><div class="small">+ adicionar alimento</div></div>
+<div class="box" style="padding:8px;margin-bottom:6px"><div class="lbl" style="font-weight:bold">Almoço</div><div class="small">+ adicionar alimento</div></div>
+<div class="box" style="padding:8px;margin-bottom:6px"><div class="lbl" style="font-weight:bold">Lanche</div><div class="small">+ adicionar alimento</div></div>
+<div class="box" style="padding:8px;margin-bottom:6px"><div class="lbl" style="font-weight:bold">Jantar</div><div class="small">+ adicionar alimento</div></div>
+</div>
+
+<!-- B: Anel central + macros -->
+<div class="frame phone" style="left:440px;top:100px">
+<h3>B · Anel + macros</h3><span class="tag">densidade baixa</span>
+<div class="status"><span>9:41</span><span>◈ ▲ ■</span></div>
+<div style="display:flex;justify-content:center;margin:20px 0"><svg width="140" height="140"><circle cx="70" cy="70" r="60" stroke="#ddd" stroke-width="14" fill="none"/><circle cx="70" cy="70" r="60" stroke="#d5ff5f" stroke-width="14" fill="none" stroke-dasharray="240 377"/><text x="70" y="65" text-anchor="middle" font-family="Inter" font-size="20" font-weight="700">1.240</text><text x="70" y="82" text-anchor="middle" font-family="Inter" font-size="10" fill="#777">/ 1.800 kcal</text></svg></div>
+<div style="display:flex;gap:6px;justify-content:space-between">
+<div class="box" style="flex:1;padding:6px;text-align:center;font-size:11px;font-family:Inter">Prot 62g</div>
+<div class="box" style="flex:1;padding:6px;text-align:center;font-size:11px;font-family:Inter">Carb 140g</div>
+<div class="box" style="flex:1;padding:6px;text-align:center;font-size:11px;font-family:Inter">Gord 38g</div>
+</div>
+<div class="dash" style="margin-top:12px;padding:10px;text-align:center">+ Registrar refeição</div>
+</div>
+
+<!-- C: Fluxo de busca/registro passo a passo -->
+<div class="frame phone" style="left:800px;top:100px">
+<h3>C · Fluxo de registro</h3><span class="tag">fluxo de navegação</span>
+<div class="status"><span>9:41</span><span>◈ ▲ ■</span></div>
+<div class="box" style="padding:8px;margin-bottom:10px">🔍 buscar alimento…</div>
+<div style="display:flex;justify-content:space-between;padding:6px 4px;border-bottom:1px dashed #ccc"><span class="lbl">Torrada integral</span><span class="small">+ </span></div>
+<div style="display:flex;justify-content:space-between;padding:6px 4px;border-bottom:1px dashed #ccc"><span class="lbl">Ovo cozido</span><span class="small">+ </span></div>
+<div style="display:flex;justify-content:space-between;padding:6px 4px;border-bottom:1px dashed #ccc"><span class="lbl">Abacate</span><span class="small">+ </span></div>
+<div style="display:flex;justify-content:space-between;padding:6px 4px;border-bottom:1px dashed #ccc"><span class="lbl">Café sem açúcar</span><span class="small">+ </span></div>
+<div class="accent" style="margin-top:14px;padding:10px;text-align:center;border-radius:20px;font-family:Inter;font-weight:700">Adicionar 3 itens</div>
+<div class="small" style="text-align:center;margin-top:6px">passo 2 de 3 →</div>
+</div>
+
+<!-- D: Grade densa (cards de refeição) -->
+<div class="frame phone" style="left:1160px;top:100px">
+<h3>D · Grade de sugestões</h3><span class="tag">densidade alta</span>
+<div class="status"><span>9:41</span><span>◈ ▲ ■</span></div>
+<div class="lbl" style="margin-bottom:6px">Sugestões para o almoço</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+<div class="box ph" style="height:90px;position:relative"><div class="small" style="position:absolute;bottom:4px;left:4px;background:#fff;padding:1px 4px">420 kcal</div></div>
+<div class="box ph" style="height:90px;position:relative"><div class="small" style="position:absolute;bottom:4px;left:4px;background:#fff;padding:1px 4px">310 kcal</div></div>
+<div class="box ph" style="height:90px;position:relative"><div class="small" style="position:absolute;bottom:4px;left:4px;background:#fff;padding:1px 4px">505 kcal</div></div>
+<div class="box ph" style="height:90px;position:relative"><div class="small" style="position:absolute;bottom:4px;left:4px;background:#fff;padding:1px 4px">275 kcal</div></div>
+</div>
+<div class="small" style="margin-top:8px">Filtrar: vegetariano · rápido · low carb</div>
+</div>
+
+<!-- E: Linha do tempo horizontal do dia -->
+<div class="frame phone" style="left:1520px;top:100px">
+<h3>E · Linha do tempo</h3><span class="tag">estilo visual / cronológico</span>
+<div class="status"><span>9:41</span><span>◈ ▲ ■</span></div>
+<div style="position:relative;padding-left:16px;border-left:3px solid #1a1a1a;margin-top:14px">
+<div style="position:relative;margin-bottom:22px"><div style="position:absolute;left:-22px;top:2px;width:10px;height:10px;border-radius:50%;background:#d5ff5f;border:2px solid #1a1a1a"></div><div class="lbl">08:30 · Café</div><div class="small">registrado · 380 kcal</div></div>
+<div style="position:relative;margin-bottom:22px"><div style="position:absolute;left:-22px;top:2px;width:10px;height:10px;border-radius:50%;background:#d5ff5f;border:2px solid #1a1a1a"></div><div class="lbl">12:30 · Almoço</div><div class="small">registrado · 380 kcal</div></div>
+<div style="position:relative;margin-bottom:22px"><div style="position:absolute;left:-22px;top:2px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid #1a1a1a"></div><div class="lbl">16:00 · Lanche</div><div class="small">ainda não registrado</div></div>
+<div style="position:relative;margin-bottom:22px"><div style="position:absolute;left:-22px;top:2px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid #1a1a1a"></div><div class="lbl">20:00 · Jantar</div><div class="small">ainda não registrado</div></div>
+</div>
+<div class="dash" style="margin-top:6px;padding:8px;text-align:center">+ registrar próxima refeição</div>
+</div>
+
+<div class="small" style="position:absolute;left:80px;top:740px;max-width:2400px;line-height:1.6">
+A · lista simples por refeição, familiar e escaneável rapidamente.&nbsp;&nbsp;&nbsp;
+B · foco no número do dia com anel de progresso, pouca densidade.&nbsp;&nbsp;&nbsp;
+C · fluxo dedicado de busca e registro, passo a passo.&nbsp;&nbsp;&nbsp;
+D · grade densa de sugestões visuais, mais "descoberta" que "registro".&nbsp;&nbsp;&nbsp;
+E · linha do tempo cronológica do dia, ênfase em quando comeu, não só quanto.
+</div>
+</div>
+</body></html>
