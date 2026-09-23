@@ -1,0 +1,6 @@
+/* UP.PRO webfonts — served from Google Fonts.
+   SUBSTITUTION NOTE: no binary font files were provided with the brand assets.
+   Plus Jakarta Sans and Jost are the exact families named in the reference UI kit,
+   loaded here from the Google Fonts CDN. If licensed binaries exist, drop them in
+   assets/fonts/ and replace the @import below with @font-face rules. */
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Jost:ital,wght@0,300..700;1,300..700&display=swap");

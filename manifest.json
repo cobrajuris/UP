@@ -1,0 +1,298 @@
+{
+  "manifestVersion": 3,
+  "name": "UP.PRO Design System",
+  "namespace": "UPPRODesignSystem_86b5ff",
+  "files": [
+    "assets/notes/MIGRATION-REPORT.md",
+    "assets/notes/SKILL.from-standalone.md",
+    "components/actions/Button.d.ts",
+    "components/actions/Button.jsx",
+    "components/actions/Button.prompt.md",
+    "components/actions/Fab.d.ts",
+    "components/actions/Fab.jsx",
+    "components/actions/Fab.prompt.md",
+    "components/actions/IconButton.d.ts",
+    "components/actions/IconButton.jsx",
+    "components/actions/IconButton.prompt.md",
+    "components/actions/actions.card.html",
+    "components/bundle.css",
+    "components/bundle.js",
+    "components/content/Card.d.ts",
+    "components/content/Card.jsx",
+    "components/content/Card.prompt.md",
+    "components/content/ExerciseRow.d.ts",
+    "components/content/ExerciseRow.jsx",
+    "components/content/ExerciseRow.prompt.md",
+    "components/content/ListRow.d.ts",
+    "components/content/ListRow.jsx",
+    "components/content/ListRow.prompt.md",
+    "components/content/PlanOption.d.ts",
+    "components/content/PlanOption.jsx",
+    "components/content/PlanOption.prompt.md",
+    "components/content/ProfessionalRow.d.ts",
+    "components/content/ProfessionalRow.jsx",
+    "components/content/ProfessionalRow.prompt.md",
+    "components/content/ReviewCard.d.ts",
+    "components/content/ReviewCard.jsx",
+    "components/content/ReviewCard.prompt.md",
+    "components/content/SectionHeader.d.ts",
+    "components/content/SectionHeader.jsx",
+    "components/content/SectionHeader.prompt.md",
+    "components/content/WorkoutCard.d.ts",
+    "components/content/WorkoutCard.jsx",
+    "components/content/WorkoutCard.prompt.md",
+    "components/content/content.card.html",
+    "components/data/ActivityRings.d.ts",
+    "components/data/ActivityRings.jsx",
+    "components/data/ActivityRings.prompt.md",
+    "components/data/BarChart.d.ts",
+    "components/data/BarChart.jsx",
+    "components/data/BarChart.prompt.md",
+    "components/data/DataRow.d.ts",
+    "components/data/DataRow.jsx",
+    "components/data/DataRow.prompt.md",
+    "components/data/DifficultyMeter.d.ts",
+    "components/data/DifficultyMeter.jsx",
+    "components/data/DifficultyMeter.prompt.md",
+    "components/data/MetricStat.d.ts",
+    "components/data/MetricStat.jsx",
+    "components/data/MetricStat.prompt.md",
+    "components/data/ProgressBar.d.ts",
+    "components/data/ProgressBar.jsx",
+    "components/data/ProgressBar.prompt.md",
+    "components/data/RatingSummary.d.ts",
+    "components/data/RatingSummary.jsx",
+    "components/data/RatingSummary.prompt.md",
+    "components/data/data.card.html",
+    "components/feedback/Dialog.d.ts",
+    "components/feedback/Dialog.jsx",
+    "components/feedback/Dialog.prompt.md",
+    "components/feedback/EmptyState.d.ts",
+    "components/feedback/EmptyState.jsx",
+    "components/feedback/EmptyState.prompt.md",
+    "components/feedback/Skeleton.d.ts",
+    "components/feedback/Skeleton.jsx",
+    "components/feedback/Skeleton.prompt.md",
+    "components/feedback/Snackbar.d.ts",
+    "components/feedback/Snackbar.jsx",
+    "components/feedback/Snackbar.prompt.md",
+    "components/feedback/feedback.card.html",
+    "components/forms/FilterChips.d.ts",
+    "components/forms/FilterChips.jsx",
+    "components/forms/FilterChips.prompt.md",
+    "components/forms/Switch.d.ts",
+    "components/forms/Switch.jsx",
+    "components/forms/Switch.prompt.md",
+    "components/forms/TextField.d.ts",
+    "components/forms/TextField.jsx",
+    "components/forms/TextField.prompt.md",
+    "components/forms/TimeSlots.d.ts",
+    "components/forms/TimeSlots.jsx",
+    "components/forms/TimeSlots.prompt.md",
+    "components/forms/ToolbarActions.d.ts",
+    "components/forms/ToolbarActions.jsx",
+    "components/forms/ToolbarActions.prompt.md",
+    "components/forms/forms.card.html",
+    "components/foundation/Avatar.d.ts",
+    "components/foundation/Avatar.jsx",
+    "components/foundation/Avatar.prompt.md",
+    "components/foundation/Badge.d.ts",
+    "components/foundation/Badge.jsx",
+    "components/foundation/Badge.prompt.md",
+    "components/foundation/Icon.d.ts",
+    "components/foundation/Icon.jsx",
+    "components/foundation/Icon.prompt.md",
+    "components/foundation/foundation.card.html",
+    "components/lib/react-dom.production.min.js",
+    "components/lib/react.production.min.js",
+    "components/navigation/BottomNav.d.ts",
+    "components/navigation/BottomNav.jsx",
+    "components/navigation/BottomNav.prompt.md",
+    "components/navigation/CalendarGrid.d.ts",
+    "components/navigation/CalendarGrid.jsx",
+    "components/navigation/CalendarGrid.prompt.md",
+    "components/navigation/DayStrip.d.ts",
+    "components/navigation/DayStrip.jsx",
+    "components/navigation/DayStrip.prompt.md",
+    "components/navigation/MonthStepper.d.ts",
+    "components/navigation/MonthStepper.jsx",
+    "components/navigation/MonthStepper.prompt.md",
+    "components/navigation/TopAppBar.d.ts",
+    "components/navigation/TopAppBar.jsx",
+    "components/navigation/TopAppBar.prompt.md",
+    "components/navigation/navigation.card.html",
+    "docs/_ds_manifest.json",
+    "guidelines/color-brand.card.html",
+    "guidelines/color-contrast.card.html",
+    "guidelines/color-metrics.card.html",
+    "guidelines/color-neutrals.card.html",
+    "guidelines/color-semantic.card.html",
+    "guidelines/color-text.card.html",
+    "guidelines/elevation.card.html",
+    "guidelines/logo.card.html",
+    "guidelines/motion.card.html",
+    "guidelines/photography.card.html",
+    "guidelines/radius.card.html",
+    "guidelines/spacing-layout.card.html",
+    "guidelines/spacing-scale.card.html",
+    "guidelines/type-body.card.html",
+    "guidelines/type-display.card.html",
+    "guidelines/type-headings.card.html",
+    "guidelines/type-numerals.card.html",
+    "tokens.css",
+    "tokens/base.css",
+    "tokens/colors.css",
+    "tokens/elevation.css",
+    "tokens/fonts.css",
+    "tokens/motion.css",
+    "tokens/radius.css",
+    "tokens/spacing.css",
+    "tokens/typography.css",
+    "ui_kits/app/App.jsx",
+    "ui_kits/app/Home.jsx",
+    "ui_kits/app/Onboarding.jsx",
+    "ui_kits/app/Profile.jsx",
+    "ui_kits/app/Progress.jsx",
+    "ui_kits/app/Shell.jsx",
+    "ui_kits/app/Workouts.jsx",
+    "ui_kits/app/index.html",
+    "wireframes/Nutricao Wireframes.html"
+  ],
+  "libraries": [
+    {
+      "name": "react",
+      "version": "18.3.1",
+      "global": "React",
+      "file": "components/lib/react.production.min.js"
+    },
+    {
+      "name": "react-dom",
+      "version": "18.3.1",
+      "global": "ReactDOM",
+      "file": "components/lib/react-dom.production.min.js"
+    }
+  ],
+  "components": [
+    {
+      "name": "Button"
+    },
+    {
+      "name": "Fab"
+    },
+    {
+      "name": "IconButton"
+    },
+    {
+      "name": "Card"
+    },
+    {
+      "name": "ExerciseRow"
+    },
+    {
+      "name": "ListRow"
+    },
+    {
+      "name": "PlanOption"
+    },
+    {
+      "name": "ProfessionalRow"
+    },
+    {
+      "name": "ReviewCard"
+    },
+    {
+      "name": "SectionHeader"
+    },
+    {
+      "name": "WorkoutCard"
+    },
+    {
+      "name": "ActivityRings"
+    },
+    {
+      "name": "BarChart"
+    },
+    {
+      "name": "DataRow"
+    },
+    {
+      "name": "DifficultyMeter"
+    },
+    {
+      "name": "MetricStat"
+    },
+    {
+      "name": "ProgressBar"
+    },
+    {
+      "name": "RatingSummary"
+    },
+    {
+      "name": "Dialog"
+    },
+    {
+      "name": "EmptyState"
+    },
+    {
+      "name": "Skeleton"
+    },
+    {
+      "name": "Snackbar"
+    },
+    {
+      "name": "FilterChips"
+    },
+    {
+      "name": "Switch"
+    },
+    {
+      "name": "TextField"
+    },
+    {
+      "name": "TimeSlots"
+    },
+    {
+      "name": "ToolbarActions"
+    },
+    {
+      "name": "Avatar"
+    },
+    {
+      "name": "Badge"
+    },
+    {
+      "name": "Icon"
+    },
+    {
+      "name": "BottomNav"
+    },
+    {
+      "name": "CalendarGrid"
+    },
+    {
+      "name": "DayStrip"
+    },
+    {
+      "name": "MonthStepper"
+    },
+    {
+      "name": "TopAppBar"
+    }
+  ],
+  "lastChange": {
+    "by": "Migration",
+    "via": "standalone export",
+    "at": "2026-09-21T00:13:10.167Z",
+    "note": "migrated from the standalone version",
+    "source": "claude-design",
+    "authoredIn": "spa"
+  },
+  "assetGroups": [
+    {
+      "name": "Other"
+    },
+    {
+      "name": "notes"
+    }
+  ]
+}

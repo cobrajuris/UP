@@ -1,0 +1,24 @@
+:root{
+  /* Base unit 5px — the reference grid uses 5px gutters between stacked rows
+     and 10px screen margins on a 390px frame. */
+  --space-0:0px; /* @kind spacing */
+  --space-1:5px;
+  --space-2:10px;
+  --space-3:15px;
+  --space-4:20px;
+  --space-5:25px;
+  --space-6:30px;
+  --space-8:40px;
+  --space-10:50px;
+  --space-12:60px;
+
+  --screen-margin:10px;      /* phone side gutter */
+  --card-padding:15px;
+  --card-padding-lg:20px;
+  --stack-gap:5px;           /* between sibling rows inside a group */
+  --section-gap:10px;        /* between card groups */
+
+  --tap-min:44px;            /* Android/Material minimum touch target */
+  --navbar-height:64px;
+  --appbar-height:56px;
+}

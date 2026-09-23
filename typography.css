@@ -1,0 +1,47 @@
+:root{
+  /* Families — Plus Jakarta Sans carries the product UI; Jost is the editorial /
+     display voice (marketing, big numerals, section posters). */
+  --font-ui:"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif;
+  --font-display:"Jost","Plus Jakarta Sans",system-ui,sans-serif;
+  --font-numeric:"Plus Jakarta Sans",system-ui,sans-serif;
+
+  /* Scale — lifted verbatim from the reference UI kit type sheet */
+  --fs-h1:48px;
+  --fw-h1:600; /* @kind other */
+  --lh-h1:1.05; /* @kind other */
+  --fs-h2:32px;
+  --fw-h2:700; /* @kind other */
+  --lh-h2:1.1; /* @kind other */
+  --fs-h2s:27px;
+  --fw-h2s:700; /* @kind other */
+  --lh-h2s:1.15; /* @kind other */
+  --fs-h3:24px;
+  --fw-h3:500; /* @kind other */
+  --lh-h3:1.2; /* @kind other */
+  --fs-h4:22px;
+  --fw-h4:700; /* @kind other */
+  --lh-h4:1.25; /* @kind other */
+  --fs-button:20px;
+  --fw-button:700; /* @kind other */
+  --lh-button:1.2; /* @kind other */
+  --fs-body1:18px;
+  --fw-body1:600; /* @kind other */
+  --lh-body1:1.4; /* @kind other */
+  --fs-body2:15px;
+  --fw-body2:500; /* @kind other */
+  --lh-body2:1.45; /* @kind other */
+  --fs-body3:14px;
+  --fw-body3:400; /* @kind other */
+  --lh-body3:1.5; /* @kind other */
+  --fs-body4:13px;
+  --fw-body4:400; /* @kind other */
+  --lh-body4:1.5; /* @kind other */
+  --fs-caption:11px;
+  --fw-caption:600; /* @kind other */
+  --lh-caption:1.3; /* @kind other */
+
+  --ls-tight:-0.02em; /* @kind other */
+  --ls-normal:0; /* @kind other */
+  --ls-wide:0.04em; /* @kind other */
+  --ls-caps:0.08em; /* @kind other */
+}

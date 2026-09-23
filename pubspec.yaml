@@ -1,0 +1,47 @@
+name: uppro_app
+description: "UP.PRO — Seu treino. Sua evolução. Seu ritmo."
+publish_to: "none"
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  # Persistência local (histórico de treino, séries, cargas) — funciona sem internet/login
+  sqflite: ^2.3.3+1
+  path: ^1.9.0
+  path_provider: ^2.1.4
+
+  # Cronômetro de descanso com notificação sonora em segundo plano
+  flutter_local_notifications: ^17.2.3
+  timezone: ^0.9.4
+
+  # Câmera para identificar aparelho (fase 1: captura + catálogo local; fase 2: IA on-device)
+  camera: ^0.11.0+2
+  permission_handler: ^11.3.1
+
+  # Compartilhar treino concluído (abre o seletor nativo — Instagram, WhatsApp etc.)
+  share_plus: ^7.2.2
+
+  # Datas/formatos em pt-BR
+  intl: ^0.19.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+  # Gera ícone e splash screen reais a partir dos seus arquivos em UP.PRO/
+  # (rode depois de configurar os caminhos — ver ROADMAP.md, Fase 4)
+  flutter_launcher_icons: ^0.14.1
+  flutter_native_splash: ^2.4.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/data/exercises.json
+    - assets/data/workout_plans.json

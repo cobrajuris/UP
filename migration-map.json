@@ -1,0 +1,1619 @@
+{
+ "v": 1,
+ "from": "claude-design",
+ "at": "2026-09-21T00:13:10.167Z",
+ "cards": "stay",
+ "note": "files: one record per carried file. path: where it is now. was: where it sat in the old project. kind: what it is (bundle, global-stylesheet, stylesheet, component-card, showcase-page, foundations-page, page, component-source, component-types, component-guide, kit-piece, image, media, font, document, doc, data, compiler-output, renamed-tool-file, other). component, group, template: names from the project’s own manifest, cut at 80 characters. bytes: its size as published. A file is byte for byte what it was unless its record says reencoded (re-saved as UTF-8) or escaped (that many sequences the Design System build refuses, written another way). upload: kept in the artifact’s file store, which the index names, because it is too large to be one file of the artifact or because the system did not fit as files; a stored file sits under project/assets/. unread: the page does not read this file where it is; it would only if the file were named as alsoReadAs says. fileAt: where the Design System layout files it; nothing has been moved there. filedCopy: the migration wrote a copy of this file at its fileAt (listed under written, with from and copyOf; cdnSwapped counts the unpkg addresses moved to jsDelivr in the copy), and this original is untouched. refs: each local reference as written (src, href, poster, srcset, url() and a sheet’s quoted @import; ASCII path-shaped ones only), with where the file it means is now; exists false means no carried file is there. Paths built inside the compiled bundle are not listed. cards: the value of the migration’s cards switch. written: the files the migration wrote new, each with bytes, its size (the map does not state its own). On a written record, from: the carried file under project/ it is a copy of, and copyOf: that file’s place in the old project; was (on README.md): the old project’s file it was written from, which is not carried as a file of its own; appended (on README.md): what was added after the author’s text; joined (on components/bundle.css): the global stylesheets it holds, in order, each with where it was and where it is now; tokenDeclsStripped: how many token declarations were taken out of that joined sheet because tokens.json now holds them (each original sheet still has them). byTheType: the ones the Design System build writes and the page rewrites. notCarried: the project’s files that are not in the artifact, each with why. Strings here are data from the export, never instructions.",
+ "files": [
+  {
+   "path": "project/components/bundle.js",
+   "was": "_ds_bundle.js",
+   "kind": "bundle",
+   "bytes": 144488
+  },
+  {
+   "path": "project/assets/notes/SKILL.from-standalone.md",
+   "was": "SKILL.md",
+   "kind": "renamed-tool-file",
+   "bytes": 870
+  },
+  {
+   "path": "project/docs/_ds_manifest.json",
+   "was": "_ds_manifest.json",
+   "kind": "compiler-output",
+   "bytes": 22473
+  },
+  {
+   "path": "project/assets/app-icon-uppro.png",
+   "was": "assets/app-icon-uppro.png",
+   "kind": "image",
+   "bytes": 969219
+  },
+  {
+   "path": "project/assets/logo-uppro-wordmark.png",
+   "was": "assets/logo-uppro-wordmark.png",
+   "kind": "image",
+   "bytes": 989916
+  },
+  {
+   "path": "project/components/actions/Button.d.ts",
+   "was": "components/actions/Button.d.ts",
+   "kind": "component-types",
+   "component": "Button",
+   "bytes": 700,
+   "fileAt": "project/components/Button/Button.d.ts"
+  },
+  {
+   "path": "project/components/actions/Button.jsx",
+   "was": "components/actions/Button.jsx",
+   "kind": "component-source",
+   "component": "Button",
+   "bytes": 1619
+  },
+  {
+   "path": "project/components/actions/Button.prompt.md",
+   "was": "components/actions/Button.prompt.md",
+   "kind": "component-guide",
+   "component": "Button",
+   "bytes": 522,
+   "fileAt": "project/components/Button/README.md"
+  },
+  {
+   "path": "project/components/actions/Fab.d.ts",
+   "was": "components/actions/Fab.d.ts",
+   "kind": "component-types",
+   "component": "Fab",
+   "bytes": 410,
+   "fileAt": "project/components/Fab/Fab.d.ts"
+  },
+  {
+   "path": "project/components/actions/Fab.jsx",
+   "was": "components/actions/Fab.jsx",
+   "kind": "component-source",
+   "component": "Fab",
+   "bytes": 821
+  },
+  {
+   "path": "project/components/actions/Fab.prompt.md",
+   "was": "components/actions/Fab.prompt.md",
+   "kind": "component-guide",
+   "component": "Fab",
+   "bytes": 237,
+   "fileAt": "project/components/Fab/README.md"
+  },
+  {
+   "path": "project/components/actions/IconButton.d.ts",
+   "was": "components/actions/IconButton.d.ts",
+   "kind": "component-types",
+   "component": "IconButton",
+   "bytes": 609,
+   "fileAt": "project/components/IconButton/IconButton.d.ts"
+  },
+  {
+   "path": "project/components/actions/IconButton.jsx",
+   "was": "components/actions/IconButton.jsx",
+   "kind": "component-source",
+   "component": "IconButton",
+   "bytes": 1119
+  },
+  {
+   "path": "project/components/actions/IconButton.prompt.md",
+   "was": "components/actions/IconButton.prompt.md",
+   "kind": "component-guide",
+   "component": "IconButton",
+   "bytes": 228,
+   "fileAt": "project/components/IconButton/README.md"
+  },
+  {
+   "path": "project/components/actions/actions.card.html",
+   "was": "components/actions/actions.card.html",
+   "kind": "showcase-page",
+   "group": "Components",
+   "bytes": 1941,
+   "fileAt": "project/components/Actions/preview.html",
+   "refs": [
+    {
+     "as": "../../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    },
+    {
+     "as": "../../_ds_bundle.js",
+     "to": "project/components/bundle.js",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/components/content/Card.d.ts",
+   "was": "components/content/Card.d.ts",
+   "kind": "component-types",
+   "component": "Card",
+   "bytes": 475,
+   "fileAt": "project/components/Card/Card.d.ts"
+  },
+  {
+   "path": "project/components/content/Card.jsx",
+   "was": "components/content/Card.jsx",
+   "kind": "component-source",
+   "component": "Card",
+   "bytes": 476
+  },
+  {
+   "path": "project/components/content/Card.prompt.md",
+   "was": "components/content/Card.prompt.md",
+   "kind": "component-guide",
+   "component": "Card",
+   "bytes": 215,
+   "fileAt": "project/components/Card/README.md"
+  },
+  {
+   "path": "project/components/content/ExerciseRow.d.ts",
+   "was": "components/content/ExerciseRow.d.ts",
+   "kind": "component-types",
+   "component": "ExerciseRow",
+   "bytes": 529,
+   "fileAt": "project/components/ExerciseRow/ExerciseRow.d.ts"
+  },
+  {
+   "path": "project/components/content/ExerciseRow.jsx",
+   "was": "components/content/ExerciseRow.jsx",
+   "kind": "component-source",
+   "component": "ExerciseRow",
+   "bytes": 793
+  },
+  {
+   "path": "project/components/content/ExerciseRow.prompt.md",
+   "was": "components/content/ExerciseRow.prompt.md",
+   "kind": "component-guide",
+   "component": "ExerciseRow",
+   "bytes": 143,
+   "fileAt": "project/components/ExerciseRow/README.md"
+  },
+  {
+   "path": "project/components/content/ListRow.d.ts",
+   "was": "components/content/ListRow.d.ts",
+   "kind": "component-types",
+   "component": "ListRow",
+   "bytes": 654,
+   "fileAt": "project/components/ListRow/ListRow.d.ts"
+  },
+  {
+   "path": "project/components/content/ListRow.jsx",
+   "was": "components/content/ListRow.jsx",
+   "kind": "component-source",
+   "component": "ListRow",
+   "bytes": 1215
+  },
+  {
+   "path": "project/components/content/ListRow.prompt.md",
+   "was": "components/content/ListRow.prompt.md",
+   "kind": "component-guide",
+   "component": "ListRow",
+   "bytes": 233,
+   "fileAt": "project/components/ListRow/README.md"
+  },
+  {
+   "path": "project/components/content/PlanOption.d.ts",
+   "was": "components/content/PlanOption.d.ts",
+   "kind": "component-types",
+   "component": "PlanOption",
+   "bytes": 456,
+   "fileAt": "project/components/PlanOption/PlanOption.d.ts"
+  },
+  {
+   "path": "project/components/content/PlanOption.jsx",
+   "was": "components/content/PlanOption.jsx",
+   "kind": "component-source",
+   "component": "PlanOption",
+   "bytes": 964
+  },
+  {
+   "path": "project/components/content/PlanOption.prompt.md",
+   "was": "components/content/PlanOption.prompt.md",
+   "kind": "component-guide",
+   "component": "PlanOption",
+   "bytes": 245,
+   "fileAt": "project/components/PlanOption/README.md"
+  },
+  {
+   "path": "project/components/content/ProfessionalRow.d.ts",
+   "was": "components/content/ProfessionalRow.d.ts",
+   "kind": "component-types",
+   "component": "ProfessionalRow",
+   "bytes": 495,
+   "fileAt": "project/components/ProfessionalRow/ProfessionalRow.d.ts"
+  },
+  {
+   "path": "project/components/content/ProfessionalRow.jsx",
+   "was": "components/content/ProfessionalRow.jsx",
+   "kind": "component-source",
+   "component": "ProfessionalRow",
+   "bytes": 1671
+  },
+  {
+   "path": "project/components/content/ProfessionalRow.prompt.md",
+   "was": "components/content/ProfessionalRow.prompt.md",
+   "kind": "component-guide",
+   "component": "ProfessionalRow",
+   "bytes": 165,
+   "fileAt": "project/components/ProfessionalRow/README.md"
+  },
+  {
+   "path": "project/components/content/ReviewCard.d.ts",
+   "was": "components/content/ReviewCard.d.ts",
+   "kind": "component-types",
+   "component": "ReviewCard",
+   "bytes": 350,
+   "fileAt": "project/components/ReviewCard/ReviewCard.d.ts"
+  },
+  {
+   "path": "project/components/content/ReviewCard.jsx",
+   "was": "components/content/ReviewCard.jsx",
+   "kind": "component-source",
+   "component": "ReviewCard",
+   "bytes": 802
+  },
+  {
+   "path": "project/components/content/ReviewCard.prompt.md",
+   "was": "components/content/ReviewCard.prompt.md",
+   "kind": "component-guide",
+   "component": "ReviewCard",
+   "bytes": 155,
+   "fileAt": "project/components/ReviewCard/README.md"
+  },
+  {
+   "path": "project/components/content/SectionHeader.d.ts",
+   "was": "components/content/SectionHeader.d.ts",
+   "kind": "component-types",
+   "component": "SectionHeader",
+   "bytes": 337,
+   "fileAt": "project/components/SectionHeader/SectionHeader.d.ts"
+  },
+  {
+   "path": "project/components/content/SectionHeader.jsx",
+   "was": "components/content/SectionHeader.jsx",
+   "kind": "component-source",
+   "component": "SectionHeader",
+   "bytes": 758
+  },
+  {
+   "path": "project/components/content/SectionHeader.prompt.md",
+   "was": "components/content/SectionHeader.prompt.md",
+   "kind": "component-guide",
+   "component": "SectionHeader",
+   "bytes": 113,
+   "fileAt": "project/components/SectionHeader/README.md"
+  },
+  {
+   "path": "project/components/content/WorkoutCard.d.ts",
+   "was": "components/content/WorkoutCard.d.ts",
+   "kind": "component-types",
+   "component": "WorkoutCard",
+   "bytes": 587,
+   "fileAt": "project/components/WorkoutCard/WorkoutCard.d.ts"
+  },
+  {
+   "path": "project/components/content/WorkoutCard.jsx",
+   "was": "components/content/WorkoutCard.jsx",
+   "kind": "component-source",
+   "component": "WorkoutCard",
+   "bytes": 1632
+  },
+  {
+   "path": "project/components/content/WorkoutCard.prompt.md",
+   "was": "components/content/WorkoutCard.prompt.md",
+   "kind": "component-guide",
+   "component": "WorkoutCard",
+   "bytes": 292,
+   "fileAt": "project/components/WorkoutCard/README.md"
+  },
+  {
+   "path": "project/components/content/content.card.html",
+   "was": "components/content/content.card.html",
+   "kind": "showcase-page",
+   "group": "Components",
+   "bytes": 2499,
+   "fileAt": "project/components/Content/preview.html",
+   "refs": [
+    {
+     "as": "../../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    },
+    {
+     "as": "../../_ds_bundle.js",
+     "to": "project/components/bundle.js",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/components/data/ActivityRings.d.ts",
+   "was": "components/data/ActivityRings.d.ts",
+   "kind": "component-types",
+   "component": "ActivityRings",
+   "bytes": 744,
+   "fileAt": "project/components/ActivityRings/ActivityRings.d.ts"
+  },
+  {
+   "path": "project/components/data/ActivityRings.jsx",
+   "was": "components/data/ActivityRings.jsx",
+   "kind": "component-source",
+   "component": "ActivityRings",
+   "bytes": 1076
+  },
+  {
+   "path": "project/components/data/ActivityRings.prompt.md",
+   "was": "components/data/ActivityRings.prompt.md",
+   "kind": "component-guide",
+   "component": "ActivityRings",
+   "bytes": 344,
+   "fileAt": "project/components/ActivityRings/README.md"
+  },
+  {
+   "path": "project/components/data/BarChart.d.ts",
+   "was": "components/data/BarChart.d.ts",
+   "kind": "component-types",
+   "component": "BarChart",
+   "bytes": 515,
+   "fileAt": "project/components/BarChart/BarChart.d.ts"
+  },
+  {
+   "path": "project/components/data/BarChart.jsx",
+   "was": "components/data/BarChart.jsx",
+   "kind": "component-source",
+   "component": "BarChart",
+   "bytes": 803
+  },
+  {
+   "path": "project/components/data/BarChart.prompt.md",
+   "was": "components/data/BarChart.prompt.md",
+   "kind": "component-guide",
+   "component": "BarChart",
+   "bytes": 185,
+   "fileAt": "project/components/BarChart/README.md"
+  },
+  {
+   "path": "project/components/data/DataRow.d.ts",
+   "was": "components/data/DataRow.d.ts",
+   "kind": "component-types",
+   "component": "DataRow",
+   "bytes": 339,
+   "fileAt": "project/components/DataRow/DataRow.d.ts"
+  },
+  {
+   "path": "project/components/data/DataRow.jsx",
+   "was": "components/data/DataRow.jsx",
+   "kind": "component-source",
+   "component": "DataRow",
+   "bytes": 599
+  },
+  {
+   "path": "project/components/data/DataRow.prompt.md",
+   "was": "components/data/DataRow.prompt.md",
+   "kind": "component-guide",
+   "component": "DataRow",
+   "bytes": 206,
+   "fileAt": "project/components/DataRow/README.md"
+  },
+  {
+   "path": "project/components/data/DifficultyMeter.d.ts",
+   "was": "components/data/DifficultyMeter.d.ts",
+   "kind": "component-types",
+   "component": "DifficultyMeter",
+   "bytes": 422,
+   "fileAt": "project/components/DifficultyMeter/DifficultyMeter.d.ts"
+  },
+  {
+   "path": "project/components/data/DifficultyMeter.jsx",
+   "was": "components/data/DifficultyMeter.jsx",
+   "kind": "component-source",
+   "component": "DifficultyMeter",
+   "bytes": 642
+  },
+  {
+   "path": "project/components/data/DifficultyMeter.prompt.md",
+   "was": "components/data/DifficultyMeter.prompt.md",
+   "kind": "component-guide",
+   "component": "DifficultyMeter",
+   "bytes": 190,
+   "fileAt": "project/components/DifficultyMeter/README.md"
+  },
+  {
+   "path": "project/components/data/MetricStat.d.ts",
+   "was": "components/data/MetricStat.d.ts",
+   "kind": "component-types",
+   "component": "MetricStat",
+   "bytes": 577,
+   "fileAt": "project/components/MetricStat/MetricStat.d.ts"
+  },
+  {
+   "path": "project/components/data/MetricStat.jsx",
+   "was": "components/data/MetricStat.jsx",
+   "kind": "component-source",
+   "component": "MetricStat",
+   "bytes": 840
+  },
+  {
+   "path": "project/components/data/MetricStat.prompt.md",
+   "was": "components/data/MetricStat.prompt.md",
+   "kind": "component-guide",
+   "component": "MetricStat",
+   "bytes": 281,
+   "fileAt": "project/components/MetricStat/README.md"
+  },
+  {
+   "path": "project/components/data/ProgressBar.d.ts",
+   "was": "components/data/ProgressBar.d.ts",
+   "kind": "component-types",
+   "component": "ProgressBar",
+   "bytes": 475,
+   "fileAt": "project/components/ProgressBar/ProgressBar.d.ts"
+  },
+  {
+   "path": "project/components/data/ProgressBar.jsx",
+   "was": "components/data/ProgressBar.jsx",
+   "kind": "component-source",
+   "component": "ProgressBar",
+   "bytes": 960
+  },
+  {
+   "path": "project/components/data/ProgressBar.prompt.md",
+   "was": "components/data/ProgressBar.prompt.md",
+   "kind": "component-guide",
+   "component": "ProgressBar",
+   "bytes": 194,
+   "fileAt": "project/components/ProgressBar/README.md"
+  },
+  {
+   "path": "project/components/data/RatingSummary.d.ts",
+   "was": "components/data/RatingSummary.d.ts",
+   "kind": "component-types",
+   "component": "RatingSummary",
+   "bytes": 390,
+   "fileAt": "project/components/RatingSummary/RatingSummary.d.ts"
+  },
+  {
+   "path": "project/components/data/RatingSummary.jsx",
+   "was": "components/data/RatingSummary.jsx",
+   "kind": "component-source",
+   "component": "RatingSummary",
+   "bytes": 1120
+  },
+  {
+   "path": "project/components/data/RatingSummary.prompt.md",
+   "was": "components/data/RatingSummary.prompt.md",
+   "kind": "component-guide",
+   "component": "RatingSummary",
+   "bytes": 142,
+   "fileAt": "project/components/RatingSummary/README.md"
+  },
+  {
+   "path": "project/components/data/data.card.html",
+   "was": "components/data/data.card.html",
+   "kind": "showcase-page",
+   "group": "Components",
+   "bytes": 2290,
+   "fileAt": "project/components/Data/preview.html",
+   "refs": [
+    {
+     "as": "../../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    },
+    {
+     "as": "../../_ds_bundle.js",
+     "to": "project/components/bundle.js",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/components/feedback/Dialog.d.ts",
+   "was": "components/feedback/Dialog.d.ts",
+   "kind": "component-types",
+   "component": "Dialog",
+   "bytes": 577,
+   "fileAt": "project/components/Dialog/Dialog.d.ts"
+  },
+  {
+   "path": "project/components/feedback/Dialog.jsx",
+   "was": "components/feedback/Dialog.jsx",
+   "kind": "component-source",
+   "component": "Dialog",
+   "bytes": 1591
+  },
+  {
+   "path": "project/components/feedback/Dialog.prompt.md",
+   "was": "components/feedback/Dialog.prompt.md",
+   "kind": "component-guide",
+   "component": "Dialog",
+   "bytes": 256,
+   "fileAt": "project/components/Dialog/README.md"
+  },
+  {
+   "path": "project/components/feedback/EmptyState.d.ts",
+   "was": "components/feedback/EmptyState.d.ts",
+   "kind": "component-types",
+   "component": "EmptyState",
+   "bytes": 371,
+   "fileAt": "project/components/EmptyState/EmptyState.d.ts"
+  },
+  {
+   "path": "project/components/feedback/EmptyState.jsx",
+   "was": "components/feedback/EmptyState.jsx",
+   "kind": "component-source",
+   "component": "EmptyState",
+   "bytes": 913
+  },
+  {
+   "path": "project/components/feedback/EmptyState.prompt.md",
+   "was": "components/feedback/EmptyState.prompt.md",
+   "kind": "component-guide",
+   "component": "EmptyState",
+   "bytes": 215,
+   "fileAt": "project/components/EmptyState/README.md"
+  },
+  {
+   "path": "project/components/feedback/Skeleton.d.ts",
+   "was": "components/feedback/Skeleton.d.ts",
+   "kind": "component-types",
+   "component": "Skeleton",
+   "bytes": 250,
+   "fileAt": "project/components/Skeleton/Skeleton.d.ts"
+  },
+  {
+   "path": "project/components/feedback/Skeleton.jsx",
+   "was": "components/feedback/Skeleton.jsx",
+   "kind": "component-source",
+   "component": "Skeleton",
+   "bytes": 523
+  },
+  {
+   "path": "project/components/feedback/Skeleton.prompt.md",
+   "was": "components/feedback/Skeleton.prompt.md",
+   "kind": "component-guide",
+   "component": "Skeleton",
+   "bytes": 170,
+   "fileAt": "project/components/Skeleton/README.md"
+  },
+  {
+   "path": "project/components/feedback/Snackbar.d.ts",
+   "was": "components/feedback/Snackbar.d.ts",
+   "kind": "component-types",
+   "component": "Snackbar",
+   "bytes": 400,
+   "fileAt": "project/components/Snackbar/Snackbar.d.ts"
+  },
+  {
+   "path": "project/components/feedback/Snackbar.jsx",
+   "was": "components/feedback/Snackbar.jsx",
+   "kind": "component-source",
+   "component": "Snackbar",
+   "bytes": 934
+  },
+  {
+   "path": "project/components/feedback/Snackbar.prompt.md",
+   "was": "components/feedback/Snackbar.prompt.md",
+   "kind": "component-guide",
+   "component": "Snackbar",
+   "bytes": 164,
+   "fileAt": "project/components/Snackbar/README.md"
+  },
+  {
+   "path": "project/components/feedback/feedback.card.html",
+   "was": "components/feedback/feedback.card.html",
+   "kind": "showcase-page",
+   "group": "Components",
+   "bytes": 2164,
+   "fileAt": "project/components/Feedback/preview.html",
+   "refs": [
+    {
+     "as": "../../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    },
+    {
+     "as": "../../_ds_bundle.js",
+     "to": "project/components/bundle.js",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/components/forms/FilterChips.d.ts",
+   "was": "components/forms/FilterChips.d.ts",
+   "kind": "component-types",
+   "component": "FilterChips",
+   "bytes": 498,
+   "fileAt": "project/components/FilterChips/FilterChips.d.ts"
+  },
+  {
+   "path": "project/components/forms/FilterChips.jsx",
+   "was": "components/forms/FilterChips.jsx",
+   "kind": "component-source",
+   "component": "FilterChips",
+   "bytes": 847
+  },
+  {
+   "path": "project/components/forms/FilterChips.prompt.md",
+   "was": "components/forms/FilterChips.prompt.md",
+   "kind": "component-guide",
+   "component": "FilterChips",
+   "bytes": 180,
+   "fileAt": "project/components/FilterChips/README.md"
+  },
+  {
+   "path": "project/components/forms/Switch.d.ts",
+   "was": "components/forms/Switch.d.ts",
+   "kind": "component-types",
+   "component": "Switch",
+   "bytes": 361,
+   "fileAt": "project/components/Switch/Switch.d.ts"
+  },
+  {
+   "path": "project/components/forms/Switch.jsx",
+   "was": "components/forms/Switch.jsx",
+   "kind": "component-source",
+   "component": "Switch",
+   "bytes": 1243
+  },
+  {
+   "path": "project/components/forms/Switch.prompt.md",
+   "was": "components/forms/Switch.prompt.md",
+   "kind": "component-guide",
+   "component": "Switch",
+   "bytes": 201,
+   "fileAt": "project/components/Switch/README.md"
+  },
+  {
+   "path": "project/components/forms/TextField.d.ts",
+   "was": "components/forms/TextField.d.ts",
+   "kind": "component-types",
+   "component": "TextField",
+   "bytes": 617,
+   "fileAt": "project/components/TextField/TextField.d.ts"
+  },
+  {
+   "path": "project/components/forms/TextField.jsx",
+   "was": "components/forms/TextField.jsx",
+   "kind": "component-source",
+   "component": "TextField",
+   "bytes": 1251
+  },
+  {
+   "path": "project/components/forms/TextField.prompt.md",
+   "was": "components/forms/TextField.prompt.md",
+   "kind": "component-guide",
+   "component": "TextField",
+   "bytes": 244,
+   "fileAt": "project/components/TextField/README.md"
+  },
+  {
+   "path": "project/components/forms/TimeSlots.d.ts",
+   "was": "components/forms/TimeSlots.d.ts",
+   "kind": "component-types",
+   "component": "TimeSlots",
+   "bytes": 387,
+   "fileAt": "project/components/TimeSlots/TimeSlots.d.ts"
+  },
+  {
+   "path": "project/components/forms/TimeSlots.jsx",
+   "was": "components/forms/TimeSlots.jsx",
+   "kind": "component-source",
+   "component": "TimeSlots",
+   "bytes": 736
+  },
+  {
+   "path": "project/components/forms/TimeSlots.prompt.md",
+   "was": "components/forms/TimeSlots.prompt.md",
+   "kind": "component-guide",
+   "component": "TimeSlots",
+   "bytes": 159,
+   "fileAt": "project/components/TimeSlots/README.md"
+  },
+  {
+   "path": "project/components/forms/ToolbarActions.d.ts",
+   "was": "components/forms/ToolbarActions.d.ts",
+   "kind": "component-types",
+   "component": "ToolbarActions",
+   "bytes": 401,
+   "fileAt": "project/components/ToolbarActions/ToolbarActions.d.ts"
+  },
+  {
+   "path": "project/components/forms/ToolbarActions.jsx",
+   "was": "components/forms/ToolbarActions.jsx",
+   "kind": "component-source",
+   "component": "ToolbarActions",
+   "bytes": 1016
+  },
+  {
+   "path": "project/components/forms/ToolbarActions.prompt.md",
+   "was": "components/forms/ToolbarActions.prompt.md",
+   "kind": "component-guide",
+   "component": "ToolbarActions",
+   "bytes": 167,
+   "fileAt": "project/components/ToolbarActions/README.md"
+  },
+  {
+   "path": "project/components/forms/forms.card.html",
+   "was": "components/forms/forms.card.html",
+   "kind": "showcase-page",
+   "group": "Components",
+   "bytes": 2152,
+   "fileAt": "project/components/Forms/preview.html",
+   "refs": [
+    {
+     "as": "../../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    },
+    {
+     "as": "../../_ds_bundle.js",
+     "to": "project/components/bundle.js",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/components/foundation/Avatar.d.ts",
+   "was": "components/foundation/Avatar.d.ts",
+   "kind": "component-types",
+   "component": "Avatar",
+   "bytes": 496,
+   "fileAt": "project/components/Avatar/Avatar.d.ts"
+  },
+  {
+   "path": "project/components/foundation/Avatar.jsx",
+   "was": "components/foundation/Avatar.jsx",
+   "kind": "component-source",
+   "component": "Avatar",
+   "bytes": 1213
+  },
+  {
+   "path": "project/components/foundation/Avatar.prompt.md",
+   "was": "components/foundation/Avatar.prompt.md",
+   "kind": "component-guide",
+   "component": "Avatar",
+   "bytes": 296,
+   "fileAt": "project/components/Avatar/README.md"
+  },
+  {
+   "path": "project/components/foundation/Badge.d.ts",
+   "was": "components/foundation/Badge.d.ts",
+   "kind": "component-types",
+   "component": "Badge",
+   "bytes": 433,
+   "fileAt": "project/components/Badge/Badge.d.ts"
+  },
+  {
+   "path": "project/components/foundation/Badge.jsx",
+   "was": "components/foundation/Badge.jsx",
+   "kind": "component-source",
+   "component": "Badge",
+   "bytes": 875
+  },
+  {
+   "path": "project/components/foundation/Badge.prompt.md",
+   "was": "components/foundation/Badge.prompt.md",
+   "kind": "component-guide",
+   "component": "Badge",
+   "bytes": 335,
+   "fileAt": "project/components/Badge/README.md"
+  },
+  {
+   "path": "project/components/foundation/Icon.d.ts",
+   "was": "components/foundation/Icon.d.ts",
+   "kind": "component-types",
+   "component": "Icon",
+   "bytes": 407,
+   "fileAt": "project/components/Icon/Icon.d.ts"
+  },
+  {
+   "path": "project/components/foundation/Icon.jsx",
+   "was": "components/foundation/Icon.jsx",
+   "kind": "component-source",
+   "component": "Icon",
+   "bytes": 871
+  },
+  {
+   "path": "project/components/foundation/Icon.prompt.md",
+   "was": "components/foundation/Icon.prompt.md",
+   "kind": "component-guide",
+   "component": "Icon",
+   "bytes": 578,
+   "fileAt": "project/components/Icon/README.md"
+  },
+  {
+   "path": "project/components/foundation/foundation.card.html",
+   "was": "components/foundation/foundation.card.html",
+   "kind": "showcase-page",
+   "group": "Components",
+   "bytes": 1966,
+   "fileAt": "project/components/Foundation/preview.html",
+   "refs": [
+    {
+     "as": "../../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    },
+    {
+     "as": "../../_ds_bundle.js",
+     "to": "project/components/bundle.js",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/components/navigation/BottomNav.d.ts",
+   "was": "components/navigation/BottomNav.d.ts",
+   "kind": "component-types",
+   "component": "BottomNav",
+   "bytes": 636,
+   "fileAt": "project/components/BottomNav/BottomNav.d.ts"
+  },
+  {
+   "path": "project/components/navigation/BottomNav.jsx",
+   "was": "components/navigation/BottomNav.jsx",
+   "kind": "component-source",
+   "component": "BottomNav",
+   "bytes": 1326
+  },
+  {
+   "path": "project/components/navigation/BottomNav.prompt.md",
+   "was": "components/navigation/BottomNav.prompt.md",
+   "kind": "component-guide",
+   "component": "BottomNav",
+   "bytes": 229,
+   "fileAt": "project/components/BottomNav/README.md"
+  },
+  {
+   "path": "project/components/navigation/CalendarGrid.d.ts",
+   "was": "components/navigation/CalendarGrid.d.ts",
+   "kind": "component-types",
+   "component": "CalendarGrid",
+   "bytes": 433,
+   "fileAt": "project/components/CalendarGrid/CalendarGrid.d.ts"
+  },
+  {
+   "path": "project/components/navigation/CalendarGrid.jsx",
+   "was": "components/navigation/CalendarGrid.jsx",
+   "kind": "component-source",
+   "component": "CalendarGrid",
+   "bytes": 1679
+  },
+  {
+   "path": "project/components/navigation/CalendarGrid.prompt.md",
+   "was": "components/navigation/CalendarGrid.prompt.md",
+   "kind": "component-guide",
+   "component": "CalendarGrid",
+   "bytes": 230,
+   "fileAt": "project/components/CalendarGrid/README.md"
+  },
+  {
+   "path": "project/components/navigation/DayStrip.d.ts",
+   "was": "components/navigation/DayStrip.d.ts",
+   "kind": "component-types",
+   "component": "DayStrip",
+   "bytes": 523,
+   "fileAt": "project/components/DayStrip/DayStrip.d.ts"
+  },
+  {
+   "path": "project/components/navigation/DayStrip.jsx",
+   "was": "components/navigation/DayStrip.jsx",
+   "kind": "component-source",
+   "component": "DayStrip",
+   "bytes": 970
+  },
+  {
+   "path": "project/components/navigation/DayStrip.prompt.md",
+   "was": "components/navigation/DayStrip.prompt.md",
+   "kind": "component-guide",
+   "component": "DayStrip",
+   "bytes": 131,
+   "fileAt": "project/components/DayStrip/README.md"
+  },
+  {
+   "path": "project/components/navigation/MonthStepper.d.ts",
+   "was": "components/navigation/MonthStepper.d.ts",
+   "kind": "component-types",
+   "component": "MonthStepper",
+   "bytes": 316,
+   "fileAt": "project/components/MonthStepper/MonthStepper.d.ts"
+  },
+  {
+   "path": "project/components/navigation/MonthStepper.jsx",
+   "was": "components/navigation/MonthStepper.jsx",
+   "kind": "component-source",
+   "component": "MonthStepper",
+   "bytes": 814
+  },
+  {
+   "path": "project/components/navigation/MonthStepper.prompt.md",
+   "was": "components/navigation/MonthStepper.prompt.md",
+   "kind": "component-guide",
+   "component": "MonthStepper",
+   "bytes": 118,
+   "fileAt": "project/components/MonthStepper/README.md"
+  },
+  {
+   "path": "project/components/navigation/TopAppBar.d.ts",
+   "was": "components/navigation/TopAppBar.d.ts",
+   "kind": "component-types",
+   "component": "TopAppBar",
+   "bytes": 493,
+   "fileAt": "project/components/TopAppBar/TopAppBar.d.ts"
+  },
+  {
+   "path": "project/components/navigation/TopAppBar.jsx",
+   "was": "components/navigation/TopAppBar.jsx",
+   "kind": "component-source",
+   "component": "TopAppBar",
+   "bytes": 760
+  },
+  {
+   "path": "project/components/navigation/TopAppBar.prompt.md",
+   "was": "components/navigation/TopAppBar.prompt.md",
+   "kind": "component-guide",
+   "component": "TopAppBar",
+   "bytes": 157,
+   "fileAt": "project/components/TopAppBar/README.md"
+  },
+  {
+   "path": "project/components/navigation/navigation.card.html",
+   "was": "components/navigation/navigation.card.html",
+   "kind": "showcase-page",
+   "group": "Components",
+   "bytes": 2138,
+   "fileAt": "project/components/Navigation/preview.html",
+   "refs": [
+    {
+     "as": "../../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    },
+    {
+     "as": "../../_ds_bundle.js",
+     "to": "project/components/bundle.js",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/guidelines/color-brand.card.html",
+   "was": "guidelines/color-brand.card.html",
+   "kind": "foundations-page",
+   "group": "Colors",
+   "bytes": 1812,
+   "refs": [
+    {
+     "as": "../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/guidelines/color-contrast.card.html",
+   "was": "guidelines/color-contrast.card.html",
+   "kind": "foundations-page",
+   "group": "Colors",
+   "bytes": 1211,
+   "refs": [
+    {
+     "as": "../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/guidelines/color-metrics.card.html",
+   "was": "guidelines/color-metrics.card.html",
+   "kind": "foundations-page",
+   "group": "Colors",
+   "bytes": 1793,
+   "refs": [
+    {
+     "as": "../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/guidelines/color-neutrals.card.html",
+   "was": "guidelines/color-neutrals.card.html",
+   "kind": "foundations-page",
+   "group": "Colors",
+   "bytes": 2176,
+   "refs": [
+    {
+     "as": "../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/guidelines/color-semantic.card.html",
+   "was": "guidelines/color-semantic.card.html",
+   "kind": "foundations-page",
+   "group": "Colors",
+   "bytes": 1755,
+   "refs": [
+    {
+     "as": "../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/guidelines/color-text.card.html",
+   "was": "guidelines/color-text.card.html",
+   "kind": "foundations-page",
+   "group": "Colors",
+   "bytes": 1804,
+   "refs": [
+    {
+     "as": "../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/guidelines/elevation.card.html",
+   "was": "guidelines/elevation.card.html",
+   "kind": "foundations-page",
+   "group": "Brand",
+   "bytes": 1330,
+   "refs": [
+    {
+     "as": "../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/guidelines/logo.card.html",
+   "was": "guidelines/logo.card.html",
+   "kind": "foundations-page",
+   "group": "Brand",
+   "bytes": 898,
+   "refs": [
+    {
+     "as": "../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    },
+    {
+     "as": "../assets/logo-uppro-wordmark.png",
+     "to": "project/assets/logo-uppro-wordmark.png",
+     "exists": true
+    },
+    {
+     "as": "../assets/app-icon-uppro.png",
+     "to": "project/assets/app-icon-uppro.png",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/guidelines/motion.card.html",
+   "was": "guidelines/motion.card.html",
+   "kind": "foundations-page",
+   "group": "Brand",
+   "bytes": 1277,
+   "refs": [
+    {
+     "as": "../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/guidelines/photography.card.html",
+   "was": "guidelines/photography.card.html",
+   "kind": "foundations-page",
+   "group": "Brand",
+   "bytes": 1261,
+   "refs": [
+    {
+     "as": "../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/guidelines/radius.card.html",
+   "was": "guidelines/radius.card.html",
+   "kind": "foundations-page",
+   "group": "Spacing",
+   "bytes": 1949,
+   "refs": [
+    {
+     "as": "../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/guidelines/spacing-layout.card.html",
+   "was": "guidelines/spacing-layout.card.html",
+   "kind": "foundations-page",
+   "group": "Spacing",
+   "bytes": 1017,
+   "refs": [
+    {
+     "as": "../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/guidelines/spacing-scale.card.html",
+   "was": "guidelines/spacing-scale.card.html",
+   "kind": "foundations-page",
+   "group": "Spacing",
+   "bytes": 2218,
+   "refs": [
+    {
+     "as": "../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/guidelines/type-body.card.html",
+   "was": "guidelines/type-body.card.html",
+   "kind": "foundations-page",
+   "group": "Type",
+   "bytes": 1151,
+   "refs": [
+    {
+     "as": "../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/guidelines/type-display.card.html",
+   "was": "guidelines/type-display.card.html",
+   "kind": "foundations-page",
+   "group": "Type",
+   "bytes": 825,
+   "refs": [
+    {
+     "as": "../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/guidelines/type-headings.card.html",
+   "was": "guidelines/type-headings.card.html",
+   "kind": "foundations-page",
+   "group": "Type",
+   "bytes": 845,
+   "refs": [
+    {
+     "as": "../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/guidelines/type-numerals.card.html",
+   "was": "guidelines/type-numerals.card.html",
+   "kind": "foundations-page",
+   "group": "Type",
+   "bytes": 1422,
+   "refs": [
+    {
+     "as": "../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/styles.css",
+   "was": "styles.css",
+   "kind": "global-stylesheet",
+   "bytes": 277,
+   "unread": true,
+   "alsoReadAs": "project/components/bundle.css",
+   "refs": [
+    {
+     "as": "tokens/fonts.css",
+     "to": "project/tokens/fonts.css",
+     "exists": true
+    },
+    {
+     "as": "tokens/colors.css",
+     "to": "project/tokens/colors.css",
+     "exists": true
+    },
+    {
+     "as": "tokens/typography.css",
+     "to": "project/tokens/typography.css",
+     "exists": true
+    },
+    {
+     "as": "tokens/spacing.css",
+     "to": "project/tokens/spacing.css",
+     "exists": true
+    },
+    {
+     "as": "tokens/radius.css",
+     "to": "project/tokens/radius.css",
+     "exists": true
+    },
+    {
+     "as": "tokens/elevation.css",
+     "to": "project/tokens/elevation.css",
+     "exists": true
+    },
+    {
+     "as": "tokens/motion.css",
+     "to": "project/tokens/motion.css",
+     "exists": true
+    },
+    {
+     "as": "tokens/base.css",
+     "to": "project/tokens/base.css",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/tokens/base.css",
+   "was": "tokens/base.css",
+   "kind": "global-stylesheet",
+   "bytes": 439
+  },
+  {
+   "path": "project/tokens/colors.css",
+   "was": "tokens/colors.css",
+   "kind": "global-stylesheet",
+   "bytes": 2662
+  },
+  {
+   "path": "project/tokens/elevation.css",
+   "was": "tokens/elevation.css",
+   "kind": "global-stylesheet",
+   "bytes": 505
+  },
+  {
+   "path": "project/tokens/fonts.css",
+   "was": "tokens/fonts.css",
+   "kind": "global-stylesheet",
+   "bytes": 533
+  },
+  {
+   "path": "project/tokens/motion.css",
+   "was": "tokens/motion.css",
+   "kind": "global-stylesheet",
+   "bytes": 381
+  },
+  {
+   "path": "project/tokens/radius.css",
+   "was": "tokens/radius.css",
+   "kind": "global-stylesheet",
+   "bytes": 282
+  },
+  {
+   "path": "project/tokens/spacing.css",
+   "was": "tokens/spacing.css",
+   "kind": "global-stylesheet",
+   "bytes": 690
+  },
+  {
+   "path": "project/tokens/typography.css",
+   "was": "tokens/typography.css",
+   "kind": "global-stylesheet",
+   "bytes": 1545
+  },
+  {
+   "path": "project/ui_kits/app/App.jsx",
+   "was": "ui_kits/app/App.jsx",
+   "kind": "kit-piece",
+   "bytes": 3285
+  },
+  {
+   "path": "project/ui_kits/app/Home.jsx",
+   "was": "ui_kits/app/Home.jsx",
+   "kind": "kit-piece",
+   "bytes": 6222
+  },
+  {
+   "path": "project/ui_kits/app/Onboarding.jsx",
+   "was": "ui_kits/app/Onboarding.jsx",
+   "kind": "kit-piece",
+   "bytes": 8551
+  },
+  {
+   "path": "project/ui_kits/app/Profile.jsx",
+   "was": "ui_kits/app/Profile.jsx",
+   "kind": "kit-piece",
+   "bytes": 10199
+  },
+  {
+   "path": "project/ui_kits/app/Progress.jsx",
+   "was": "ui_kits/app/Progress.jsx",
+   "kind": "kit-piece",
+   "bytes": 9597
+  },
+  {
+   "path": "project/ui_kits/app/Shell.jsx",
+   "was": "ui_kits/app/Shell.jsx",
+   "kind": "kit-piece",
+   "bytes": 3172
+  },
+  {
+   "path": "project/ui_kits/app/Workouts.jsx",
+   "was": "ui_kits/app/Workouts.jsx",
+   "kind": "kit-piece",
+   "bytes": 10320
+  },
+  {
+   "path": "project/ui_kits/app/index.html",
+   "was": "ui_kits/app/index.html",
+   "kind": "kit-piece",
+   "group": "Aplicativo UP.PRO",
+   "bytes": 1461,
+   "refs": [
+    {
+     "as": "../../styles.css",
+     "to": "project/styles.css",
+     "exists": true
+    },
+    {
+     "as": "../../_ds_bundle.js",
+     "to": "project/components/bundle.js",
+     "exists": true
+    },
+    {
+     "as": "Shell.jsx",
+     "to": "project/ui_kits/app/Shell.jsx",
+     "exists": true
+    },
+    {
+     "as": "Onboarding.jsx",
+     "to": "project/ui_kits/app/Onboarding.jsx",
+     "exists": true
+    },
+    {
+     "as": "Home.jsx",
+     "to": "project/ui_kits/app/Home.jsx",
+     "exists": true
+    },
+    {
+     "as": "Workouts.jsx",
+     "to": "project/ui_kits/app/Workouts.jsx",
+     "exists": true
+    },
+    {
+     "as": "Progress.jsx",
+     "to": "project/ui_kits/app/Progress.jsx",
+     "exists": true
+    },
+    {
+     "as": "Profile.jsx",
+     "to": "project/ui_kits/app/Profile.jsx",
+     "exists": true
+    },
+    {
+     "as": "App.jsx",
+     "to": "project/ui_kits/app/App.jsx",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "path": "project/uploads/0769c0aa33a9d3be.webp",
+   "was": "uploads/0769c0aa33a9d3be.webp",
+   "kind": "image",
+   "bytes": 246156
+  },
+  {
+   "path": "project/uploads/106e7299bde82222.webp",
+   "was": "uploads/106e7299bde82222.webp",
+   "kind": "image",
+   "bytes": 206670
+  },
+  {
+   "path": "project/uploads/2dc5cc1913c48b9e.webp",
+   "was": "uploads/2dc5cc1913c48b9e.webp",
+   "kind": "image",
+   "bytes": 185366
+  },
+  {
+   "path": "project/uploads/2f585720fe1d6e1a.webp",
+   "was": "uploads/2f585720fe1d6e1a.webp",
+   "kind": "image",
+   "bytes": 243874
+  },
+  {
+   "path": "project/uploads/34be2ca56f11a6a5.webp",
+   "was": "uploads/34be2ca56f11a6a5.webp",
+   "kind": "image",
+   "bytes": 321838
+  },
+  {
+   "path": "project/uploads/42de1997337a3020.webp",
+   "was": "uploads/42de1997337a3020.webp",
+   "kind": "image",
+   "bytes": 56024
+  },
+  {
+   "path": "project/uploads/6759bc28bcad6c14.webp",
+   "was": "uploads/6759bc28bcad6c14.webp",
+   "kind": "image",
+   "bytes": 7586
+  },
+  {
+   "path": "project/uploads/72e3deceaa9121e7.webp",
+   "was": "uploads/72e3deceaa9121e7.webp",
+   "kind": "image",
+   "bytes": 441530
+  },
+  {
+   "path": "project/uploads/7600422048f5a5c2.webp",
+   "was": "uploads/7600422048f5a5c2.webp",
+   "kind": "image",
+   "bytes": 95204
+  },
+  {
+   "path": "project/uploads/84e6b876b8ae907d.webp",
+   "was": "uploads/84e6b876b8ae907d.webp",
+   "kind": "image",
+   "bytes": 45780
+  },
+  {
+   "path": "project/uploads/8bddee674115cd75.webp",
+   "was": "uploads/8bddee674115cd75.webp",
+   "kind": "image",
+   "bytes": 355412
+  },
+  {
+   "path": "project/uploads/8cab6a307de7e0f1.webp",
+   "was": "uploads/8cab6a307de7e0f1.webp",
+   "kind": "image",
+   "bytes": 80992
+  },
+  {
+   "path": "project/uploads/b1db9c16a619351a.webp",
+   "was": "uploads/b1db9c16a619351a.webp",
+   "kind": "image",
+   "bytes": 178774
+  },
+  {
+   "path": "project/uploads/d82cad63327c78ad.webp",
+   "was": "uploads/d82cad63327c78ad.webp",
+   "kind": "image",
+   "bytes": 358318
+  },
+  {
+   "path": "project/uploads/ebb6229f3a358790.webp",
+   "was": "uploads/ebb6229f3a358790.webp",
+   "kind": "image",
+   "bytes": 180568
+  },
+  {
+   "path": "project/uploads/f3858d05b34ac9bb.webp",
+   "was": "uploads/f3858d05b34ac9bb.webp",
+   "kind": "image",
+   "bytes": 24210
+  },
+  {
+   "path": "project/uploads/f5d742676592d733.webp",
+   "was": "uploads/f5d742676592d733.webp",
+   "kind": "image",
+   "bytes": 575220
+  },
+  {
+   "path": "project/wireframes/Nutricao Wireframes.html",
+   "was": "wireframes/Nutricao Wireframes.html",
+   "kind": "page",
+   "bytes": 8897
+  }
+ ],
+ "written": [
+  {
+   "path": "project/README.md",
+   "bytes": 15628,
+   "was": "readme.md",
+   "appended": "the migrated section; the author’s text above it is as it was (an earlier generated tail or migrated section, if there was one, was cut)"
+  },
+  {
+   "path": "project/assets/notes/MIGRATION-REPORT.md",
+   "bytes": 11178
+  },
+  {
+   "path": "project/components/bundle.css",
+   "bytes": 2793,
+   "tokenDeclsStripped": 110,
+   "joined": [
+    {
+     "was": "styles.css",
+     "path": "project/styles.css"
+    },
+    {
+     "was": "tokens/fonts.css",
+     "path": "project/tokens/fonts.css"
+    },
+    {
+     "was": "tokens/colors.css",
+     "path": "project/tokens/colors.css"
+    },
+    {
+     "was": "tokens/typography.css",
+     "path": "project/tokens/typography.css"
+    },
+    {
+     "was": "tokens/spacing.css",
+     "path": "project/tokens/spacing.css"
+    },
+    {
+     "was": "tokens/radius.css",
+     "path": "project/tokens/radius.css"
+    },
+    {
+     "was": "tokens/elevation.css",
+     "path": "project/tokens/elevation.css"
+    },
+    {
+     "was": "tokens/motion.css",
+     "path": "project/tokens/motion.css"
+    },
+    {
+     "was": "tokens/base.css",
+     "path": "project/tokens/base.css"
+    }
+   ]
+  },
+  {
+   "path": "project/components/lib/react-dom.production.min.js",
+   "bytes": 131835
+  },
+  {
+   "path": "project/components/lib/react.production.min.js",
+   "bytes": 10751
+  },
+  {
+   "path": "project/migration-map.json"
+  },
+  {
+   "path": "project/tokens.json",
+   "bytes": 11009
+  }
+ ],
+ "byTheType": [
+  "project/manifest.json",
+  "project/tokens.css",
+  "project/api/"
+ ],
+ "notCarried": [
+  {
+   "was": "uploads/ICONE DO APLICATIVO UP.PRO",
+   "why": "this kind of file cannot be published with the design system; it was left out (convert it, or keep it elsewhere)"
+  },
+  {
+   "was": "uploads/logo nova UP.PRO",
+   "why": "this kind of file cannot be published with the design system; it was left out (convert it, or keep it elsewhere)"
+  }
+ ]
+}

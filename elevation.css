@@ -1,0 +1,12 @@
+:root{
+  /* Elevation is carried by surface lightness, not by heavy drop shadows. */
+  --shadow-none:none;
+  --shadow-card:0 1px 0 rgba(243,243,243,.03) inset;
+  --shadow-raised:0 8px 24px rgba(0,0,0,.35);
+  --shadow-sheet:0 -12px 40px rgba(0,0,0,.45);
+  --shadow-accent:0 6px 20px rgba(213,255,95,.22);
+  --glow-accent:0 0 24px rgba(213,255,95,.28);
+
+  --blur-scrim:blur(18px); /* @kind other */
+  --overlay-image:linear-gradient(180deg,rgba(14,14,17,0) 35%,rgba(14,14,17,.82) 100%); /* @kind other */
+}

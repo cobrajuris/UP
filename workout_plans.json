@@ -1,0 +1,142 @@
+[
+  {
+    "id": "FB-A", "name": "Treino A", "focus": "Corpo inteiro", "split": "full_body",
+    "goal": "geral", "level": "iniciante", "estimatedMinutes": 40,
+    "exercises": [
+      {"exerciseId": "pernas_leg_press"},
+      {"exerciseId": "peito_supino_inclinado_halteres"},
+      {"exerciseId": "costas_remada_sentada_cabo"},
+      {"exerciseId": "ombro_elevacao_lateral"},
+      {"exerciseId": "abdomen_prancha"}
+    ]
+  },
+  {
+    "id": "FB-B", "name": "Treino B", "focus": "Corpo inteiro", "split": "full_body",
+    "goal": "geral", "level": "iniciante", "estimatedMinutes": 40,
+    "exercises": [
+      {"exerciseId": "pernas_afundo"},
+      {"exerciseId": "peito_flexao"},
+      {"exerciseId": "costas_puxada_alta"},
+      {"exerciseId": "biceps_rosca_alternada"},
+      {"exerciseId": "abdomen_abdominal_supra"}
+    ]
+  },
+  {
+    "id": "FB-C", "name": "Treino C", "focus": "Corpo inteiro", "split": "full_body",
+    "goal": "geral", "level": "iniciante", "estimatedMinutes": 40,
+    "exercises": [
+      {"exerciseId": "pernas_cadeira_extensora"},
+      {"exerciseId": "peito_crucifixo_maquina"},
+      {"exerciseId": "costas_remada_unilateral_halter"},
+      {"exerciseId": "triceps_corda_polia"},
+      {"exerciseId": "abdomen_elevacao_pernas"}
+    ]
+  },
+  {
+    "id": "UL-A", "name": "Superiores", "focus": "Peito, costas, ombro e braços", "split": "upper_lower",
+    "goal": "geral", "level": "retomando", "estimatedMinutes": 55,
+    "exercises": [
+      {"exerciseId": "peito_supino_reto_barra"},
+      {"exerciseId": "costas_puxada_alta"},
+      {"exerciseId": "ombro_desenvolvimento_halteres"},
+      {"exerciseId": "biceps_rosca_direta_barra"},
+      {"exerciseId": "triceps_corda_polia"},
+      {"exerciseId": "abdomen_abdominal_bicicleta"}
+    ]
+  },
+  {
+    "id": "UL-B", "name": "Inferiores", "focus": "Pernas e abdômen", "split": "upper_lower",
+    "goal": "geral", "level": "retomando", "estimatedMinutes": 55,
+    "exercises": [
+      {"exerciseId": "pernas_agachamento_livre"},
+      {"exerciseId": "pernas_stiff"},
+      {"exerciseId": "pernas_cadeira_extensora"},
+      {"exerciseId": "pernas_mesa_flexora"},
+      {"exerciseId": "pernas_panturrilha_em_pe"},
+      {"exerciseId": "abdomen_prancha"}
+    ]
+  },
+  {
+    "id": "PPL-PUSH", "name": "Push", "focus": "Peito, ombro e tríceps", "split": "ppl",
+    "goal": "hipertrofia", "level": "avancado", "estimatedMinutes": 60,
+    "exercises": [
+      {"exerciseId": "peito_supino_reto_barra"},
+      {"exerciseId": "peito_supino_inclinado_halteres"},
+      {"exerciseId": "ombro_desenvolvimento_halteres"},
+      {"exerciseId": "ombro_elevacao_lateral"},
+      {"exerciseId": "triceps_testa"},
+      {"exerciseId": "triceps_corda_polia"}
+    ]
+  },
+  {
+    "id": "PPL-PULL", "name": "Pull", "focus": "Costas e bíceps", "split": "ppl",
+    "goal": "hipertrofia", "level": "avancado", "estimatedMinutes": 60,
+    "exercises": [
+      {"exerciseId": "costas_barra_fixa"},
+      {"exerciseId": "costas_remada_curvada_barra"},
+      {"exerciseId": "costas_puxada_alta"},
+      {"exerciseId": "biceps_rosca_direta_barra"},
+      {"exerciseId": "biceps_rosca_martelo"},
+      {"exerciseId": "costas_hiperextensao"}
+    ]
+  },
+  {
+    "id": "PPL-LEGS", "name": "Legs", "focus": "Pernas completo", "split": "ppl",
+    "goal": "hipertrofia", "level": "avancado", "estimatedMinutes": 65,
+    "exercises": [
+      {"exerciseId": "pernas_agachamento_livre"},
+      {"exerciseId": "pernas_leg_press"},
+      {"exerciseId": "pernas_stiff"},
+      {"exerciseId": "pernas_mesa_flexora"},
+      {"exerciseId": "pernas_panturrilha_em_pe"}
+    ]
+  },
+  {
+    "id": "A", "name": "Ficha A", "focus": "Peito e Tríceps", "split": "abcd",
+    "goal": "hipertrofia", "level": "avancado", "estimatedMinutes": 48,
+    "exercises": [
+      {"exerciseId": "peito_supino_reto_barra"},
+      {"exerciseId": "peito_supino_inclinado_halteres"},
+      {"exerciseId": "peito_crucifixo_maquina"},
+      {"exerciseId": "peito_crossover_cabo"},
+      {"exerciseId": "triceps_corda_polia"},
+      {"exerciseId": "triceps_testa"}
+    ]
+  },
+  {
+    "id": "B", "name": "Ficha B", "focus": "Costas e Bíceps", "split": "abcd",
+    "goal": "hipertrofia", "level": "avancado", "estimatedMinutes": 52,
+    "exercises": [
+      {"exerciseId": "costas_puxada_alta"},
+      {"exerciseId": "costas_remada_curvada_barra"},
+      {"exerciseId": "costas_remada_sentada_cabo"},
+      {"exerciseId": "biceps_rosca_direta_barra"},
+      {"exerciseId": "biceps_rosca_alternada"},
+      {"exerciseId": "biceps_rosca_scott"}
+    ]
+  },
+  {
+    "id": "C", "name": "Ficha C", "focus": "Pernas completo", "split": "abcd",
+    "goal": "hipertrofia", "level": "avancado", "estimatedMinutes": 58,
+    "exercises": [
+      {"exerciseId": "pernas_agachamento_livre"},
+      {"exerciseId": "pernas_leg_press"},
+      {"exerciseId": "pernas_cadeira_extensora"},
+      {"exerciseId": "pernas_mesa_flexora"},
+      {"exerciseId": "pernas_afundo"},
+      {"exerciseId": "pernas_stiff"},
+      {"exerciseId": "pernas_panturrilha_em_pe"}
+    ]
+  },
+  {
+    "id": "D", "name": "Ficha D", "focus": "Ombro e Abdômen", "split": "abcd",
+    "goal": "hipertrofia", "level": "avancado", "estimatedMinutes": 40,
+    "exercises": [
+      {"exerciseId": "ombro_desenvolvimento_halteres"},
+      {"exerciseId": "ombro_elevacao_lateral"},
+      {"exerciseId": "ombro_elevacao_frontal"},
+      {"exerciseId": "ombro_crucifixo_inverso"},
+      {"exerciseId": "abdomen_prancha"}
+    ]
+  }
+]

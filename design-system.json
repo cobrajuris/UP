@@ -1,0 +1,54 @@
+{
+  "v": 3,
+  "assetGroups": {
+    "Other": {
+      "files": {},
+      "name": "Other",
+      "order": []
+    },
+    "notes": {
+      "files": {},
+      "name": "notes",
+      "order": []
+    }
+  },
+  "blobs": {},
+  "createdOnFiles": {
+    "at": "2026-09-21T00:13:10.167Z",
+    "v": 1
+  },
+  "docs": {
+    "readme": "project/README.md",
+    "sections": []
+  },
+  "groups": [
+    "Other",
+    "notes"
+  ],
+  "layout": "files",
+  "libraries": [
+    {
+      "file": "components/lib/react.production.min.js",
+      "global": "React",
+      "name": "react",
+      "version": "18.3.1"
+    },
+    {
+      "file": "components/lib/react-dom.production.min.js",
+      "global": "ReactDOM",
+      "name": "react-dom",
+      "version": "18.3.1"
+    }
+  ],
+  "namespace": "UPPRODesignSystem_86b5ff",
+  "sections": {},
+  "source": {
+    "app": "claude-design",
+    "exportedAt": "2026-09-21T00:13:10.167Z",
+    "map": "project/migration-map.json",
+    "projectId": "86b5ff4c-e9b0-4990-9697-272448fe08b8",
+    "url": "https://claude.ai/design/p/86b5ff4c-e9b0-4990-9697-272448fe08b8",
+    "v": 1
+  },
+  "title": "UP.PRO Design System"
+}

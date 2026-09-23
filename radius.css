@@ -1,0 +1,10 @@
+:root{
+  --radius-xs:8px;
+  --radius-sm:12px;
+  --radius-md:20px;
+  --radius-lg:25px;
+  --radius-card:35px;        /* R35 — the signature card radius */
+  --radius-shell:50px;       /* R50 — bottom nav, full-width CTAs, sheets */
+  --radius-pill:999px;
+  --radius-phone:44px;
+}

@@ -1,0 +1,215 @@
+/* UP.PRO Design System — generated from tokens.json */
+:root, [data-theme="default"] {
+  --lime-500: #d5ff5f;
+  --lime-400: #e3ff92;
+  --lime-600: #c2f03f;
+  --lime-700: #9dc52f;
+  --lime-glow: rgba(213,255,95,.28);
+  --black-900: #0e0e11;
+  --raisin-800: #17171b;
+  --raisin-700: #1e1e25;
+  --outer-space-600: #2d2d36;
+  --outer-space-500: #3a3a45;
+  --grey-400: #656566;
+  --grey-300: #8d8d92;
+  --grey-200: #bababa;
+  --grey-100: #e6e6e6;
+  --white-050: #f3f3f3;
+  --white: #ffffff;
+  --success-500: #7ee08a;
+  --warning-500: #ffcf5c;
+  --danger-500: #ff6b5e;
+  --info-500: #6fd3ff;
+  --water-500: #5fd0ff;
+  --calories-500: #ff8a4c;
+  --sleep-500: #a98cff;
+  --bg-app: var(--raisin-800);
+  --bg-elevated: var(--raisin-700);
+  --surface-card: var(--outer-space-600);
+  --surface-card-hover: var(--outer-space-500);
+  --surface-field: var(--outer-space-600);
+  --surface-inverse: var(--white-050);
+  --surface-accent: var(--lime-500);
+  --text-primary: var(--white-050);
+  --text-secondary: var(--grey-200);
+  --text-muted: var(--grey-400);
+  --text-accent: var(--lime-500);
+  --text-on-accent: var(--raisin-700);
+  --text-on-inverse: var(--raisin-700);
+  --text-disabled: var(--grey-400);
+  --border-subtle: rgba(243,243,243,.08);
+  --border-strong: rgba(243,243,243,.16);
+  --border-accent: var(--lime-500);
+  --divider: rgba(243,243,243,.10);
+  --focus-ring: var(--lime-500);
+  --scrim: rgba(14,14,17,.72);
+  --shadow-none: none;
+  --shadow-card: 0 1px 0 rgba(243,243,243,.03) inset;
+  --shadow-raised: 0 8px 24px rgba(0,0,0,.35);
+  --shadow-sheet: 0 -12px 40px rgba(0,0,0,.45);
+  --shadow-accent: 0 6px 20px rgba(213,255,95,.22);
+  --glow-accent: 0 0 24px rgba(213,255,95,.28);
+}
+[data-theme="root-light"] {
+  --bg-app: #f3f3f3;
+  --bg-elevated: #ffffff;
+  --surface-card: #ffffff;
+  --surface-card-hover: #f0f0f0;
+  --surface-field: #ececec;
+  --surface-inverse: var(--raisin-700);
+  --surface-accent: var(--lime-500);
+  --text-primary: #1e1e25;
+  --text-secondary: #565660;
+  --text-muted: #8d8d92;
+  --text-accent: var(--lime-700);
+  --text-on-accent: var(--raisin-700);
+  --text-on-inverse: var(--white-050);
+  --text-disabled: #b4b4b8;
+  --border-subtle: rgba(30,30,37,.08);
+  --border-strong: rgba(30,30,37,.16);
+  --border-accent: var(--lime-500);
+  --divider: rgba(30,30,37,.10);
+  --focus-ring: var(--lime-500);
+  --scrim: rgba(30,30,37,.5);
+}
+:root {
+  --space-0: 0px;
+  --space-1: 5px;
+  --space-2: 10px;
+  --space-3: 15px;
+  --space-4: 20px;
+  --space-5: 25px;
+  --space-6: 30px;
+  --space-8: 40px;
+  --space-10: 50px;
+  --space-12: 60px;
+  --screen-margin: 10px;
+  --card-padding: 15px;
+  --card-padding-lg: 20px;
+  --stack-gap: 5px;
+  --section-gap: 10px;
+  --tap-min: 44px;
+  --navbar-height: 64px;
+  --appbar-height: 56px;
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 25px;
+  --radius-card: 35px;
+  --radius-shell: 50px;
+  --radius-pill: 999px;
+  --radius-phone: 44px;
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 320ms;
+  --dur-ring: 900ms;
+  --ease-standard: cubic-bezier(.2,0,0,1);
+  --ease-emphasized: cubic-bezier(.05,.7,.1,1);
+  --ease-exit: cubic-bezier(.3,0,1,1);
+  --ls-tight: -0.02em;
+  --ls-normal: 0;
+  --ls-wide: 0.04em;
+  --ls-caps: 0.08em;
+  --blur-scrim: blur(18px);
+  --overlay-image: linear-gradient(180deg,rgba(14,14,17,0) 35%,rgba(14,14,17,.82) 100%);
+  --press-scale: .97;
+  --font-ui: "Plus Jakarta Sans","Segoe UI",system-ui,sans-serif;
+  --font-display: "Jost","Plus Jakarta Sans",system-ui,sans-serif;
+  --font-numeric: "Plus Jakarta Sans",system-ui,sans-serif;
+  --text-fs-h1: 600 48px/1.05 var(--font-ui);
+  --text-fs-h2: 700 32px/1.1 var(--font-ui);
+  --text-fs-h2s: 700 27px/1.15 var(--font-ui);
+  --text-fs-h3: 500 24px/1.2 var(--font-ui);
+  --text-fs-h4: 700 22px/1.25 var(--font-ui);
+  --text-fs-button: 700 20px/1.2 var(--font-ui);
+  --text-fs-body1: 600 18px/1.4 var(--font-ui);
+  --text-fs-body2: 500 15px/1.45 var(--font-ui);
+  --text-fs-body3: 400 14px/1.5 var(--font-ui);
+  --text-fs-body4: 400 13px/1.5 var(--font-ui);
+  --text-fs-caption: 600 11px/1.3 var(--font-ui);
+  --text-body: 400 15px/1.45 var(--font-ui); /* From `body` in tokens/base.css. */
+}
+.fs-h1 {
+  font-family: var(--font-ui);
+  font-size: 48px;
+  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.fs-h2 {
+  font-family: var(--font-ui);
+  font-size: 32px;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.fs-h2s {
+  font-family: var(--font-ui);
+  font-size: 27px;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.fs-h3 {
+  font-family: var(--font-ui);
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.fs-h4 {
+  font-family: var(--font-ui);
+  font-size: 22px;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.fs-button {
+  font-family: var(--font-ui);
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.fs-body1 {
+  font-family: var(--font-ui);
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.fs-body2 {
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.45;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.fs-body3 {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.fs-body4 {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.fs-caption {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.body {
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.45;
+  font-weight: 400;
+  letter-spacing: 0;
+}

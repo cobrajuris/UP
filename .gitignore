@@ -1,0 +1,14 @@
+# Flutter / Dart
+.dart_tool/
+.packages
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
+*.iml
+.idea/
+.vscode/
+local.properties
+*.keystore
+*.jks
+key.properties
+.DS_Store
