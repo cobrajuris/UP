@@ -1,0 +1,92 @@
+<title>Note</title>
+<meta name="description" content="Note — ilha dinâmica com assistente, atividades ao vivo e animações de mola.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="note.css">
+
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- Efeito líquido: a bolha nasce e volta a se fundir com a ilha -->
+    <filter id="goo" x="-20%" y="-50%" width="140%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/>
+      <feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -10"/>
+    </filter>
+  </defs>
+</svg>
+
+<main class="stage">
+  <div class="device">
+    <section class="phone" aria-label="Celular de demonstração">
+      <div class="screen" id="screen">
+        <div class="wallpaper" aria-hidden="true"></div>
+
+        <header class="statusbar">
+          <span class="clock num" id="clock">09:41</span>
+          <span class="sys" aria-hidden="true">
+            <svg class="i silent-ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6.5 9a5.5 5.5 0 0 1 11 0c0 6 2.5 7.5 2.5 7.5H4s2.5-1.5 2.5-7.5M3.5 3.5l17 17"/></svg>
+            <span class="signal"><i></i><i></i><i></i><i></i></span>
+            <svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M2.5 9a14 14 0 0 1 19 0M5.8 12.4a9.2 9.2 0 0 1 12.4 0M9.1 15.8a4.4 4.4 0 0 1 5.8 0"/><circle cx="12" cy="19" r="1.3" fill="currentColor" stroke="none"/></svg>
+            <span class="batt"><i id="battFill"></i></span>
+          </span>
+        </header>
+
+        <div class="home">
+          <section class="widget" aria-label="Como usar o Note">
+            <div class="widget-head">
+              <span class="orb md" aria-hidden="true"></span>
+              <div>
+                <b>Note</b>
+                <span>Toque na ilha para conversar</span>
+              </div>
+            </div>
+            <ul class="hints">
+              <li><b>Toque</b> abre</li>
+              <li><b>Segure</b> expande</li>
+              <li><b>Deslize ↔</b> alterna</li>
+              <li><b>Deslize ↑</b> recolhe</li>
+            </ul>
+          </section>
+          <nav class="grid" id="apps" aria-label="Apps"></nav>
+          <nav class="dock" id="dock" aria-label="Favoritos"></nav>
+        </div>
+
+        <div class="island-layer">
+          <div class="goo" aria-hidden="true"><div class="g-main" id="gMain"></div><div class="g-bub" id="gBub"></div></div>
+          <div class="glow" id="glow" aria-hidden="true"><span class="halo"></span><span class="edge"></span></div>
+          <div class="bubble" id="bubble" role="button" tabindex="-1"></div>
+          <div class="island" id="island" role="button" tabindex="0" aria-label="Note"><span class="lens" aria-hidden="true"></span></div>
+        </div>
+        <span class="homebar" aria-hidden="true"></span>
+      </div>
+    </section>
+  </div>
+
+  <aside class="about">
+    <p class="eyebrow">Ilha dinâmica · protótipo</p>
+    <h1>Note</h1>
+    <p class="lede">Um assistente que mora em volta da câmera. Cresce quando você precisa e volta a ser uma pílula quando não precisa.</p>
+
+    <dl class="gestures">
+      <div><dt>Toque na ilha</dt><dd>Abre a atividade ou chama o Note</dd></div>
+      <div><dt>Segure</dt><dd>Expande · na ilha vazia abre o resumo de hoje</dd></div>
+      <div><dt>Deslize para os lados</dt><dd>Alterna entre atividades</dd></div>
+      <div><dt>Deslize para cima</dt><dd>Recolhe · tocar fora também</dd></div>
+      <div><dt>Toque na bolha</dt><dd>Traz a segunda atividade para a frente</dd></div>
+    </dl>
+
+    <div class="livebox">
+      <p class="eyebrow">Em andamento</p>
+      <ul id="liveList"></ul>
+    </div>
+    <p class="foot">Teclado: Tab até a ilha, Enter abre, ← → alternam, Esc recolhe.</p>
+  </aside>
+</main>
+
+<script src="js/spring.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/fx.js"></script>
+<script src="js/activities.js"></script>
+<script src="js/brain.js"></script>
+<script src="js/island.js"></script>
+<script src="js/app.js"></script>

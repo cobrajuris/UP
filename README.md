@@ -162,6 +162,11 @@ a reutilize dentro da UI.
 - `readme.md` — este guia.
 - `SKILL.md` — descrição para uso como Agent Skill.
 
+### `note/`
+**Note**: ilha dinâmica com assistente, atividades ao vivo (timer, música, corrida, voo,
+chamada, treino UP.PRO, navegação, tradutor) e animações de mola. Abra `note/index.html`;
+detalhes em `note/README.md`.
+
 ### `tokens/`
 `fonts.css` · `colors.css` · `typography.css` · `spacing.css` · `radius.css` · `elevation.css` ·
 `motion.css` · `base.css`
