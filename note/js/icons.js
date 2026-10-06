@@ -1,0 +1,40 @@
+/* Note — ícones em traço (24×24). */
+(function (N) {
+  const F = 'fill="currentColor" stroke="none"';
+  const P = {
+    play: `<path d="M7 4.6v14.8a1 1 0 0 0 1.5.86l11.8-7.4a1 1 0 0 0 0-1.72L8.5 3.74A1 1 0 0 0 7 4.6z" ${F}/>`,
+    pause: `<rect x="5.5" y="4" width="4.5" height="16" rx="1.4" ${F}/><rect x="14" y="4" width="4.5" height="16" rx="1.4" ${F}/>`,
+    next: `<path d="M4 5.6v12.8a.9.9 0 0 0 1.4.75L14.6 12.8a.9.9 0 0 0 0-1.5L5.4 4.85A.9.9 0 0 0 4 5.6z" ${F}/><rect x="16.5" y="4.5" width="3.2" height="15" rx="1.2" ${F}/>`,
+    prev: `<path d="M20 5.6v12.8a.9.9 0 0 1-1.4.75L9.4 12.8a.9.9 0 0 1 0-1.5l9.2-6.45A.9.9 0 0 1 20 5.6z" ${F}/><rect x="4.3" y="4.5" width="3.2" height="15" rx="1.2" ${F}/>`,
+    x: '<path d="M6 6l12 12M18 6 6 18"/>',
+    timer: '<circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5v4l2.6 2.2M9.5 2.8h5"/>',
+    car: '<path d="M3.5 16.5v-3.2l2-5.1A2 2 0 0 1 7.4 7h9.2a2 2 0 0 1 1.9 1.2l2 5.1v3.2z"/><path d="M6 16.5v2M18 16.5v2M3.8 12.5h16.4"/><circle cx="7.5" cy="14.6" r=".9" ' + F + '/><circle cx="16.5" cy="14.6" r=".9" ' + F + '/>',
+    plane: `<path d="M21 12.6c0-.7-.6-1.2-1.3-1.2h-4.9L10.4 4H8.3l2.3 7.4H6.1L4.5 9.2H3l.9 3.4-.9 3.4h1.5l1.6-2.2h4.5L8.3 21h2.1l4.4-7.4h4.9c.7 0 1.3-.5 1.3-1z" ${F}/>`,
+    phone: `<path d="M6.6 3.2 8.9 3c.6 0 1.1.3 1.3.9l1.1 3c.2.5 0 1.1-.4 1.4L9.3 9.6a11 11 0 0 0 5.1 5.1l1.3-1.6c.3-.4.9-.6 1.4-.4l3 1.1c.6.2.9.7.9 1.3l-.2 2.3c-.1.9-.8 1.6-1.7 1.6C10.8 19 5 13.2 5 5c0-.9.7-1.7 1.6-1.8z" ${F}/>`,
+    phoneDown: `<g transform="rotate(135 12 12)"><path d="M6.6 3.2 8.9 3c.6 0 1.1.3 1.3.9l1.1 3c.2.5 0 1.1-.4 1.4L9.3 9.6a11 11 0 0 0 5.1 5.1l1.3-1.6c.3-.4.9-.6 1.4-.4l3 1.1c.6.2.9.7.9 1.3l-.2 2.3c-.1.9-.8 1.6-1.7 1.6C10.8 19 5 13.2 5 5c0-.9.7-1.7 1.6-1.8z" ${F}/></g>`,
+    mic: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/>',
+    micOff: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M4 4l16 16"/>',
+    speaker: '<path d="M11 5 6.5 8.5H3.5v7h3L11 19z" ' + F + '/><path d="M15 9a4.2 4.2 0 0 1 0 6M18 6.2a8.2 8.2 0 0 1 0 11.6"/>',
+    message: '<path d="M4 5.5h16v10.5H9.5L5.5 19.5V16H4z"/>',
+    run: '<circle cx="14.5" cy="4.3" r="1.9" ' + F + '/><path d="M6 20.5l3.2-4.8 2.8 1.8.8-4.6M8 10.5l3.4-2.6 3.3 1 1.9 3h3M12.8 12.9l-1.4-5"/>',
+    turnRight: '<path d="M7 20v-6.5A4.5 4.5 0 0 1 11.5 9H18"/><path d="m14.5 5.5 3.5 3.5-3.5 3.5"/>',
+    turnLeft: '<path d="M17 20v-6.5A4.5 4.5 0 0 0 12.5 9H6"/><path d="M9.5 5.5 6 9l3.5 3.5"/>',
+    straight: '<path d="M12 20V5M7.5 9.5 12 5l4.5 4.5"/>',
+    flag: '<path d="M6 21V4M6 4.5h11l-2 4 2 4H6"/>',
+    bell: '<path d="M6.5 9a5.5 5.5 0 0 1 11 0c0 6 2.5 7.5 2.5 7.5H4s2.5-1.5 2.5-7.5"/><path d="M10.2 20a2 2 0 0 0 3.6 0"/>',
+    bellOff: '<path d="M6.5 9a5.5 5.5 0 0 1 11 0c0 6 2.5 7.5 2.5 7.5H4s2.5-1.5 2.5-7.5"/><path d="M10.2 20a2 2 0 0 0 3.6 0M3.5 3.5l17 17"/>',
+    bolt: `<path d="M13.4 2.5 4.6 13.6h6.2l-1.2 7.9 8.8-11.1h-6.2z" ${F}/>`,
+    cloud: '<path d="M7 18.5a4.5 4.5 0 0 1-.6-9 6 6 0 0 1 11.5 1.6 3.8 3.8 0 0 1-.4 7.4z"/>',
+    languages: '<path d="M4 5.5h9M8.5 3.5v2M6 5.5c.6 3.5 2.8 6 5.5 7.5M11 5.5c-.8 3.8-3.2 6.6-6.5 8.2"/><path d="m12.5 20.5 4-9.5 4 9.5M14 17h5"/>',
+    calendar: '<rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+    music: '<path d="M9 17.5V5.5l11-2v12"/><circle cx="6.5" cy="17.5" r="2.6" ' + F + '/><circle cx="17.5" cy="15.5" r="2.6" ' + F + '/>',
+    map: '<path d="M9 4 3.5 6v14L9 18l6 2 5.5-2V4L15 6z"/><path d="M9 4v14M15 6v14"/>',
+    send: '<path d="M12 19V5M6 11l6-6 6 6"/>',
+    battery: '<rect x="2.5" y="7" width="17" height="10" rx="3"/><path d="M22 10.5v3"/>',
+    wifi: '<path d="M2.5 9a14 14 0 0 1 19 0M5.8 12.4a9.2 9.2 0 0 1 12.4 0M9.1 15.8a4.4 4.4 0 0 1 5.8 0"/><circle cx="12" cy="19" r="1.2" ' + F + '/>',
+    lock: '<rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/>',
+    sparkle: `<path d="M12 2.5c.5 4.6 2.9 7 7.5 7.5-4.6.5-7 2.9-7.5 7.5-.5-4.6-2.9-7-7.5-7.5 4.6-.5 7-2.9 7.5-7.5z" ${F}/>`,
+  };
+  N.icon = (name, size = 16, cls = '') =>
+    `<svg class="i ${cls}" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[name] || ''}</svg>`;
+})(window.Note = window.Note || {});
