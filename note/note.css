@@ -26,6 +26,7 @@
   --f-ui: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --f-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
   --top: 11px;
+  --cam: 48px; /* faixa livre em volta do furo da câmera */
   --s: 1;
   color-scheme: dark;
 }
@@ -58,7 +59,7 @@ button { font: inherit; color: inherit; }
 .phone {
   width: 415px; height: 876px;
   padding: 11px 11px;
-  border-radius: 64px;
+  border-radius: 50px;
   background: linear-gradient(145deg, #2b2a31, #121116 40%, #26252b);
   box-shadow: 0 0 0 1.5px #3b3a42, 0 40px 90px -20px rgba(0, 0, 0, .8), inset 0 0 0 2px #050507;
   transform: scale(var(--s));
@@ -68,13 +69,13 @@ button { font: inherit; color: inherit; }
 .phone::before, .phone::after {
   content: ""; position: absolute; width: 4px; border-radius: 2px; background: #2c2b32;
 }
-.phone::before { left: -4px; top: 190px; height: 64px; box-shadow: 0 84px 0 #2c2b32; }
-.phone::after { right: -4px; top: 240px; height: 96px; }
+.phone::before { right: -4px; top: 170px; height: 96px; }
+.phone::after { right: -4px; top: 300px; height: 56px; }
 
 .screen {
   position: relative;
   width: 393px; height: 854px;
-  border-radius: 53px;
+  border-radius: 40px;
   overflow: hidden;
   background: #000;
   isolation: isolate;
@@ -95,12 +96,12 @@ button { font: inherit; color: inherit; }
   position: absolute; z-index: 5; left: 0; right: 0; top: 0;
   height: calc(var(--top) + 36px);
   display: flex; align-items: center; justify-content: space-between;
-  padding: var(--top) 34px 0 40px;
-  font-weight: 600; font-size: 16px;
+  padding: var(--top) 28px 0 30px;
+  font-weight: 500; font-size: 14.5px;
   pointer-events: none;
 }
 .sys { display: flex; align-items: center; gap: 6px; transition: opacity .25s; }
-.has-bubble .sys, .island-open .sys, .island-open .clock { opacity: 0; }
+.has-bubble .sys, .island-wide .sys, .island-open .sys, .island-open .clock { opacity: 0; }
 .clock { transition: opacity .25s; }
 .signal { display: flex; align-items: flex-end; gap: 1.5px; height: 11px; }
 .signal i { width: 3px; background: currentColor; border-radius: 1px; }
@@ -219,11 +220,11 @@ button { font: inherit; color: inherit; }
 .g-bub { border-radius: 50%; transform: translateX(-50%); }
 
 .lens {
-  position: absolute;
-  top: 11px; left: calc(50% + 32px);
-  width: 14px; height: 14px; border-radius: 50%;
-  background: radial-gradient(circle at 38% 35%, #2b3352 0 18%, #0b0d16 30%, #050508 70%);
-  box-shadow: inset 0 0 0 1.5px #121219;
+  position: absolute; z-index: 2; pointer-events: none;
+  top: calc(var(--top) + 12px); left: 50%;
+  width: 12px; height: 12px; margin-left: -6px; border-radius: 50%;
+  background: radial-gradient(circle at 36% 34%, #3a4570 0 14%, #12162a 30%, #04050a 64%);
+  box-shadow: 0 0 0 1.5px #101017, 0 0 0 3px rgba(255, 255, 255, .03);
 }
 
 /* brilho do assistente em volta da ilha */
@@ -254,12 +255,17 @@ button { font: inherit; color: inherit; }
 
 /* ---------------------------------------------------------------- compacto e avisos */
 .cmp { height: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 12px 0 8px; }
-.cmp .lead, .cmp .trail { display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 14.5px; white-space: nowrap; }
+.cmp { gap: var(--cam); }
+.cmp .lead, .cmp .trail { display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 14.5px; white-space: nowrap; min-width: 0; max-width: calc(50% - var(--cam) / 2); overflow: hidden; }
 .cmp.alr { padding: 0 14px 0 9px; }
 .cmp .trail { justify-content: flex-end; }
 
 /* ---------------------------------------------------------------- utilitários do cartão */
-.exp { position: absolute; inset: 0; padding: 16px 20px 18px; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; overflow: hidden; }
+.exp { position: absolute; inset: 0; padding: 10px 22px 18px; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; overflow: hidden; }
+.hdr { display: grid; grid-template-columns: minmax(0, 1fr) var(--cam) minmax(0, 1fr); align-items: center; min-height: 26px; }
+.hdr > :first-child { grid-column: 1; justify-self: start; max-width: 100%; }
+.hdr > :last-child { grid-column: 3; justify-self: end; max-width: 100%; }
+.ell { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
 .row { display: flex; align-items: center; min-width: 0; }
 .row.between { justify-content: space-between; gap: 10px; }
 .row.center { justify-content: center; }
@@ -359,7 +365,7 @@ button { font: inherit; color: inherit; }
 .ruler::before { content: ""; position: absolute; z-index: 1; left: 0; width: 50%; top: 0; bottom: 0; background: linear-gradient(90deg, transparent, rgba(0, 0, 0, .55)); }
 
 /* ---------------------------------------------------------------- música */
-.dots { width: 100%; height: 20px; display: block; }
+.dots { width: 100%; height: 14px; display: block; margin-top: 6px; }
 .prog { display: grid; grid-template-columns: 38px 1fr 42px; align-items: center; gap: 10px; }
 .prog .muted { text-align: right; }
 .bar { height: 6px; border-radius: 3px; background: rgba(255, 255, 255, .14); overflow: hidden; }
@@ -398,7 +404,7 @@ button { font: inherit; color: inherit; }
 .stats span { font-size: 11px; color: var(--ink-2); }
 
 /* ---------------------------------------------------------------- navegação */
-.turn { width: 62px; height: 62px; flex: none; border-radius: 18px; display: grid; place-items: center; background: var(--c-nav); color: #fff; }
+.turn { width: 44px; height: 44px; flex: none; border-radius: 14px; display: grid; place-items: center; background: var(--c-nav); color: #fff; }
 
 /* ---------------------------------------------------------------- tradutor */
 .exp-translate { padding: 14px 20px; justify-content: center; }
@@ -428,7 +434,7 @@ button { font: inherit; color: inherit; }
 /* ---------------------------------------------------------------- Note (assistente) */
 .exp-note { gap: 8px; }
 .as-name { font-size: 16px; }
-.as-status { margin-left: auto; text-align: right; }
+.as-status { text-align: right; }
 .as-text { margin: 2px 0 0; font-size: 20px; font-weight: 600; line-height: 1.25; letter-spacing: -.01em; min-height: 50px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .as-wave { width: 100%; height: 30px; display: block; }
 .chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 0 -20px; padding: 0 20px; -webkit-mask: linear-gradient(90deg, transparent, #000 20px, #000 calc(100% - 20px), transparent); mask: linear-gradient(90deg, transparent, #000 20px, #000 calc(100% - 20px), transparent); }

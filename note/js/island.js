@@ -1,7 +1,7 @@
 /* Note — motor da ilha dinâmica.
 
    Estados visuais
-     idle      pílula em volta da câmera
+     idle      círculo em volta do furo da câmera (Android)
      compact   atividade principal: conteúdo à esquerda e à direita da câmera
      expanded  cartão grande (atividade principal aberta ou um "sheet": Note, Hoje, chamada)
      alert     aviso rápido que some sozinho (silencioso, carregando, timer concluído)
@@ -16,14 +16,14 @@
   const S = N.Spring;
   const E = {};
   const sp = {
-    w: new S(120), h: new S(36), r: new S(18),
+    w: new S(36), h: new S(36), r: new S(18),
     s: new S(1, { response: 0.32, damping: 0.62 }),
     x: new S(0, { response: 0.4, damping: 0.55 }),
     bx: new S(0, { response: 0.55, damping: 0.72 }),
     bs: new S(0, { response: 0.5, damping: 0.68 }),
   };
   const st = { live: [], sheet: null, alert: null, expanded: false, stretch: 0 };
-  const target = { w: 120, h: 36, r: 18 };
+  const target = { w: 36, h: 36, r: 18 };
   const listeners = [];
   let screen, island, bubble, gMain, gBub, glow;
   let W = 393, TOP = 11, scale = 1, uid = 0;
@@ -33,7 +33,7 @@
 
   /* ---------- geometria ---------- */
   function sizeFor(mode, act) {
-    if (mode === 'idle') return { w: 120, h: 36, r: 18 };
+    if (mode === 'idle') return { w: 36, h: 36, r: 18 }; // círculo em volta do furo da câmera
     if (mode === 'compact') return { w: Math.min(act.compactW || 230, W - 120), h: 36, r: 18 };
     if (mode === 'alert') {
       const a = act.alertSize || { w: 240, h: 36 };
@@ -139,6 +139,7 @@
 
     glow.classList.toggle('on', !!(mode === 'expanded' && act && act.glow));
     screen.classList.toggle('has-bubble', !!sec);
+    screen.classList.toggle('island-wide', t.w > 190);
     screen.classList.toggle('island-open', mode === 'expanded');
     island.setAttribute('aria-label', act ? `${act.name}${mode === 'compact' ? ', toque para abrir' : ''}` : 'Note, toque para falar');
     island.setAttribute('aria-expanded', mode === 'expanded' ? 'true' : 'false');

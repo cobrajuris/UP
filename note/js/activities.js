@@ -47,8 +47,8 @@
     minimal() { return ring('p', 26, 3, 'var(--c-timer)', I('timer', 12)); },
     expanded() {
       return `
-      <div class="row between end">
-        <span class="label" style="color:var(--c-timer)">${I('timer', 16)} ${this.label}</span>
+      <div class="hdr">
+        <span class="label ell" style="color:var(--c-timer)">${I('timer', 16)} ${this.label}</span>
         <b class="big num" style="color:var(--c-timer)" data-t="time"></b>
       </div>
       <div class="ruler" data-p="p" style="--rw:${Math.max(600, Math.round(this.total * 2))}px"><div class="ruler-track"></div></div>
@@ -74,7 +74,7 @@
   ];
   const art = (g, size, r) => `<span class="art" style="--g1:${g[0]};--g2:${g[1]};width:${size}px;height:${size}px;border-radius:${r}px"></span>`;
   N.create.music = () => ({
-    id: 'music', name: 'Música', kind: 'live', compactW: 224, expandedH: 226,
+    id: 'music', name: 'Música', kind: 'live', compactW: 214, expandedH: 236,
     i: 0, pos: 48, playing: true,
     get track() { return TRACKS[this.i]; },
     tick(dt) { if (this.playing) { this.pos += dt; if (this.pos >= this.track.d) this.skip(1); } },
@@ -88,11 +88,13 @@
     expanded() {
       const t = this.track;
       return `
-      <canvas class="dots" aria-hidden="true"></canvas>
-      <div class="row gap">
-        ${art(t.g, 58, 14)}
-        <div class="meta"><b>${t.t}</b><span class="muted">${t.a}</span></div>
+      <div class="hdr">
+        <span class="tag ell" style="--c:var(--c-music)">${I('music', 13)} Tocando</span>
         ${eq('var(--c-music)', 'play')}
+      </div>
+      <div class="row gap">
+        ${art(t.g, 56, 14)}
+        <div class="meta"><b>${t.t}</b><span class="muted">${t.a}</span><canvas class="dots" aria-hidden="true"></canvas></div>
       </div>
       <div class="prog"><span class="num small" data-t="pos"></span><div class="bar" style="--c:var(--c-music)"><i data-p="p"></i></div><span class="num small muted" data-t="rem"></span></div>
       <div class="row center gap-lg">
@@ -105,7 +107,7 @@
     },
     mount(layer, mode) {
       if (mode !== 'expanded') return null;
-      return N.dotMatrix(layer.querySelector('.dots'), () => `NOTE > TOCANDO AGORA > ${this.track.t} - ${this.track.a}      `, () => this.playing);
+      return N.dotMatrix(layer.querySelector('.dots'), () => `${this.track.t} - ${this.track.a}    NOTE    `, () => this.playing);
     },
     onAction(a, el, E) {
       if (a === 'toggle') this.playing = !this.playing;
@@ -195,9 +197,9 @@
     minimal() { return ring('p', 26, 3, 'var(--c-flight)', I('plane', 11)); },
     expanded() {
       return `
-      <div class="row between">
-        <span class="tag" style="--c:var(--c-flight)">${I('plane', 13)} NT 2047</span>
-        <span class="muted small">Portão B12 · Assento 23A</span>
+      <div class="hdr">
+        <span class="tag ell" style="--c:var(--c-flight)">${I('plane', 13)} NT 2047</span>
+        <span class="muted small ell">Portão B12 · 23A</span>
       </div>
       <div class="flight">
         <div class="col"><b class="code">GRU</b><span class="muted small">São Paulo</span></div>
@@ -237,7 +239,7 @@
   });
 
   N.create.call = ({ name = 'Mãe', initials = 'M', outgoing = false } = {}) => ({
-    id: 'call', name: `Chamada com ${name}`, kind: 'live', compactW: 214, expandedH: 156,
+    id: 'call', name: `Chamada com ${name}`, kind: 'live', compactW: 214, expandedH: 188,
     t: outgoing ? -3 : 0, muted: false, speaker: false,
     get variant() { return this.t < 0 ? 'dialing' : ''; },
     tick(dt, E) { const was = this.t < 0; this.t += dt; if (was && this.t >= 0) E.refresh(); },
@@ -251,10 +253,13 @@
     minimal() { return `<span style="color:var(--c-call)">${I('phone', 17)}</span>`; },
     expanded() {
       return `
-      <div class="row gap">
-        ${ava(initials, '#8e8e98', '#4b4b55', 46)}
-        <div class="col grow tight"><b class="title sm">${name}</b><span class="num small" style="color:var(--c-call)" data-t="dur"></span></div>
+      <div class="hdr">
+        <span class="tag ell" style="--c:var(--c-call)">${I('phone', 13)} <span data-t="dur"></span></span>
         ${eq('var(--c-call)', '', 5)}
+      </div>
+      <div class="row gap">
+        ${ava(initials, '#8e8e98', '#4b4b55', 40)}
+        <b class="title sm ell">${name}</b>
       </div>
       <div class="row between">
         <button class="btn-round" data-act="mute" style="--b:#d9d6e0" aria-label="Silenciar microfone">
@@ -287,15 +292,15 @@
     expanded() {
       return `
       <span class="flare" aria-hidden="true"></span>
-      <div class="row between">
-        <span class="tag up">UP.PRO <span class="muted">· Corrida ao ar livre</span></span>
+      <div class="hdr">
+        <span class="tag up">UP.PRO</span>
         <span class="row gap-sm">
           <button class="btn-round xs" style="--b:var(--c-workout)" data-act="toggle" aria-label="Pausar ou retomar treino">
             <span data-show="run">${I('pause', 13)}</span><span data-show="paused" hidden>${I('play', 13)}</span></button>
           <button class="btn-round xs" style="--b:#d9d6e0" data-act="end" aria-label="Encerrar treino">${I('x', 13)}</button>
         </span>
       </div>
-      <div class="col tight"><b class="hero num" data-t="steps"></b><span class="muted small">passos hoje</span></div>
+      <div class="col tight"><b class="hero num" data-t="steps"></b><span class="muted small">passos · corrida ao ar livre</span></div>
       <div class="stats">
         <div><b class="num"><span data-t="km"></span><small>km</small></b><span>Distância</span></div>
         <div><b class="num"><span data-t="kcal"></span><small>kcal</small></b><span>Calorias</span></div>
@@ -320,7 +325,7 @@
     { dir: 'flag', verb: 'Chegada', street: 'Parque Trianon', d: 160 },
   ];
   N.create.nav = () => ({
-    id: 'nav', name: 'Navegação', kind: 'live', compactW: 214, expandedH: 160,
+    id: 'nav', name: 'Navegação', kind: 'live', compactW: 214, expandedH: 168,
     step: 0, d: ROUTE[0].d,
     get variant() { return 's' + this.step; },
     get s() { return ROUTE[this.step]; },
@@ -341,10 +346,11 @@
     minimal() { return `<span style="color:var(--c-nav)">${I(this.s.dir, 18)}</span>`; },
     expanded() {
       return `
-      <div class="row gap">
-        <span class="turn">${I(this.s.dir, 34)}</span>
-        <div class="col grow tight"><b class="big num" data-t="dist"></b><span class="title xs">${this.s.verb} · ${this.s.street}</span></div>
+      <div class="hdr">
+        <span class="turn">${I(this.s.dir, 28)}</span>
+        <b class="big num" data-t="dist"></b>
       </div>
+      <span class="title sm ell">${this.s.verb} · ${this.s.street}</span>
       <div class="row between">
         <span class="muted small num" data-t="eta"></span>
         <button class="btn-pill danger" data-act="end">Encerrar</button>
@@ -433,8 +439,8 @@
       values() { return { clock: hhmm(), bat: (N.app ? N.app.battery : 82) / 100, batTxt: N.app ? N.app.battery : 82, steps: 6240 / 8000 }; },
       expanded() {
         return `
-        <div class="row between end">
-          <div class="col tight"><span class="muted small cap">${wd}</span><b class="title">${day}</b></div>
+        <div class="hdr">
+          <div class="col tight"><span class="muted small cap ell">${wd}</span><b class="title ell">${day}</b></div>
           <b class="big num thin" data-t="clock"></b>
         </div>
         <div class="gauges">
@@ -460,11 +466,11 @@
   ];
   N.create.assistant = () => ({
     id: 'note', name: 'Note', kind: 'sheet', expandedH: 262, glow: true,
-    text: 'Como posso ajudar?', status: 'Toque no microfone ou digite', level: 0.18, rec: null, ti: 0, wait: 0,
+    text: 'Como posso ajudar?', status: 'Fale ou digite', level: 0.18, rec: null, ti: 0, wait: 0,
     values() { return { text: this.text, status: this.status, listening: !!this.rec }; },
     expanded() {
       return `
-      <div class="row gap-sm"><span class="orb" aria-hidden="true"></span><b class="as-name">Note</b><span class="muted small as-status" data-t="status"></span></div>
+      <div class="hdr"><span class="row gap-sm"><span class="orb" aria-hidden="true"></span><b class="as-name">Note</b></span><span class="muted small as-status ell" data-t="status"></span></div>
       <p class="as-text" data-t="text" aria-live="polite"></p>
       <canvas class="as-wave" aria-hidden="true"></canvas>
       <div class="chips">${SUGGESTIONS.map(([l, q]) => `<button class="chip-btn" data-act="ask" data-q="${q}">${l}</button>`).join('')}</div>
@@ -492,7 +498,7 @@
       E.bindNow();
       this.wait = setTimeout(() => {
         const r = N.brain(q);
-        this.status = r.status || 'Note'; this.level = 0.22;
+        this.status = r.status || 'Pronto'; this.level = 0.22;
         this.type(r.reply, E, () => {
           if (r.run) this.wait = setTimeout(() => { if (E.state.sheet === this) { E.dismiss(); r.run(); } }, 900);
         });

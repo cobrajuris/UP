@@ -1,6 +1,6 @@
 # Note — ilha dinâmica
 
-O Note é uma ilha dinâmica que funciona como assistente. Ela fica em volta da câmera e muda
+O Note é uma ilha dinâmica que funciona como assistente. Ela nasce em volta do furo da câmera, no centro do topo da tela do Android, e muda
 de forma conforme o que está acontecendo no celular: um timer, uma música, uma corrida, uma
 chamada, um treino do UP.PRO ou uma conversa com o próprio Note.
 
@@ -14,11 +14,18 @@ servidor. No celular, a tela ocupa tudo; no computador, o aparelho aparece com a
 
 Para falar com o Note por voz, use o Chrome. Se o microfone não estiver disponível, digite a pergunta.
 
+## Câmera no centro
+
+A câmera do Android fica parada no centro do topo e a ilha cresce em volta dela. Em todos os
+estados fica uma faixa livre de 48 px no centro (`--cam` em `note.css`): no compacto o conteúdo
+fica à esquerda e à direita, e nos cartões abertos o cabeçalho (`.hdr`) tem duas laterais com o
+vão da câmera no meio. Nenhum texto ou botão passa por cima da lente.
+
 ## Estados da ilha
 
 | Estado | Quando aparece | Tamanho |
 |---|---|---|
-| Vazia | Nada acontecendo | 120 × 36 |
+| Vazia | Nada acontecendo: só um círculo em volta do furo da câmera | 36 × 36 |
 | Compacta | Uma atividade ao vivo: conteúdo à esquerda e à direita da câmera | ~220 × 36 |
 | Bolha (mínima) | Uma segunda atividade ao vivo, em um círculo ao lado | 36 × 36 |
 | Expandida | Você abriu a atividade, ou o Note, o resumo de Hoje ou uma chamada chegou | largura da tela − 18, altura de cada atividade |
