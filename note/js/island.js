@@ -31,7 +31,7 @@
   let screen, island, bubble, gMain, gBub, glow;
   let W = 393, TOP = 11, scale = 1, uid = 0;
   let viewKey = '', layer = null, viewAct = null, viewMode = 'idle', cleanup = null;
-  let bubbleAct = null, bubbleKey = '';
+  let bubbleAct = null, bubbleKey = '', lastShape = '';
   let raf = 0, last = 0, presentT = 0, alertT = 0;
 
   /* ---------- geometria ---------- */
@@ -132,6 +132,11 @@
     const { mode, act } = current();
     const key = mode + ':' + (act ? act.uid + ':' + (act.variant || '') : '');
     const t = sizeFor(mode, act);
+    const sec0 = mode === 'compact' ? st.live[1] || null : null;
+    const shape = `${key}|${t.w}|${t.h}|${sec0 ? sec0.uid + ':' + (sec0.variant || '') : ''}`;
+    // Nada mudou (ex.: toque fora com a ilha parada): não anima nem mexe na janela.
+    if (!force && shape === lastShape) return;
+    lastShape = shape;
     const grow = t.w * t.h > target.w * target.h + 1;
     for (const k of ['w', 'h', 'r']) sp[k].config(grow ? 0.5 : 0.42, grow ? 0.8 : 0.92);
     Object.assign(target, t);

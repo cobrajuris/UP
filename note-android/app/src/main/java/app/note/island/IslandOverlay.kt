@@ -59,6 +59,9 @@ class IslandOverlay(private val service: IslandService) {
     private var islandTopDp = 6f
     private var screenW = 0
     private var hidden = false
+    private var lastX = Int.MIN_VALUE
+    private var lastW = -1
+    private var lastH = -1
 
     private val speech by lazy {
         Speech(service,
@@ -139,6 +142,7 @@ class IslandOverlay(private val service: IslandService) {
         root.visibility = if (landscape) View.GONE else View.VISIBLE
         if (landscape) return
         measureScreen()
+        lastX = Int.MIN_VALUE // força recalcular a posição na tela nova
         web.layoutParams = (web.layoutParams as FrameLayout.LayoutParams).apply { width = screenW }
         sendInit()
     }
@@ -216,7 +220,11 @@ class IslandOverlay(private val service: IslandService) {
         }
         lp.height = ceil(bottomDp * density).toInt()
         lp.y = 0
-        web.translationX = pageLeft - lp.x
+        val tx = pageLeft - lp.x
+        val same = lp.x == lastX && lp.width == lastW && lp.height == lastH
+        if (same) return
+        lastX = lp.x; lastW = lp.width; lastH = lp.height
+        web.translationX = tx
         if (attached && !hidden) wm.updateViewLayout(root, lp)
     }
 

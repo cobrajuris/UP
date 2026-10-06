@@ -179,7 +179,7 @@
       E.setScale(1);
       E.layout(width, top);
     },
-    outside() { E.collapse(); },
+    outside() { if (E.state.sheet || E.state.expanded) E.collapse(); },
     battery(level, plugged, justPlugged) {
       N.app.battery = level;
       if (justPlugged) E.alert(N.create.charging(level), 2600);
