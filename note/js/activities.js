@@ -378,6 +378,123 @@
     };
   };
 
+  /* ------------------------------------------------------------ Menu de opções (toque na ilha) */
+  // Cada opção: id, rótulo, ícone, cor e o que fazer. O app Android troca "run" pelas ações reais.
+  const demo = (label) => (E) => E.alert(N.create.toast({ icon: 'sparkle', color: 'var(--note)', lead: label, trail: 'no app Android', w: 250 }), 1800);
+  let torch = false;
+  N.hubOptions = [
+    { id: 'chat', label: 'Conversar', icon: 'chat', color: 'var(--note)', run: (E) => E.present(N.create.assistant()) },
+    { id: 'timer', label: 'Timer', icon: 'timer', color: 'var(--c-timer)', run: (E) => E.present(N.create.timerPick()) },
+    { id: 'torch', label: 'Lanterna', icon: 'flash', color: '#ffd60a', run: (E) => { torch = !torch; E.alert(N.create.toast({ icon: 'flash', color: '#ffd60a', lead: 'Lanterna', trail: torch ? 'Ligada' : 'Desligada', w: 210 }), 1600); } },
+    { id: 'silent', label: 'Silencioso', icon: 'bellOff', color: 'var(--c-alert)', run: () => N.app && N.app.setSilent(!N.app.silent) },
+    { id: 'music', label: 'Música', icon: 'music', color: 'var(--c-music)', run: (E) => { if (!E.focus('music')) E.start(N.create.music(), { present: true }); } },
+    { id: 'camera', label: 'Câmera', icon: 'camera', color: '#d9d6e0', run: demo('Câmera') },
+    { id: 'shot', label: 'Captura', icon: 'screenshot', color: 'var(--c-flight)', run: demo('Captura de tela') },
+    { id: 'today', label: 'Hoje', icon: 'calendar', color: 'var(--c-charge)', run: (E) => E.present(N.create.overview()) },
+    { id: 'dial', label: 'Ligar', icon: 'phone', color: 'var(--c-call)', run: (E) => setTimeout(() => E.present(N.create.incoming()), 400) },
+    { id: 'calc', label: 'Calculadora', icon: 'calc', color: 'var(--c-timer)', run: demo('Calculadora') },
+    { id: 'wifi', label: 'Wi-Fi', icon: 'wifi', color: 'var(--c-nav)', run: demo('Wi-Fi') },
+    { id: 'bt', label: 'Bluetooth', icon: 'bluetooth', color: 'var(--c-nav)', run: demo('Bluetooth') },
+    { id: 'lock', label: 'Bloquear', icon: 'lock', color: '#d9d6e0', run: demo('Bloquear tela') },
+    { id: 'settings', label: 'Ajustes', icon: 'sliders', color: '#d9d6e0', run: demo('Ajustes') },
+  ];
+
+  /* Dados do painel. O app Android substitui por dados reais (música, bateria, apps instalados). */
+  N.hubData = () => {
+    const m = N.island.get('music');
+    return {
+      media: m ? { title: m.track ? m.track.t : m.title, artist: m.track ? m.track.a : m.artist, playing: m.playing, art: '', g: m.track ? m.track.g : ['#7b5cff', '#f08bd6'] } : null,
+      status: [{ v: `${N.app ? N.app.battery : 82}%`, l: 'bateria', c: 'var(--c-charge)' }, { v: '24°', l: 'nublado', c: 'var(--c-flight)' }],
+      apps: [
+        ['WhatsApp', '#25d366', 'W'], ['Instagram', 'linear-gradient(135deg,#f9ce34,#ee2a7b,#6228d7)', 'I'], ['YouTube', '#ff0033', 'Y'],
+        ['Spotify', '#1ed760', 'S'], ['Chrome', 'conic-gradient(#ea4335 0 33%,#fbbc05 0 66%,#34a853 0)', 'C'], ['Telegram', '#2aabee', 'T'],
+        ['Gmail', '#ea4335', 'M'], ['Mapas', '#34a853', 'M'], ['UP.PRO', '#17171b', 'U'], ['Fotos', 'linear-gradient(135deg,#4285f4,#ea4335)', 'F'],
+      ].map(([label, bg, l]) => ({ id: label, label, bg, letter: l })),
+    };
+  };
+  const esc = (t) => String(t == null ? '' : t).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const safeImg = (u) => (typeof u === 'string' && /^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(u) ? u : '');
+
+  /* Painel do Note: widgets, ações rápidas e apps, no estilo LaunchMe, adaptado ao celular. */
+  N.create.hub = () => {
+    const d = new Date();
+    const wd = d.toLocaleDateString('pt-BR', { weekday: 'short' }).replace('.', '');
+    const data = N.hubData();
+    const m = data.media;
+    const art = m && safeImg(m.art)
+      ? `<span class="art img" style="width:38px;height:38px;border-radius:10px;background-image:url(${safeImg(m.art)})"></span>`
+      : `<span class="art" style="--g1:${(m && m.g ? m.g[0] : '#3a3845')};--g2:${(m && m.g ? m.g[1] : '#24232b')};width:38px;height:38px;border-radius:10px"></span>`;
+    return {
+      id: 'hub', name: 'Painel do Note', kind: 'sheet', expandedH: 232, expandedW: 380, tapToClose: true,
+      playing: m ? !!m.playing : false,
+      values() { return { clock: hhmm(), play: this.playing, pause: !this.playing }; },
+      expanded() {
+        return `
+        <div class="hdr">
+          <span class="row gap-sm"><span class="orb" aria-hidden="true"></span><b class="as-name">Note</b></span>
+          <span class="row gap-sm"><span class="muted xs num" data-t="clock"></span>
+            <button class="btn-round xs" style="--b:var(--note)" data-act="talk" aria-label="Falar com o Note">${I('mic', 13)}</button></span>
+        </div>
+        <div class="widgets">
+          <button class="wg wg-media" data-act="media">
+            ${art}
+            <span class="col tight grow"><b class="xs ell">${m ? esc(m.title) : 'Nada tocando'}</b><span class="xs muted ell">${m ? esc(m.artist) : 'Toque para música'}</span></span>
+            <span class="wg-play">${m ? `<span data-show="play">${I('pause', 14)}</span><span data-show="pause" hidden>${I('play', 14)}</span>` : I('music', 14)}</span>
+          </button>
+          <button class="wg wg-date" data-act="today"><span class="wg-wd">${esc(wd)}</span><b class="wg-day num">${d.getDate()}</b></button>
+          <button class="wg wg-stat" data-act="today">${data.status.map((x) => `<span class="col tight"><b class="small num" style="color:${x.c}">${esc(x.v)}</b><span class="xs muted ell">${esc(x.l)}</span></span>`).join('')}</button>
+        </div>
+        <div class="hub" role="list">${N.hubOptions.map((o) => `
+          <button class="hub-op" role="listitem" data-act="op" data-id="${o.id}" style="--c:${o.color}">
+            <span class="hub-ic">${I(o.icon, 17)}</span><span class="hub-lb">${o.label}</span></button>`).join('')}
+        </div>
+        <div class="dock-apps" role="list">${data.apps.map((a) => {
+          const icon = safeImg(a.icon);
+          return `<button class="app-mini ${icon ? 'img' : ''}" role="listitem" data-act="app" data-id="${esc(a.id)}" aria-label="Abrir ${esc(a.label)}"
+            style="${icon ? `background-image:url(${icon})` : `background:${a.bg}`}">${icon ? '' : esc(a.letter)}</button>`;
+        }).join('')}</div>`;
+      },
+      onAction(a, el, E) {
+        if (a === 'talk') { const s = E.present(N.create.assistant()); setTimeout(() => s.listen(E), 350); return; }
+        if (a === 'today') { E.present(N.create.overview()); return; }
+        if (a === 'media') {
+          if (!m) { E.dismiss(); setTimeout(() => N.hubOptions.find((x) => x.id === 'music').run(E), 120); return; }
+          this.playing = !this.playing;
+          if (N.mediaToggle) N.mediaToggle(); else { const mu = E.get('music'); if (mu) mu.playing = this.playing; }
+          return;
+        }
+        if (a === 'app') {
+          E.dismiss();
+          if (N.openApp) N.openApp(el.dataset.id);
+          else setTimeout(() => E.alert(N.create.toast({ icon: 'sparkle', color: 'var(--note)', lead: el.dataset.id, trail: 'abre no app Android', w: 250 }), 1800), 120);
+          return;
+        }
+        const o = N.hubOptions.find((x) => x.id === el.dataset.id);
+        if (!o) return;
+        E.dismiss();
+        setTimeout(() => o.run(E), 120);
+      },
+    };
+  };
+
+  /* Timer rápido: escolhe o tempo com um toque. */
+  N.create.timerPick = () => ({
+    id: 'timerpick', name: 'Novo timer', kind: 'sheet', expandedH: 60, tapToClose: true,
+    expanded() {
+      return `
+      <div class="hdr">
+        <span class="row gap-sm" style="color:var(--c-timer)"><span class="chip lg" style="--c:var(--c-timer)">${I('timer', 17)}</span><span class="col tight"><b class="small">Timer</b><span class="xs muted">minutos</span></span></span>
+        <span class="row gap-xs">${[1, 5, 10, 15].map((m) => `<button class="pick" data-act="pick" data-min="${m}" aria-label="${m} minutos">${m}</button>`).join('')}</span>
+      </div>`;
+    },
+    onAction(a, el, E) {
+      if (a !== 'pick') return;
+      const m = +el.dataset.min;
+      E.dismiss();
+      setTimeout(() => E.start(N.create.timer(m * 60, `Timer ${m} min`), { present: true }), 150);
+    },
+  });
+
   /* ------------------------------------------------------------ Note (assistente) */
   N.create.assistant = () => ({
     id: 'note', name: 'Note', kind: 'sheet', expandedH: 124, glow: true,

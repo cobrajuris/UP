@@ -44,7 +44,7 @@
     }
     const h = act.expandedH || 64;
     // Aberta: pílula larga e baixa, sem virar um cartão grande.
-    return { w: Math.min(W - 36, 344), h, r: Math.min(h / 2, 34) };
+    return { w: Math.min(W - (act.expandedW ? 14 : 36), act.expandedW || 344), h, r: Math.min(h / 2, act.expandedW ? 30 : 34) };
   }
 
   function current() {
@@ -303,7 +303,7 @@
   function onTap() {
     const { mode, act } = current();
     if (mode === 'alert') { clearTimeout(alertT); const a = st.alert; st.alert = null; sync(); if (a && a.onTap) a.onTap(E); return; }
-    if (mode === 'idle') { N.haptic(6); E.present(N.create.assistant()); return; }
+    if (mode === 'idle') { N.haptic(6); E.present(N.create.hub()); return; }
     if (mode === 'compact') { E.expand(); return; }
     if (mode === 'expanded' && act && act.kind === 'live') E.collapse();
     else if (act && act.tapToClose) E.dismiss();
@@ -312,7 +312,7 @@
     const { mode } = current();
     N.haptic(14);
     sp.s.vel += 1.2;
-    if (mode === 'idle') E.present(N.create.overview());
+    if (mode === 'idle') E.present(N.create.assistant());
     else if (mode === 'compact') E.expand();
     kick();
   }
@@ -335,7 +335,7 @@
   E.onBounds = (f) => { boundsFns.push(f); lastBounds = ''; emitBounds(false); };
 
   function down(e) {
-    if (e.button > 0 || e.target.closest('button,input,textarea,a,label')) return;
+    if (e.button > 0 || e.target.closest('button,input,textarea,a,label,.hub,.dock-apps')) return;
     clearTimeout(presentT);
     const { mode } = current();
     press = { x: e.clientX, y: e.clientY, moved: false, long: false, mode, id: e.pointerId };
@@ -371,7 +371,7 @@
     if (!p.moved) return onTap();
     if (p.mode !== 'expanded' && Math.abs(dx) > 34 && Math.abs(dx) > Math.abs(dy)) return E.rotate(dx < 0 ? 1 : -1);
     if (p.mode === 'expanded' && dy < -30) return E.collapse();
-    if (p.mode !== 'expanded' && dy > 34) return p.mode === 'idle' ? E.present(N.create.assistant()) : E.expand();
+    if (p.mode !== 'expanded' && dy > 34) return p.mode === 'idle' ? E.present(N.create.hub()) : E.expand();
   }
 
   E.mount = (root) => {
@@ -403,7 +403,7 @@
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onTap(); }
       else if (e.key === 'ArrowRight') E.rotate(1);
       else if (e.key === 'ArrowLeft') E.rotate(-1);
-      else if (e.key === 'ArrowDown') { current().mode === 'idle' ? E.present(N.create.overview()) : E.expand(); }
+      else if (e.key === 'ArrowDown') { current().mode === 'idle' ? E.present(N.create.hub()) : E.expand(); }
     });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') E.collapse(); });
 

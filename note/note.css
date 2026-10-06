@@ -498,3 +498,72 @@ button { font: inherit; color: inherit; }
   .layer, .layer.on, .layer.off { transition-duration: .12s !important; filter: none !important; }
   .orb, .glow span, .eq i, .ringing, .wiggle, .pulse { animation: none !important; }
 }
+
+/* ---------------------------------------------------------------- painel do Note (estilo LaunchMe) */
+.exp-hub { justify-content: flex-start; gap: 8px; padding: 8px 10px 10px; }
+.widgets { display: grid; grid-template-columns: minmax(0, 1.7fr) 62px minmax(0, 1.15fr); gap: 6px; }
+.wg {
+  border: 0; cursor: pointer; font: inherit; color: var(--ink); text-align: left;
+  height: 62px; border-radius: 16px; padding: 8px;
+  background: rgba(255, 255, 255, .075);
+  display: flex; align-items: center; gap: 8px; min-width: 0;
+  transition: transform .3s cubic-bezier(.3, 1.6, .5, 1), background .2s;
+}
+.wg:active { transform: scale(.95); }
+.wg:focus-visible { outline: 2px solid var(--note); outline-offset: 2px; }
+.wg-media .col { min-width: 0; }
+.wg-play { width: 26px; height: 26px; flex: none; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--c-music) 24%, #000); color: var(--c-music); }
+.wg-date { flex-direction: column; justify-content: center; gap: 0; padding: 4px; }
+.wg-wd { font-size: 11px; font-weight: 700; color: #ff453a; text-transform: capitalize; line-height: 1.1; }
+.wg-day { font-size: 26px; line-height: 1; font-weight: 700; }
+.wg-stat { justify-content: space-around; gap: 4px; }
+.wg-stat .col { min-width: 0; align-items: center; text-align: center; }
+.hub {
+  display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 5 * 4px) / 6);
+  gap: 4px; overflow-x: auto; overscroll-behavior: contain;
+  scroll-snap-type: x mandatory; scrollbar-width: none;
+  touch-action: pan-x;
+  -webkit-mask: linear-gradient(90deg, #000 calc(100% - 16px), transparent);
+  mask: linear-gradient(90deg, #000 calc(100% - 16px), transparent);
+}
+.hub::-webkit-scrollbar, .dock-apps::-webkit-scrollbar { display: none; }
+.hub-op {
+  border: 0; background: none; padding: 0; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  scroll-snap-align: start; color: var(--ink);
+  -webkit-tap-highlight-color: transparent;
+}
+.hub-ic {
+  width: 38px; height: 38px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: color-mix(in srgb, var(--c) 20%, #000);
+  color: var(--c);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 30%, transparent);
+  transition: transform .3s cubic-bezier(.3, 1.6, .5, 1);
+}
+.hub-op:active .hub-ic { transform: scale(.86); }
+.hub-op:focus-visible .hub-ic { outline: 2px solid var(--note); outline-offset: 2px; }
+.hub-lb { font-size: 10px; color: var(--ink-2); white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+.dock-apps {
+  display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; touch-action: pan-x;
+  padding: 6px 4px 0; border-top: 1px solid var(--line);
+  -webkit-mask: linear-gradient(90deg, #000 calc(100% - 16px), transparent);
+  mask: linear-gradient(90deg, #000 calc(100% - 16px), transparent);
+}
+.app-mini {
+  flex: none; width: 32px; height: 32px; border-radius: 9px; border: 0; cursor: pointer;
+  display: grid; place-items: center; color: #fff; font: inherit; font-weight: 700; font-size: 13px;
+  background-size: cover; background-position: center;
+  transition: transform .3s cubic-bezier(.3, 1.6, .5, 1);
+}
+.app-mini.img { background-color: transparent; }
+.app-mini:active { transform: scale(.85); }
+.app-mini:focus-visible { outline: 2px solid var(--note); outline-offset: 2px; }
+.pick {
+  border: 0; cursor: pointer; height: 34px; min-width: 40px; padding: 0 8px; border-radius: 17px;
+  background: color-mix(in srgb, var(--c-timer) 20%, #000); color: var(--c-timer);
+  font: inherit; font-weight: 700; font-size: 14px; font-variant-numeric: tabular-nums;
+  transition: transform .3s cubic-bezier(.3, 1.6, .5, 1);
+}
+.pick small { font-size: 9.5px; font-weight: 600; margin-left: 1px; opacity: .8; }
+.pick:active { transform: scale(.88); }
