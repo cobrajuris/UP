@@ -60,8 +60,6 @@ class IslandOverlay(private val service: IslandService) {
     private var screenW = 0
     private var hidden = false
 
-    private val shortcuts by lazy { Shortcuts(service) }
-
     private val speech by lazy {
         Speech(service,
             emitText = { text, final -> js("NoteBridge.speech(${JSONObject.quote(text)},$final,'')") },
@@ -125,7 +123,6 @@ class IslandOverlay(private val service: IslandService) {
 
     fun hide() {
         speech.destroy()
-        shortcuts.release()
         if (attached) {
             try {
                 wm.removeView(root)
@@ -242,7 +239,6 @@ class IslandOverlay(private val service: IslandService) {
             pending.clear()
             queued.forEach { web.evaluateJavascript(it, null) }
             service.replay()
-            Thread { shortcuts.apps() }.start() // prepara os ícones antes do primeiro toque
         }
 
         @JavascriptInterface
@@ -302,18 +298,6 @@ class IslandOverlay(private val service: IslandService) {
             } catch (_: Exception) {
             }
         }
-
-        @JavascriptInterface
-        fun torch(): Boolean = shortcuts.toggleTorch()
-
-        @JavascriptInterface
-        fun system(what: String) = main.post { shortcuts.system(what) }
-
-        @JavascriptInterface
-        fun apps(): String = shortcuts.apps()
-
-        @JavascriptInterface
-        fun launch(pkg: String) = main.post { shortcuts.launch(pkg) }
 
         @JavascriptInterface
         fun stats(): String {

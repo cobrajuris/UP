@@ -56,7 +56,7 @@ class MainActivity : Activity() {
             ) { startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)) },
             Step(
                 "3. Microfone",
-                "Para falar com o Note. Segure a ilha ou toque no microfone do painel.",
+                "Para falar com o Note. Toque na ilha vazia e depois no microfone.",
                 "Liberar microfone",
                 { checkSelfPermission(Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED },
             ) { requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), 1) },
@@ -99,8 +99,7 @@ class MainActivity : Activity() {
         col.addView(text("Como usar", 15f, ink, bold = true).apply { setPadding(0, dp(24), 0, dp(6)) })
         col.addView(
             text(
-                "Toque na ilha vazia: abre o painel com música, data, ações rápidas (lanterna, timer, captura, Wi-Fi...) e seus apps.\n" +
-                    "Segure: conversa com o Note.\nToque numa atividade: abre.\n" +
+                "Toque na ilha vazia: fala com o Note.\nSegure: abre o resumo de hoje.\nToque numa atividade: abre.\n" +
                     "Deslize para os lados: alterna.\nDeslize para cima ou toque fora: recolhe.\n\n" +
                     "Peça \"timer de 10 minutos\", \"tocar música\", \"ativar modo silencioso\" ou \"resumo de hoje\". " +
                     "Corrida, voo, mapas, tradutor e treino ainda são demonstrações.",

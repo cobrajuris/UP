@@ -30,8 +30,6 @@ do anterior, sem perder as permissões.
 | Recurso | De onde vem |
 |---|---|
 | Ilha em volta da câmera | posição real do furo da câmera (DisplayCutout) |
-| Painel (toque na ilha vazia) | música tocando, data, bateria, avisos, ações rápidas e seus apps instalados |
-| Ações rápidas | lanterna, timer, silencioso, câmera, captura de tela, ligar, calculadora, Wi-Fi, Bluetooth, bloquear, ajustes |
 | Música | player que estiver tocando (Spotify, YouTube Music...), com capa e controles |
 | Notificações | avisos novos dos apps, no estilo HyperOS; tocar abre a conversa |
 | Chamadas | atender e recusar pela ilha; duração durante a chamada |

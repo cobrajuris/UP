@@ -141,42 +141,6 @@
     };
   };
 
-  /* ---------------------------------------------------------- painel: ações e apps reais */
-  const sys = (what, label, icon, color) => (E2) => {
-    call('system', what);
-    if (label) E2.alert(N.create.toast({ icon, color, lead: label, trail: 'abrindo', w: 210 }), 1200);
-  };
-  const real = {
-    torch: (E2) => { const on = call('torch'); E2.alert(N.create.toast({ icon: 'flash', color: '#ffd60a', lead: 'Lanterna', trail: on ? 'Ligada' : 'Desligada', w: 210 }), 1500); },
-    music: (E2) => { if (media.key) { call('media', 'play'); E2.focus('music'); } else call('system', 'music'); },
-    camera: sys('camera'),
-    shot: () => setTimeout(() => call('system', 'screenshot'), 450),
-    dial: sys('dial'),
-    calc: sys('calculator'),
-    wifi: sys('wifi'),
-    bt: sys('bluetooth'),
-    lock: () => setTimeout(() => call('system', 'lock'), 300),
-    settings: sys('settings'),
-  };
-  N.hubOptions.forEach((o) => { if (real[o.id]) o.run = real[o.id]; });
-
-  let appsCache = null;
-  N.hubData = () => {
-    let st = {};
-    try { st = JSON.parse(call('stats') || '{}'); } catch (e) { st = {}; }
-    if (!appsCache) { try { appsCache = JSON.parse(call('apps') || '[]'); } catch (e) { appsCache = []; } }
-    return {
-      media: media.key ? { title: media.title, artist: media.artist || media.app, playing: media.playing, art: media.art } : null,
-      status: [
-        { v: `${st.battery ?? N.app.battery}%`, l: 'bateria', c: 'var(--c-charge)' },
-        { v: String(st.notices || 0), l: 'avisos', c: 'var(--c-timer)' },
-      ],
-      apps: appsCache.map((a) => ({ id: a.pkg, label: a.label, icon: a.icon, bg: '#2d2d36', letter: (a.label || '?').charAt(0) })),
-    };
-  };
-  N.openApp = (pkg) => call('launch', pkg);
-  N.mediaToggle = () => { media.playing = !media.playing; call('media', 'toggle'); };
-
   /* ---------------------------------------------------------- assistente: voz e comandos do celular */
   let listening = null;
   N.nativeListen = (a, E2) => {
@@ -216,7 +180,6 @@
       E.layout(width, top);
     },
     outside() { E.collapse(); },
-    appsChanged() { appsCache = null; },
     battery(level, plugged, justPlugged) {
       N.app.battery = level;
       if (justPlugged) E.alert(N.create.charging(level), 2600);
