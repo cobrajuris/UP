@@ -7,6 +7,11 @@ chamada, um treino do UP.PRO ou uma conversa com o próprio Note.
 As referências de movimento são a Dynamic Island da Apple (molas com leve quique, conteúdo que
 entra desfocado) e a ilha da Xiaomi HyperOS (bolha que se separa e volta a se fundir como líquido).
 
+## App para Android (APK)
+
+Baixe `Note.apk` em https://github.com/cobrajuris/UP/releases/tag/note-apk e siga o guia em
+`note-android/README.md`. O app usa esta mesma ilha (`overlay.html`) ligada ao celular de verdade.
+
 ## Como abrir
 
 Abra `note/index.html` no Chrome, no Edge ou no Safari. Não é preciso instalar nada nem rodar

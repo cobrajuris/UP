@@ -165,7 +165,8 @@ a reutilize dentro da UI.
 ### `note/`
 **Note**: ilha dinâmica com assistente, atividades ao vivo (timer, música, corrida, voo,
 chamada, treino UP.PRO, navegação, tradutor) e animações de mola. Abra `note/index.html`;
-detalhes em `note/README.md`.
+detalhes em `note/README.md`. App Android em `note-android/`; APK em
+https://github.com/cobrajuris/UP/releases/tag/note-apk.
 
 ### `tokens/`
 `fonts.css` · `colors.css` · `typography.css` · `spacing.css` · `radius.css` · `elevation.css` ·
