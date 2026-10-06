@@ -25,6 +25,8 @@
   const st = { live: [], sheet: null, alert: null, expanded: false, stretch: 0 };
   const target = { w: 36, h: 36, r: 18 };
   const listeners = [];
+  const boundsFns = [];
+  let lastBounds = '';
   let screen, island, bubble, gMain, gBub, glow;
   let W = 393, TOP = 11, scale = 1, uid = 0;
   let viewKey = '', layer = null, viewAct = null, viewMode = 'idle', cleanup = null;
@@ -54,6 +56,7 @@
 
   function html(mode, act) {
     if (mode === 'idle') return '';
+    if (mode === 'alert' && act.alertHtml) return `<div class="exp exp-${act.id}">${act.alertHtml()}</div>`;
     if (mode === 'compact' || mode === 'alert') {
       const c = mode === 'compact' ? act.compact() : act.alertView();
       return `<div class="cmp ${mode === 'alert' ? 'alr' : ''}"><div class="lead">${c.lead}</div><div class="trail">${c.trail}</div></div>`;
@@ -144,6 +147,7 @@
     island.setAttribute('aria-label', act ? `${act.name}${mode === 'compact' ? ', toque para abrir' : ''}` : 'Note, toque para falar');
     island.setAttribute('aria-expanded', mode === 'expanded' ? 'true' : 'false');
     listeners.forEach((f) => f(st, mode, act));
+    emitBounds(false);
     kick();
   }
 
@@ -187,6 +191,7 @@
       springs.forEach((s) => s.snap());
       draw();
       raf = 0; last = 0;
+      emitBounds(true);
       return;
     }
     raf = requestAnimationFrame(frame);
@@ -294,7 +299,7 @@
 
   function onTap() {
     const { mode, act } = current();
-    if (mode === 'alert') { clearTimeout(alertT); st.alert = null; sync(); return; }
+    if (mode === 'alert') { clearTimeout(alertT); const a = st.alert; st.alert = null; sync(); if (a && a.onTap) a.onTap(E); return; }
     if (mode === 'idle') { N.haptic(6); E.present(N.create.assistant()); return; }
     if (mode === 'compact') { E.expand(); return; }
     if (mode === 'expanded' && act && act.kind === 'live') E.collapse();
@@ -309,11 +314,29 @@
     kick();
   }
 
+  /* Área ocupada pela ilha (em px de CSS), para quem hospeda a página (app Android)
+     recortar a janela: meia largura a partir do centro e a borda de baixo. */
+  function emitBounds(settled) {
+    if (!boundsFns.length) return;
+    const { mode } = current();
+    const small = settled && target.h <= 40 && mode !== 'expanded';
+    const mx = small ? 4 : 30, mb = small ? 4 : 56;
+    let half = Math.max(target.w, settled ? 0 : sp.w.v) / 2 + mx;
+    if (bubbleAct || (!settled && sp.bs.v > 1)) half = Math.max(half, Math.max(sp.bx.t, sp.bx.v) - W / 2 + 18 + mx);
+    const bottom = TOP + Math.max(target.h, settled ? 0 : sp.h.v) + mb;
+    const key = `${Math.ceil(half)}:${Math.ceil(bottom)}`;
+    if (key === lastBounds) return;
+    lastBounds = key;
+    boundsFns.forEach((f) => f(Math.ceil(half), Math.ceil(bottom), settled));
+  }
+  E.onBounds = (f) => { boundsFns.push(f); lastBounds = ''; emitBounds(false); };
+
   function down(e) {
     if (e.button > 0 || e.target.closest('button,input,textarea,a,label')) return;
     clearTimeout(presentT);
     const { mode } = current();
     press = { x: e.clientX, y: e.clientY, moved: false, long: false, mode, id: e.pointerId };
+    lastBounds = ''; emitBounds(false);
     try { island.setPointerCapture(e.pointerId); } catch (err) { /* ok */ }
     sp.s.t = mode === 'expanded' ? 0.985 : 0.94;
     if (mode !== 'expanded') lpT = setTimeout(() => { if (press && !press.moved) { press.long = true; sp.s.t = 1; onLong(); } }, 430);

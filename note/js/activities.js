@@ -25,6 +25,7 @@
 
   N.create = {};
   N.fmt = { mmss, num, hhmm };
+  N.ui = { ring, eq, ava, icon: I };
 
   /* ------------------------------------------------------------ Timer */
   N.create.timer = (sec = 300, label = 'Timer') => ({
@@ -473,7 +474,7 @@
       <div class="hdr"><span class="row gap-sm"><span class="orb" aria-hidden="true"></span><b class="as-name">Note</b></span><span class="muted small as-status ell" data-t="status"></span></div>
       <p class="as-text" data-t="text" aria-live="polite"></p>
       <canvas class="as-wave" aria-hidden="true"></canvas>
-      <div class="chips">${SUGGESTIONS.map(([l, q]) => `<button class="chip-btn" data-act="ask" data-q="${q}">${l}</button>`).join('')}</div>
+      <div class="chips">${(N.suggestions || SUGGESTIONS).map(([l, q]) => `<button class="chip-btn" data-act="ask" data-q="${q}">${l}</button>`).join('')}</div>
       <form class="ask" autocomplete="off">
         <input id="note-ask" name="q" type="text" placeholder="Pergunte ao Note" aria-label="Pergunte ao Note" enterkeyhint="send">
         <button type="button" class="mic" data-act="mic" data-on="listening" aria-label="Falar com o Note">${I('mic', 18)}</button>
@@ -514,6 +515,7 @@
       }, 24);
     },
     listen(E) {
+      if (N.nativeListen) return N.nativeListen(this, E);
       if (this.rec) { this.rec.stop(); return; }
       const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
       const fallback = (msg) => {

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Note</string>
+    <string name="a11y_label">Note — ilha dinâmica</string>
+    <string name="a11y_desc">Desenha a ilha do Note em volta da câmera, por cima dos outros apps. O Note não lê o conteúdo da tela.</string>
+</resources>

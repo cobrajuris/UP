@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Note</title>
+<!-- Página carregada pelo app Android (note-android): só a ilha, sobre fundo transparente. -->
+<link rel="stylesheet" href="note.css">
+<link rel="stylesheet" href="overlay.css">
+</head>
+<body class="overlay">
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="goo" x="-20%" y="-50%" width="140%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/>
+      <feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -10"/>
+    </filter>
+  </defs>
+</svg>
+<div class="screen" id="screen">
+  <div class="island-layer">
+    <div class="goo" aria-hidden="true"><div class="g-main" id="gMain"></div><div class="g-bub" id="gBub"></div></div>
+    <div class="glow" id="glow" aria-hidden="true"><span class="halo"></span><span class="edge"></span></div>
+    <div class="bubble" id="bubble" role="button" tabindex="-1"></div>
+    <div class="island" id="island" role="button" tabindex="0" aria-label="Note"></div>
+  </div>
+</div>
+<script src="js/spring.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/fx.js"></script>
+<script src="js/activities.js"></script>
+<script src="js/brain.js"></script>
+<script src="js/island.js"></script>
+<script src="js/overlay.js"></script>
+</body>
+</html>
