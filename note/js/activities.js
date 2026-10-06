@@ -29,7 +29,7 @@
 
   /* ------------------------------------------------------------ Timer */
   N.create.timer = (sec = 300, label = 'Timer') => ({
-    id: 'timer', name: 'Timer', kind: 'live', compactW: 220, expandedH: 176,
+    id: 'timer', name: 'Timer', kind: 'live', compactW: 176, expandedH: 60,
     total: sec, left: sec, running: true, label,
     tick(dt, E) {
       if (!this.running) return;
@@ -43,22 +43,18 @@
     },
     values() { return { time: mmss(this.left), p: 1 - this.left / this.total, run: this.running, paused: !this.running }; },
     compact() {
-      return { lead: ring('p', 22, 3, 'var(--c-timer)'), trail: `<b class="num" style="color:var(--c-timer)" data-t="time"></b>` };
+      return { lead: ring('p', 18, 2.5, 'var(--c-timer)'), trail: `<b class="num" style="color:var(--c-timer)" data-t="time"></b>` };
     },
-    minimal() { return ring('p', 26, 3, 'var(--c-timer)', I('timer', 12)); },
+    minimal() { return ring('p', 22, 2.5, 'var(--c-timer)', I('timer', 10)); },
     expanded() {
       return `
       <div class="hdr">
-        <span class="label ell" style="color:var(--c-timer)">${I('timer', 16)} ${this.label}</span>
-        <b class="big num" style="color:var(--c-timer)" data-t="time"></b>
-      </div>
-      <div class="ruler" data-p="p" style="--rw:${Math.max(600, Math.round(this.total * 2))}px"><div class="ruler-track"></div></div>
-      <div class="row between">
-        <button class="btn-round" style="--b:#d9d6e0" data-act="cancel" aria-label="Cancelar timer">${I('x', 20)}</button>
-        <span class="muted small">${mmss(this.total)} no total · termina ${inMin(this.left / 60)}</span>
-        <button class="btn-round" style="--b:var(--c-timer)" data-act="toggle" aria-label="Pausar ou retomar">
-          <span data-show="run">${I('pause', 20)}</span><span data-show="paused" hidden>${I('play', 20)}</span>
-        </button>
+        <span class="row gap-sm">${ring('p', 30, 3.5, 'var(--c-timer)', I('timer', 13))}<b class="mid num" style="color:var(--c-timer)" data-t="time"></b></span>
+        <span class="row gap-xs">
+          <button class="btn-round sm" style="--b:var(--c-timer)" data-act="toggle" aria-label="Pausar ou retomar">
+            <span data-show="run">${I('pause', 16)}</span><span data-show="paused" hidden>${I('play', 16)}</span></button>
+          <button class="btn-round sm" style="--b:#d9d6e0" data-act="cancel" aria-label="Cancelar timer">${I('x', 16)}</button>
+        </span>
       </div>`;
     },
     onAction(a, el, E) {
@@ -75,7 +71,7 @@
   ];
   const art = (g, size, r) => `<span class="art" style="--g1:${g[0]};--g2:${g[1]};width:${size}px;height:${size}px;border-radius:${r}px"></span>`;
   N.create.music = () => ({
-    id: 'music', name: 'Música', kind: 'live', compactW: 214, expandedH: 236,
+    id: 'music', name: 'Música', kind: 'live', compactW: 176, expandedH: 100,
     i: 0, pos: 48, playing: true,
     get track() { return TRACKS[this.i]; },
     tick(dt) { if (this.playing) { this.pos += dt; if (this.pos >= this.track.d) this.skip(1); } },
@@ -84,31 +80,22 @@
       const t = this.track;
       return { pos: mmss(this.pos), rem: '-' + mmss(t.d - this.pos), p: this.pos / t.d, play: this.playing, pause: !this.playing };
     },
-    compact() { return { lead: art(this.track.g, 24, 7), trail: eq('var(--c-music)', 'play') }; },
+    compact() { return { lead: art(this.track.g, 20, 6), trail: eq('var(--c-music)', 'play') }; },
     minimal() { return eq('var(--c-music)', 'play', 3); },
     expanded() {
       const t = this.track;
       return `
       <div class="hdr">
-        <span class="tag ell" style="--c:var(--c-music)">${I('music', 13)} Tocando</span>
-        ${eq('var(--c-music)', 'play')}
+        <span class="row gap-sm side">${art(t.g, 32, 9)}${eq('var(--c-music)', 'play')}</span>
+        <span class="row gap-xs">
+          <button class="btn-ghost" data-act="prev" aria-label="Faixa anterior">${I('prev', 18)}</button>
+          <button class="btn-ghost" data-act="toggle" aria-label="Tocar ou pausar">
+            <span data-show="play">${I('pause', 22)}</span><span data-show="pause" hidden>${I('play', 22)}</span></button>
+          <button class="btn-ghost" data-act="next" aria-label="Próxima faixa">${I('next', 18)}</button>
+        </span>
       </div>
-      <div class="row gap">
-        ${art(t.g, 56, 14)}
-        <div class="meta"><b>${t.t}</b><span class="muted">${t.a}</span><canvas class="dots" aria-hidden="true"></canvas></div>
-      </div>
-      <div class="prog"><span class="num small" data-t="pos"></span><div class="bar" style="--c:var(--c-music)"><i data-p="p"></i></div><span class="num small muted" data-t="rem"></span></div>
-      <div class="row center gap-lg">
-        <button class="btn-ghost" data-act="prev" aria-label="Faixa anterior">${I('prev', 24)}</button>
-        <button class="btn-ghost lg" data-act="toggle" aria-label="Tocar ou pausar">
-          <span data-show="play">${I('pause', 30)}</span><span data-show="pause" hidden>${I('play', 30)}</span>
-        </button>
-        <button class="btn-ghost" data-act="next" aria-label="Próxima faixa">${I('next', 24)}</button>
-      </div>`;
-    },
-    mount(layer, mode) {
-      if (mode !== 'expanded') return null;
-      return N.dotMatrix(layer.querySelector('.dots'), () => `${this.track.t} - ${this.track.a}    NOTE    `, () => this.playing);
+      <p class="track ell"><b>${t.t}</b> <span class="muted">· ${t.a}</span></p>
+      <div class="prog"><span class="num xs" data-t="pos"></span><div class="bar" style="--c:var(--c-music)"><i data-p="p"></i></div><span class="num xs muted" data-t="rem"></span></div>`;
     },
     onAction(a, el, E) {
       if (a === 'toggle') this.playing = !this.playing;
@@ -119,7 +106,7 @@
 
   /* ------------------------------------------------------------ Corrida */
   N.create.ride = () => ({
-    id: 'ride', name: 'Corrida', kind: 'live', compactW: 212, expandedH: 200,
+    id: 'ride', name: 'Corrida', kind: 'live', compactW: 176, expandedH: 60,
     eta: 190, total: 190,
     get variant() { return this.eta <= 0 ? 'chegou' : ''; },
     tick(dt, E) {
@@ -129,96 +116,55 @@
     },
     values() {
       const m = Math.max(1, Math.ceil(this.eta / 60));
-      return { min: this.eta > 0 ? `${m} min` : 'Chegou', title: this.eta > 0 ? `Chega em ${m} min` : 'Rafael chegou', p: 1 - Math.max(0, this.eta) / this.total };
+      return { min: this.eta > 0 ? `${m} min` : 'Chegou', title: this.eta > 0 ? `Em ${m} min` : 'Chegou', p: 1 - Math.max(0, this.eta) / this.total };
     },
     compact() {
-      return { lead: `<span class="chip" style="--c:var(--c-ride)">${I('car', 15)}</span>`, trail: `<b class="num" style="color:var(--c-ride)" data-t="min"></b>` };
+      return { lead: `<span class="chip" style="--c:var(--c-ride)">${I('car', 13)}</span>`, trail: `<b class="num" style="color:var(--c-ride)" data-t="min"></b>` };
     },
     minimal() { return `<span style="color:var(--c-ride)">${I('car', 18)}</span>`; },
     expanded() {
       return `
-      <div class="row gap top">
-        <div class="col grow">
-          <span class="tag" style="--c:var(--c-ride)">${I('car', 13)} Corrida</span>
-          <b class="title" data-t="title"></b>
-          <div class="row gap-sm">
-            ${ava('RS', '#ff4fa3', '#7b5cff', 34)}
-            <div class="col tight"><b class="small">Rafael · 4,9 ★</b><span class="muted xs">Onix prata · BRA2E19</span></div>
-          </div>
-        </div>
-        <div class="minimap" data-p="p">
-          <svg viewBox="0 0 100 100" aria-hidden="true">
-            <rect width="100" height="100" fill="#15151b"/>
-            <path d="M0 30H100M0 64H100M34 0V100M72 0V100M0 88 60 0" stroke="#24242e" stroke-width="5" fill="none"/>
-            <path class="route" d="M18 84 V64 H72 V30 H86" stroke="var(--c-ride)" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="18" cy="84" r="5" fill="#fff"/><circle cx="18" cy="84" r="2.4" fill="var(--c-ride)"/>
-            <g class="carpin"><circle r="7" fill="#fff"/><circle r="4.2" fill="var(--c-ride)"/></g>
-          </svg>
-        </div>
-      </div>
-      <div class="row gap-sm">
-        <button class="btn-pill" data-act="call">${I('phone', 15)} Ligar</button>
-        <button class="btn-pill" data-act="msg">${I('message', 15)} Mensagem</button>
-        <button class="btn-round sm" style="--b:#d9d6e0" data-act="end" aria-label="Encerrar acompanhamento">${I('x', 16)}</button>
+      <div class="hdr">
+        <span class="row gap-sm side"><span class="chip lg" style="--c:var(--c-ride)">${I('car', 17)}</span>
+          <span class="col tight"><b class="small ell" data-t="title"></b><span class="muted xs ell">Rafael · Onix</span></span></span>
+        <span class="row gap-xs">
+          <button class="btn-round sm" style="--b:var(--c-call)" data-act="call" aria-label="Ligar para o motorista">${I('phone', 15)}</button>
+          <button class="btn-round sm" style="--b:#d9d6e0" data-act="end" aria-label="Encerrar acompanhamento">${I('x', 15)}</button>
+        </span>
       </div>`;
-    },
-    mount(layer, mode) {
-      if (mode !== 'expanded') return null;
-      const path = layer.querySelector('.route'), pin = layer.querySelector('.carpin');
-      if (!path || !pin) return null;
-      const len = path.getTotalLength();
-      let raf = 0, p = 1 - Math.max(0, this.eta) / this.total;
-      const loop = () => {
-        const goal = 1 - Math.max(0, this.eta) / this.total;
-        p += (goal - p) * 0.1;
-        const pt = path.getPointAtLength(len * (1 - p));
-        pin.setAttribute('transform', `translate(${pt.x} ${pt.y})`);
-        raf = requestAnimationFrame(loop);
-      };
-      loop();
-      return () => cancelAnimationFrame(raf);
     },
     onAction(a, el, E) {
       if (a === 'end') E.stop('ride');
       if (a === 'call') { E.collapse(); E.start(N.create.call({ name: 'Rafael', initials: 'RS', outgoing: true })); }
-      if (a === 'msg') E.alert(N.create.toast({ icon: 'message', color: 'var(--c-ride)', lead: 'Rafael', trail: '“Estou chegando”', w: 270 }), 2600);
     },
   });
 
   /* ------------------------------------------------------------ Voo */
   N.create.flight = () => ({
-    id: 'flight', name: 'Voo', kind: 'live', compactW: 214, expandedH: 168,
+    id: 'flight', name: 'Voo', kind: 'live', compactW: 176, expandedH: 84,
     left: 7 * 3600 + 12 * 60, total: 11 * 3600 + 40 * 60,
     tick(dt) { this.left = Math.max(0, this.left - dt); },
     values() {
       const h = Math.floor(this.left / 3600), m = Math.floor((this.left % 3600) / 60);
       return { rem: `${h} h ${pad(m)} min`, short: `${h}h${pad(m)}`, p: 1 - this.left / this.total, eta: inMin(this.left / 60) };
     },
-    compact() { return { lead: `<span style="color:var(--c-flight)">${I('plane', 17)}</span>`, trail: `<b class="num" style="color:var(--c-flight)" data-t="short"></b>` }; },
-    minimal() { return ring('p', 26, 3, 'var(--c-flight)', I('plane', 11)); },
+    compact() { return { lead: `<span style="color:var(--c-flight)">${I('plane', 14)}</span>`, trail: `<b class="num" style="color:var(--c-flight)" data-t="short"></b>` }; },
+    minimal() { return ring('p', 22, 2.5, 'var(--c-flight)', I('plane', 10)); },
     expanded() {
       return `
       <div class="hdr">
-        <span class="tag ell" style="--c:var(--c-flight)">${I('plane', 13)} NT 2047</span>
-        <span class="muted small ell">Portão B12 · 23A</span>
+        <span class="col tight"><b class="code">GRU</b><span class="muted xs">São Paulo</span></span>
+        <span class="row gap-sm"><span class="col tight right"><b class="code">LIS</b><span class="muted xs num">Chega <span data-t="eta"></span></span></span>
+          <button class="btn-round xs" style="--b:#d9d6e0" data-act="end" aria-label="Encerrar acompanhamento">${I('x', 12)}</button></span>
       </div>
-      <div class="flight">
-        <div class="col"><b class="code">GRU</b><span class="muted small">São Paulo</span></div>
-        <div class="fl-line" data-p="p"><i></i><span class="fl-plane">${I('plane', 18)}</span></div>
-        <div class="col right"><b class="code">LIS</b><span class="muted small">Lisboa</span></div>
-      </div>
-      <div class="row between">
-        <span class="small">Pousa em <b class="num" style="color:var(--c-flight)" data-t="rem"></b></span>
-        <span class="row gap-sm"><span class="muted small num">Chegada <span data-t="eta"></span></span>
-        <button class="btn-round xs" style="--b:#d9d6e0" data-act="end" aria-label="Encerrar acompanhamento">${I('x', 13)}</button></span>
-      </div>`;
+      <div class="fl-line" data-p="p"><i></i><span class="fl-plane">${I('plane', 15)}</span></div>`;
     },
     onAction(a, el, E) { if (a === 'end') E.stop('flight'); },
   });
 
   /* ------------------------------------------------------------ Chamada */
   N.create.incoming = ({ name = 'Mãe', initials = 'M', label = 'Celular' } = {}) => ({
-    id: 'incoming', name: `Chamada de ${name}`, kind: 'sheet', expandedH: 84, t: 0,
+    id: 'incoming', name: `Chamada de ${name}`, kind: 'sheet', expandedH: 60, t: 0,
     tick(dt, E) {
       this.t += dt;
       if (Math.floor(this.t * 2) !== Math.floor((this.t - dt) * 2)) N.haptic(40);
@@ -226,11 +172,12 @@
     },
     expanded() {
       return `
-      <div class="row gap call-in">
-        ${ava(initials, '#8e8e98', '#4b4b55', 52)}
-        <div class="col grow tight"><span class="muted small">${label}</span><b class="title sm">${name}</b></div>
-        <button class="btn-round solid" style="--b:var(--c-alert)" data-act="decline" aria-label="Recusar">${I('phoneDown', 22)}</button>
-        <button class="btn-round solid ringing" style="--b:var(--c-call)" data-act="accept" aria-label="Atender">${I('phone', 22)}</button>
+      <div class="hdr">
+        <span class="row gap-sm side">${ava(initials, '#8e8e98', '#4b4b55', 36)}<span class="col tight"><span class="muted xs">${label}</span><b class="small ell">${name}</b></span></span>
+        <span class="row gap-sm">
+          <button class="btn-round sm solid" style="--b:var(--c-alert)" data-act="decline" aria-label="Recusar">${I('phoneDown', 17)}</button>
+          <button class="btn-round sm solid ringing" style="--b:var(--c-call)" data-act="accept" aria-label="Atender">${I('phone', 17)}</button>
+        </span>
       </div>`;
     },
     onAction(a, el, E) {
@@ -240,14 +187,14 @@
   });
 
   N.create.call = ({ name = 'Mãe', initials = 'M', outgoing = false } = {}) => ({
-    id: 'call', name: `Chamada com ${name}`, kind: 'live', compactW: 214, expandedH: 188,
+    id: 'call', name: `Chamada com ${name}`, kind: 'live', compactW: 184, expandedH: 60,
     t: outgoing ? -3 : 0, muted: false, speaker: false,
     get variant() { return this.t < 0 ? 'dialing' : ''; },
     tick(dt, E) { const was = this.t < 0; this.t += dt; if (was && this.t >= 0) E.refresh(); },
     values() { return { dur: this.t < 0 ? 'Chamando…' : mmss(this.t), mute: this.muted, unmute: !this.muted }; },
     compact() {
       return {
-        lead: `<span class="row gap-xs" style="color:var(--c-call)">${I('phone', 15)}<b class="num" data-t="dur"></b></span>`,
+        lead: `<span class="row gap-xs" style="color:var(--c-call)">${I('phone', 13)}<b class="num" data-t="dur"></b></span>`,
         trail: eq('var(--c-call)', '', 5),
       };
     },
@@ -255,30 +202,23 @@
     expanded() {
       return `
       <div class="hdr">
-        <span class="tag ell" style="--c:var(--c-call)">${I('phone', 13)} <span data-t="dur"></span></span>
-        ${eq('var(--c-call)', '', 5)}
-      </div>
-      <div class="row gap">
-        ${ava(initials, '#8e8e98', '#4b4b55', 40)}
-        <b class="title sm ell">${name}</b>
-      </div>
-      <div class="row between">
-        <button class="btn-round" data-act="mute" style="--b:#d9d6e0" aria-label="Silenciar microfone">
-          <span data-show="unmute">${I('mic', 20)}</span><span data-show="mute" hidden>${I('micOff', 20)}</span></button>
-        <button class="btn-round ${this.speaker ? 'solid' : ''}" data-act="speaker" style="--b:#d9d6e0" aria-label="Viva-voz">${I('speaker', 20)}</button>
-        <button class="btn-round solid wide" style="--b:var(--c-alert)" data-act="end" aria-label="Encerrar chamada">${I('phoneDown', 22)}</button>
+        <span class="row gap-sm side">${ava(initials, '#8e8e98', '#4b4b55', 34)}<span class="col tight"><b class="small ell">${name}</b><span class="num xs" style="color:var(--c-call)" data-t="dur"></span></span></span>
+        <span class="row gap-xs">
+          <button class="btn-round sm" data-act="mute" style="--b:#d9d6e0" aria-label="Silenciar microfone">
+            <span data-show="unmute">${I('mic', 16)}</span><span data-show="mute" hidden>${I('micOff', 16)}</span></button>
+          <button class="btn-round sm solid wide" style="--b:var(--c-alert)" data-act="end" aria-label="Encerrar chamada">${I('phoneDown', 17)}</button>
+        </span>
       </div>`;
     },
     onAction(a, el, E) {
       if (a === 'mute') this.muted = !this.muted;
-      if (a === 'speaker') { this.speaker = !this.speaker; el.classList.toggle('solid', this.speaker); }
       if (a === 'end') { E.stop('call'); E.alert(N.create.toast({ icon: 'phoneDown', color: 'var(--c-alert)', lead: 'Chamada encerrada', trail: mmss(Math.max(0, this.t)), w: 250 }), 1800); }
     },
   });
 
   /* ------------------------------------------------------------ Treino (UP.PRO) */
   N.create.workout = () => ({
-    id: 'workout', name: 'Treino UP.PRO', kind: 'live', compactW: 214, expandedH: 210,
+    id: 'workout', name: 'Treino UP.PRO', kind: 'live', compactW: 176, expandedH: 60,
     t: 312, running: true,
     tick(dt) { if (this.running) this.t += dt; },
     values() {
@@ -288,25 +228,17 @@
         bpm: Math.round(134 + 6 * Math.sin(t / 9)), p: Math.min(1, (t * 0.0029) / 5), run: this.running, paused: !this.running,
       };
     },
-    compact() { return { lead: `<span style="color:var(--c-workout)">${I('run', 18)}</span>`, trail: `<b class="num" style="color:var(--c-workout)" data-t="time"></b>` }; },
-    minimal() { return ring('p', 26, 3, 'var(--c-workout)', I('run', 11)); },
+    compact() { return { lead: `<span style="color:var(--c-workout)">${I('run', 15)}</span>`, trail: `<b class="num" style="color:var(--c-workout)" data-t="time"></b>` }; },
+    minimal() { return ring('p', 22, 2.5, 'var(--c-workout)', I('run', 10)); },
     expanded() {
       return `
-      <span class="flare" aria-hidden="true"></span>
       <div class="hdr">
-        <span class="tag up">UP.PRO</span>
-        <span class="row gap-sm">
+        <span class="row gap-sm side"><span class="chip lg" style="--c:var(--c-workout)">${I('run', 17)}</span>
+          <span class="col tight"><b class="small num"><span data-t="steps"></span> passos</b><span class="muted xs num ell"><span data-t="km"></span> km · <span data-t="bpm"></span> bpm</span></span></span>
+        <span class="row gap-xs"><b class="small num" style="color:var(--c-workout)" data-t="time"></b>
           <button class="btn-round xs" style="--b:var(--c-workout)" data-act="toggle" aria-label="Pausar ou retomar treino">
-            <span data-show="run">${I('pause', 13)}</span><span data-show="paused" hidden>${I('play', 13)}</span></button>
-          <button class="btn-round xs" style="--b:#d9d6e0" data-act="end" aria-label="Encerrar treino">${I('x', 13)}</button>
-        </span>
-      </div>
-      <div class="col tight"><b class="hero num" data-t="steps"></b><span class="muted small">passos · corrida ao ar livre</span></div>
-      <div class="stats">
-        <div><b class="num"><span data-t="km"></span><small>km</small></b><span>Distância</span></div>
-        <div><b class="num"><span data-t="kcal"></span><small>kcal</small></b><span>Calorias</span></div>
-        <div><b class="num" data-t="bpm"></b><span>BPM</span></div>
-        <div><b class="num" data-t="time"></b><span>Tempo</span></div>
+            <span data-show="run">${I('pause', 12)}</span><span data-show="paused" hidden>${I('play', 12)}</span></button>
+          <button class="btn-round xs" style="--b:#d9d6e0" data-act="end" aria-label="Encerrar treino">${I('x', 12)}</button></span>
       </div>`;
     },
     onAction(a, el, E) {
@@ -326,7 +258,7 @@
     { dir: 'flag', verb: 'Chegada', street: 'Parque Trianon', d: 160 },
   ];
   N.create.nav = () => ({
-    id: 'nav', name: 'Navegação', kind: 'live', compactW: 214, expandedH: 168,
+    id: 'nav', name: 'Navegação', kind: 'live', compactW: 176, expandedH: 60,
     step: 0, d: ROUTE[0].d,
     get variant() { return 's' + this.step; },
     get s() { return ROUTE[this.step]; },
@@ -339,22 +271,19 @@
     values() {
       const rest = ROUTE.slice(this.step + 1).reduce((s, r) => s + r.d, 0) + this.d;
       const dist = this.d >= 1000 ? `${num(this.d / 1000, 1)} km` : `${Math.max(10, Math.round(this.d / 10) * 10)} m`;
-      return { dist, eta: `Chegada ${inMin(rest / 70)} · ${Math.max(1, Math.round(rest / 70))} min · ${num(rest / 1000, 1)} km` };
+      return { dist, eta: `${inMin(rest / 70)} · ${Math.max(1, Math.round(rest / 70))} min` };
     },
     compact() {
-      return { lead: `<span class="chip" style="--c:var(--c-nav)">${I(this.s.dir, 15)}</span>`, trail: `<b class="num" style="color:var(--c-nav)" data-t="dist"></b>` };
+      return { lead: `<span class="chip" style="--c:var(--c-nav)">${I(this.s.dir, 13)}</span>`, trail: `<b class="num" style="color:var(--c-nav)" data-t="dist"></b>` };
     },
     minimal() { return `<span style="color:var(--c-nav)">${I(this.s.dir, 18)}</span>`; },
     expanded() {
       return `
       <div class="hdr">
-        <span class="turn">${I(this.s.dir, 28)}</span>
-        <b class="big num" data-t="dist"></b>
-      </div>
-      <span class="title sm ell">${this.s.verb} · ${this.s.street}</span>
-      <div class="row between">
-        <span class="muted small num" data-t="eta"></span>
-        <button class="btn-pill danger" data-act="end">Encerrar</button>
+        <span class="row gap-sm side"><span class="turn">${I(this.s.dir, 20)}</span>
+          <span class="col tight"><b class="small num" data-t="dist"></b><span class="muted xs ell">${this.s.street}</span></span></span>
+        <span class="row gap-sm"><span class="muted xs num right" data-t="eta"></span>
+          <button class="btn-round xs" style="--b:#d9d6e0" data-act="end" aria-label="Encerrar navegação">${I('x', 12)}</button></span>
       </div>`;
     },
     onAction(a, el, E) { if (a === 'end') E.stop('nav'); },
@@ -367,7 +296,7 @@
     ['Quanto custa até o aeroporto?', 'How much is it to the airport?'],
   ];
   N.create.translate = () => ({
-    id: 'translate', name: 'Tradutor', kind: 'live', compactW: 200, expandedH: 104,
+    id: 'translate', name: 'Tradutor', kind: 'live', compactW: 170, expandedH: 80,
     t: 0,
     get phase() { return Math.floor(this.t / 3.5) % 2; },
     tick(dt) { this.t += dt; },
@@ -380,12 +309,12 @@
     minimal() { return `<span style="color:var(--c-flight)">${I('languages', 17)}</span>`; },
     expanded() {
       return `
-      <div class="tr">
-        <div class="col tight tr-side"><span class="muted xs">Português</span><b class="tr-txt" data-t="a"></b></div>
-        <canvas class="tr-wave" aria-hidden="true"></canvas>
-        <div class="col tight tr-side right"><span class="xs" style="color:var(--c-flight)">English</span><b class="tr-txt" style="color:var(--c-flight)" data-t="b"></b></div>
-        <button class="btn-round xs" style="--b:#d9d6e0" data-act="end" aria-label="Encerrar tradução">${I('x', 12)}</button>
-      </div>`;
+      <div class="hdr">
+        <span class="col tight"><span class="muted xs">Português</span><b class="small ell" data-t="a"></b></span>
+        <span class="col tight right"><span class="xs" style="color:var(--c-flight)">English</span><b class="small ell" style="color:var(--c-flight)" data-t="b"></b></span>
+      </div>
+      <div class="row gap-sm"><canvas class="tr-wave" aria-hidden="true"></canvas>
+        <button class="btn-round xs" style="--b:#d9d6e0" data-act="end" aria-label="Encerrar tradução">${I('x', 12)}</button></div>`;
     },
     mount(layer, mode) {
       if (mode !== 'expanded') return null;
@@ -396,7 +325,7 @@
 
   /* ------------------------------------------------------------ Avisos */
   N.create.toast = ({ icon, color, lead, trail, w = 240, ring: withRing = false }) => ({
-    id: 'toast', name: lead, kind: 'alert', alertSize: { w, h: 36 },
+    id: 'toast', name: lead, kind: 'alert', alertSize: { w: Math.min(w + 10, 280), h: 30 },
     alertView() {
       return {
         lead: `<span class="row gap-xs" style="color:${color}">${withRing ? `<span class="pulse" style="--c:${color}">${I(icon, 14)}</span>` : I(icon, 16)}<b>${lead}</b></span>`,
@@ -406,7 +335,7 @@
   });
 
   N.create.silent = (on) => ({
-    id: 'silent', name: on ? 'Silencioso' : 'Toque', kind: 'alert', alertSize: { w: 214, h: 36 },
+    id: 'silent', name: on ? 'Silencioso' : 'Toque', kind: 'alert', alertSize: { w: 204, h: 30 },
     alertView() {
       return {
         lead: `<span class="bellchip ${on ? 'on' : ''}">${I(on ? 'bellOff' : 'bell', 14, 'wiggle')}</span>`,
@@ -416,12 +345,12 @@
   });
 
   N.create.charging = (pct) => ({
-    id: 'charging', name: 'Carregando', kind: 'alert', alertSize: { w: 252, h: 36 }, pct,
+    id: 'charging', name: 'Carregando', kind: 'alert', alertSize: { w: 226, h: 30 }, pct,
     values() { return { p: this.pct / 100 }; },
     alertView() {
       return {
         lead: `<span class="row gap-xs" style="color:var(--c-charge)">${I('bolt', 15)}<b>Carregando</b></span>`,
-        trail: `<span class="row gap-xs"><b class="num" style="color:var(--c-charge)">${this.pct}%</b>${ring('p', 22, 3, 'var(--c-charge)')}</span>`,
+        trail: `<span class="row gap-xs"><b class="num" style="color:var(--c-charge)">${this.pct}%</b>${ring('p', 18, 2.5, 'var(--c-charge)')}</span>`,
       };
     },
   });
@@ -431,57 +360,39 @@
     const d = new Date();
     const wd = d.toLocaleDateString('pt-BR', { weekday: 'long' });
     const day = d.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long' });
-    const dots = Array.from({ length: 14 }, (_, i) => {
-      const a = (i / 14) * Math.PI * 2 - Math.PI / 2, hue = 120 - i * 9;
-      return `<circle cx="${32 + Math.cos(a) * 26}" cy="${32 + Math.sin(a) * 26}" r="${i < 6 ? 3.1 : 2.2}" fill="hsl(${hue} 85% 60%)" opacity="${i < 6 ? 1 : 0.35}"/>`;
-    }).join('');
+    const mini = (key, color, inner, label) => `<span class="mini-g" title="${label}">${ring(key, 34, 3.5, color, inner)}</span>`;
     return {
-      id: 'overview', name: 'Hoje', kind: 'sheet', expandedH: 252, tapToClose: true,
-      values() { return { clock: hhmm(), bat: (N.app ? N.app.battery : 82) / 100, batTxt: N.app ? N.app.battery : 82, steps: 6240 / 8000 }; },
+      id: 'overview', name: 'Hoje', kind: 'sheet', expandedH: 64, tapToClose: true,
+      values() { return { clock: hhmm(), bat: (N.app ? N.app.battery : 82) / 100, batTxt: N.app ? N.app.battery : 82, steps: 6240 / 8000, temp: 0.55 }; },
       expanded() {
         return `
         <div class="hdr">
-          <div class="col tight"><span class="muted small cap ell">${wd}</span><b class="title ell">${day}</b></div>
-          <b class="big num thin" data-t="clock"></b>
-        </div>
-        <div class="gauges">
-          <div class="gauge">${ring('bat', 64, 6, 'var(--c-charge)', `<b class="num" data-t="batTxt"></b>${I('bolt', 10)}`)}<span>Bateria</span></div>
-          <div class="gauge">${ring('steps', 64, 6, 'var(--c-workout)', '<b class="num">6,2k</b>')}<span>Passos</span></div>
-          <div class="gauge"><span class="ring" style="width:64px;height:64px">
-            <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="tg" x1="0" x2="1"><stop offset="0" stop-color="#5ad1ff"/><stop offset="1" stop-color="#ffb340"/></linearGradient></defs>
-            <circle cx="32" cy="32" r="27" fill="none" stroke="url(#tg)" stroke-width="5" stroke-linecap="round" pathLength="100" stroke-dasharray="75 100" transform="rotate(135 32 32)"/>
-            <circle cx="${32 + Math.cos(Math.PI * 0.75 + Math.PI * 1.5 * 0.55) * 27}" cy="${32 + Math.sin(Math.PI * 0.75 + Math.PI * 1.5 * 0.55) * 27}" r="4" fill="#fff" stroke="#000" stroke-width="2"/></svg>
-            <span class="ring-in col"><b class="num">24°</b><span class="xs muted num">18 · 29</span></span></span><span>Clima</span></div>
-          <div class="gauge"><span class="ring" style="width:64px;height:64px"><svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true">${dots}</svg>
-            <span class="ring-in col"><b class="num">42</b><span class="xs muted">IQA</span></span></span><span>Ar</span></div>
-        </div>
-        <div class="event"><i></i><div class="col tight grow"><b class="small">Revisão do projeto</b><span class="muted xs num">14:00 – 15:00 · Sala 3</span></div>${ava('AL', '#a98cff', '#5d43c9', 26)}<span class="plus">+2</span></div>`;
+          <span class="col tight"><b class="mid num thin" data-t="clock"></b><span class="muted xs cap ell">${wd}, ${day}</span></span>
+          <span class="row gap-xs">
+            ${mini('bat', 'var(--c-charge)', '<b class="num" data-t="batTxt"></b>', 'Bateria')}
+            ${mini('steps', 'var(--c-workout)', '<b class="num">78</b>', 'Passos: 78% da meta')}
+            ${mini('temp', 'var(--c-flight)', '<b class="num">24°</b>', 'Clima')}
+          </span>
+        </div>`;
       },
     };
   };
 
   /* ------------------------------------------------------------ Note (assistente) */
-  const SUGGESTIONS = [
-    ['Timer de 5 min', 'timer de 5 minutos'], ['Tocar música', 'tocar música'], ['Como está o tempo?', 'como está o tempo?'],
-    ['Pedir corrida', 'pedir uma corrida'], ['Traduzir', 'traduzir para inglês'], ['Modo silencioso', 'ativar modo silencioso'],
-  ];
   N.create.assistant = () => ({
-    id: 'note', name: 'Note', kind: 'sheet', expandedH: 262, glow: true,
+    id: 'note', name: 'Note', kind: 'sheet', expandedH: 124, glow: true,
     text: 'Como posso ajudar?', status: 'Fale ou digite', level: 0.18, rec: null, ti: 0, wait: 0,
     values() { return { text: this.text, status: this.status, listening: !!this.rec }; },
     expanded() {
       return `
       <div class="hdr"><span class="row gap-sm"><span class="orb" aria-hidden="true"></span><b class="as-name">Note</b></span><span class="muted small as-status ell" data-t="status"></span></div>
       <p class="as-text" data-t="text" aria-live="polite"></p>
-      <canvas class="as-wave" aria-hidden="true"></canvas>
-      <div class="chips">${(N.suggestions || SUGGESTIONS).map(([l, q]) => `<button class="chip-btn" data-act="ask" data-q="${q}">${l}</button>`).join('')}</div>
       <form class="ask" autocomplete="off">
-        <input id="note-ask" name="q" type="text" placeholder="Pergunte ao Note" aria-label="Pergunte ao Note" enterkeyhint="send">
+        <input id="note-ask" name="q" type="text" placeholder="Peça um timer, música, silencioso…" aria-label="Pergunte ao Note" enterkeyhint="send">
         <button type="button" class="mic" data-act="mic" data-on="listening" aria-label="Falar com o Note">${I('mic', 18)}</button>
         <button type="submit" class="send" aria-label="Enviar">${I('send', 18)}</button>
       </form>`;
     },
-    mount(layer, mode) { return mode === 'expanded' ? N.wave(layer.querySelector('.as-wave'), () => this.level) : null; },
     onAction(a, el, E) {
       if (a === 'ask') this.ask(el.dataset.q, E);
       if (a === 'mic') this.listen(E);

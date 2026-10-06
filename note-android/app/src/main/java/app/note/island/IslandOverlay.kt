@@ -98,7 +98,7 @@ class IslandOverlay(private val service: IslandService) {
         }
 
         measureScreen()
-        root.addView(web, FrameLayout.LayoutParams(screenW, dp(PAGE_HEIGHT_DP), Gravity.TOP or Gravity.CENTER_HORIZONTAL))
+        root.addView(web, FrameLayout.LayoutParams(screenW, dp(PAGE_HEIGHT_DP), Gravity.TOP or Gravity.START))
 
         lp.type = WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY
         lp.format = PixelFormat.TRANSLUCENT
@@ -114,7 +114,7 @@ class IslandOverlay(private val service: IslandService) {
         else WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
         lp.softInputMode = WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING
         lp.title = "Note"
-        applyBounds(30f, 70f)
+        applyBounds(30f, 60f, false)
 
         wm.addView(root, lp)
         attached = true
@@ -196,13 +196,27 @@ class IslandOverlay(private val service: IslandService) {
         return if (id > 0) service.resources.getDimensionPixelSize(id) else dp(28)
     }
 
-    /** half e bottom chegam em px de CSS (= dp). */
-    private fun applyBounds(halfDp: Float, bottomDp: Float) {
-        val half = ceil(halfDp * density)
-        lp.width = (half * 2).roundToInt()
-        lp.height = ceil(bottomDp * density).roundToInt()
-        lp.x = (centerX - half).roundToInt()
+    /**
+     * Recorta a janela em volta da ilha. half e bottom chegam em px de CSS (= dp).
+     *
+     * Parada e fina (full = false): janela do tamanho exato da ilha.
+     * Animando ou aberta (full = true): largura da tela inteira, que não muda durante a
+     * animação. Nos dois casos a página fica no mesmo pixel da tela, então a troca não treme.
+     */
+    private fun applyBounds(halfDp: Float, bottomDp: Float, full: Boolean) {
+        val cx = centerX.roundToInt()
+        val pageLeft = cx - screenW / 2f // onde a borda esquerda da página cai na tela
+        if (full) {
+            lp.x = 0
+            lp.width = screenW
+        } else {
+            val half = ceil(halfDp * density).toInt()
+            lp.x = cx - half
+            lp.width = half * 2
+        }
+        lp.height = ceil(bottomDp * density).toInt()
         lp.y = 0
+        web.translationX = pageLeft - lp.x
         if (attached && !hidden) wm.updateViewLayout(root, lp)
     }
 
@@ -228,7 +242,7 @@ class IslandOverlay(private val service: IslandService) {
         }
 
         @JavascriptInterface
-        fun setBounds(half: Double, bottom: Double) = main.post { applyBounds(half.toFloat(), bottom.toFloat()) }
+        fun setBounds(half: Double, bottom: Double, full: Boolean) = main.post { applyBounds(half.toFloat(), bottom.toFloat(), full) }
 
         @JavascriptInterface
         fun setKeyboard(on: Boolean) = main.post {
@@ -302,6 +316,6 @@ class IslandOverlay(private val service: IslandService) {
 
     private companion object {
         const val PAGE_HEIGHT_DP = 360
-        const val ISLAND_HALF_DP = 18f
+        const val ISLAND_HALF_DP = 15f
     }
 }

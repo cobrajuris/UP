@@ -19,15 +19,9 @@
     charge() { E.alert(N.create.charging(N.app.battery), 2600); },
   };
 
-  /* Sugestões do assistente que fazem sentido no celular de verdade. */
-  N.suggestions = [
-    ['Timer de 5 min', 'timer de 5 minutos'], ['Tocar música', 'tocar música'], ['Resumo de hoje', 'resumo de hoje'],
-    ['Silencioso', 'ativar modo silencioso'], ['Bateria', 'como está a bateria?'], ['Ligar', 'ligar para alguém'],
-  ];
-
   /* ---------------------------------------------------------- música real (MediaSession) */
   const media = {
-    id: 'music', name: 'Música', kind: 'live', compactW: 214, expandedH: 236,
+    id: 'music', name: 'Música', kind: 'live', compactW: 176, expandedH: 100,
     key: '', title: '', artist: '', app: '', art: '', dur: 0, pos: 0, playing: false,
     get variant() { return this.key; },
     tick(dt) { if (this.playing && this.dur) this.pos = Math.min(this.dur, this.pos + dt); },
@@ -42,30 +36,21 @@
         ? `<span class="art img" style="width:${size}px;height:${size}px;border-radius:${r}px;background-image:url(${this.art})"></span>`
         : `<span class="art" style="--g1:#7b5cff;--g2:#f08bd6;width:${size}px;height:${size}px;border-radius:${r}px"></span>`;
     },
-    compact() { return { lead: this.artHtml(24, 7), trail: eq('var(--c-music)', 'play') }; },
+    compact() { return { lead: this.artHtml(20, 6), trail: eq('var(--c-music)', 'play') }; },
     minimal() { return eq('var(--c-music)', 'play', 3); },
     expanded() {
       return `
       <div class="hdr">
-        <span class="tag ell" style="--c:var(--c-music)">${I('music', 13)} ${esc(this.app || 'Tocando')}</span>
-        ${eq('var(--c-music)', 'play')}
+        <span class="row gap-sm side">${this.artHtml(32, 9)}<span class="col tight"><span class="xs muted ell">${esc(this.app)}</span>${eq('var(--c-music)', 'play')}</span></span>
+        <span class="row gap-xs">
+          <button class="btn-ghost" data-act="prev" aria-label="Faixa anterior">${I('prev', 18)}</button>
+          <button class="btn-ghost" data-act="toggle" aria-label="Tocar ou pausar">
+            <span data-show="play">${I('pause', 22)}</span><span data-show="pause" hidden>${I('play', 22)}</span></button>
+          <button class="btn-ghost" data-act="next" aria-label="Próxima faixa">${I('next', 18)}</button>
+        </span>
       </div>
-      <div class="row gap">
-        ${this.artHtml(56, 14)}
-        <div class="meta"><b>${esc(this.title || 'Sem título')}</b><span class="muted">${esc(this.artist)}</span><canvas class="dots" aria-hidden="true"></canvas></div>
-      </div>
-      <div class="prog"><span class="num small" data-t="pos"></span><div class="bar" style="--c:var(--c-music)"><i data-p="p"></i></div><span class="num small muted" data-t="rem"></span></div>
-      <div class="row center gap-lg">
-        <button class="btn-ghost" data-act="prev" aria-label="Faixa anterior">${I('prev', 24)}</button>
-        <button class="btn-ghost lg" data-act="toggle" aria-label="Tocar ou pausar">
-          <span data-show="play">${I('pause', 30)}</span><span data-show="pause" hidden>${I('play', 30)}</span>
-        </button>
-        <button class="btn-ghost" data-act="next" aria-label="Próxima faixa">${I('next', 24)}</button>
-      </div>`;
-    },
-    mount(layer, mode) {
-      if (mode !== 'expanded') return null;
-      return N.dotMatrix(layer.querySelector('.dots'), () => `${this.title} - ${this.artist}     `, () => this.playing);
+      <p class="track ell"><b>${esc(this.title || 'Sem título')}</b> <span class="muted">${this.artist ? '· ' + esc(this.artist) : ''}</span></p>
+      <div class="prog"><span class="num xs" data-t="pos"></span><div class="bar" style="--c:var(--c-music)"><i data-p="p"></i></div><span class="num xs muted" data-t="rem"></span></div>`;
     },
     onAction(a) {
       if (a === 'toggle') this.playing = !this.playing;
@@ -77,13 +62,13 @@
   const notice = (n) => {
     const icon = safeImg(n.icon);
     return {
-      id: 'notice', name: n.app, kind: 'alert', alertSize: { w: 360, h: 92 },
+      id: 'notice', name: n.app, kind: 'alert', alertSize: { w: 330, h: 60 },
       alertHtml() {
         return `
-        <div class="hdr"><span class="xs muted ell">${esc(n.app)}</span><span class="xs muted">agora</span></div>
-        <div class="row gap-sm">
-          <span class="nt-ic ${icon ? 'img' : ''}" ${icon ? `style="background-image:url(${icon})"` : ''}>${esc((n.app || '?').charAt(0))}</span>
-          <div class="col tight grow"><b class="small ell">${esc(n.title)}</b><span class="xs muted ell">${esc(n.text)}</span></div>
+        <div class="hdr">
+          <span class="row gap-sm side"><span class="nt-ic ${icon ? 'img' : ''}" ${icon ? `style="background-image:url(${icon})"` : ''}>${esc((n.app || '?').charAt(0))}</span>
+            <span class="col tight"><b class="small ell">${esc(n.title)}</b><span class="xs muted ell">${esc(n.text)}</span></span></span>
+          <span class="col tight right"><span class="xs muted ell">${esc(n.app)}</span><span class="xs muted">agora</span></span>
         </div>`;
       },
       onTap() { call('open', n.key); },
@@ -96,14 +81,15 @@
   const incomingReal = (c) => {
     const ai = c.actions.findIndex((t) => ANSWER.test(t)), di = c.actions.findIndex((t) => DECLINE.test(t));
     return {
-      id: 'incoming', name: `Chamada de ${c.title}`, kind: 'sheet', expandedH: 84, key: c.key,
+      id: 'incoming', name: `Chamada de ${c.title}`, kind: 'sheet', expandedH: 60, key: c.key,
       expanded() {
         return `
-        <div class="row gap call-in">
-          ${N.ui.ava(esc((c.title || '?').charAt(0)), '#8e8e98', '#4b4b55', 52)}
-          <div class="col grow tight"><span class="muted small ell">${esc(c.text || 'Chamada')}</span><b class="title sm ell">${esc(c.title)}</b></div>
-          ${di >= 0 ? `<button class="btn-round solid" style="--b:var(--c-alert)" data-act="decline" aria-label="Recusar">${I('phoneDown', 22)}</button>` : ''}
-          ${ai >= 0 ? `<button class="btn-round solid ringing" style="--b:var(--c-call)" data-act="accept" aria-label="Atender">${I('phone', 22)}</button>` : ''}
+        <div class="hdr">
+          <span class="row gap-sm side">${N.ui.ava(esc((c.title || '?').charAt(0)), '#8e8e98', '#4b4b55', 36)}<span class="col tight"><span class="muted xs ell">${esc(c.text || 'Chamada')}</span><b class="small ell">${esc(c.title)}</b></span></span>
+          <span class="row gap-sm">
+            ${di >= 0 ? `<button class="btn-round sm solid" style="--b:var(--c-alert)" data-act="decline" aria-label="Recusar">${I('phoneDown', 17)}</button>` : ''}
+            ${ai >= 0 ? `<button class="btn-round sm solid ringing" style="--b:var(--c-call)" data-act="accept" aria-label="Atender">${I('phone', 17)}</button>` : ''}
+          </span>
         </div>`;
       },
       onAction(a) {
@@ -117,10 +103,9 @@
     callKey = c.key;
     const live = N.create.call({ name: c.title || 'Chamada', initials: (c.title || '?').charAt(0) });
     const di = c.actions.findIndex((t) => DECLINE.test(t));
-    live.onAction = function (a, el) {
+    live.onAction = function (a) {
       if (a === 'end') { if (di >= 0) call('action', c.key, di); E.stop('call'); }
       if (a === 'mute') this.muted = !this.muted;
-      if (a === 'speaker') { this.speaker = !this.speaker; el.classList.toggle('solid', this.speaker); }
     };
     E.start(live);
   };
@@ -140,7 +125,7 @@
       { k: 'g4', label: 'Avisos', p: Math.min(1, (s.notices || 0) / 10) * 100, color: 'var(--c-timer)', text: String(s.notices || 0) },
     ];
     return {
-      id: 'overview', name: 'Hoje', kind: 'sheet', expandedH: 186, tapToClose: true,
+      id: 'overview', name: 'Hoje', kind: 'sheet', expandedH: 64, tapToClose: true,
       values() {
         const v = { clock: N.fmt.hhmm() };
         g.forEach((x) => { v[x.k] = x.p / 100; });
@@ -149,10 +134,9 @@
       expanded() {
         return `
         <div class="hdr">
-          <div class="col tight"><span class="muted small cap ell">${wd}</span><b class="title ell">${day}</b></div>
-          <b class="big num thin" data-t="clock"></b>
-        </div>
-        <div class="gauges">${g.map((x) => `<div class="gauge">${ring(x.k, 60, 6, x.color, `<b class="num">${x.text || x.p}</b>${x.text ? '' : `<small>${x.unit}</small>`}`)}<span>${x.label}</span></div>`).join('')}</div>`;
+          <span class="col tight"><b class="mid num thin" data-t="clock"></b><span class="muted xs cap ell">${wd}, ${day}</span></span>
+          <span class="row gap-xs">${g.slice(0, 3).map((x) => `<span class="mini-g" title="${x.label}">${ring(x.k, 34, 3.5, x.color, `<b class="num">${x.text || x.p}</b>`)}</span>`).join('')}</span>
+        </div>`;
       },
     };
   };
@@ -242,7 +226,7 @@
   };
 
   /* Tamanho da janela e teclado acompanham a ilha. */
-  E.onBounds((half, bottom) => call('setBounds', half, bottom));
+  E.onBounds((half, bottom, full) => call('setBounds', half, bottom, !!full));
   E.onChange((st, mode, act) => {
     call('setKeyboard', !!(mode === 'expanded' && act && act.id === 'note'));
     if (!(st.sheet && st.sheet.id === 'note') && listening) { listening = null; call('stopListening'); }

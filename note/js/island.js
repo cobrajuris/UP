@@ -15,15 +15,16 @@
 (function (N) {
   const S = N.Spring;
   const E = {};
+  const H = 30; // altura da pílula: fina, em volta do furo da câmera
   const sp = {
-    w: new S(36), h: new S(36), r: new S(18),
-    s: new S(1, { response: 0.32, damping: 0.62 }),
-    x: new S(0, { response: 0.4, damping: 0.55 }),
-    bx: new S(0, { response: 0.55, damping: 0.72 }),
-    bs: new S(0, { response: 0.5, damping: 0.68 }),
+    w: new S(H), h: new S(H), r: new S(H / 2),
+    s: new S(1, { response: 0.3, damping: 0.82 }),
+    x: new S(0, { response: 0.4, damping: 0.75 }),
+    bx: new S(0, { response: 0.5, damping: 0.82 }),
+    bs: new S(0, { response: 0.45, damping: 0.8 }),
   };
   const st = { live: [], sheet: null, alert: null, expanded: false, stretch: 0 };
-  const target = { w: 36, h: 36, r: 18 };
+  const target = { w: H, h: H, r: H / 2 };
   const listeners = [];
   const boundsFns = [];
   let lastBounds = '';
@@ -35,14 +36,15 @@
 
   /* ---------- geometria ---------- */
   function sizeFor(mode, act) {
-    if (mode === 'idle') return { w: 36, h: 36, r: 18 }; // círculo em volta do furo da câmera
-    if (mode === 'compact') return { w: Math.min(act.compactW || 230, W - 120), h: 36, r: 18 };
+    if (mode === 'idle') return { w: H, h: H, r: H / 2 }; // círculo em volta do furo da câmera
+    if (mode === 'compact') return { w: Math.min(act.compactW || 180, W - 140), h: H, r: H / 2 };
     if (mode === 'alert') {
-      const a = act.alertSize || { w: 240, h: 36 };
+      const a = act.alertSize || { w: 210, h: H };
       return { w: Math.min(a.w, W - 24), h: a.h, r: a.h / 2 };
     }
-    const h = act.expandedH || 160;
-    return { w: Math.min(W - 18, 384), h, r: h < 110 ? h / 2 : 44 };
+    const h = act.expandedH || 64;
+    // Aberta: pílula larga e baixa, sem virar um cartão grande.
+    return { w: Math.min(W - 36, 344), h, r: Math.min(h / 2, 34) };
   }
 
   function current() {
@@ -131,7 +133,7 @@
     const key = mode + ':' + (act ? act.uid + ':' + (act.variant || '') : '');
     const t = sizeFor(mode, act);
     const grow = t.w * t.h > target.w * target.h + 1;
-    for (const k of ['w', 'h', 'r']) sp[k].config(grow ? 0.56 : 0.44, grow ? 0.72 : 0.86);
+    for (const k of ['w', 'h', 'r']) sp[k].config(grow ? 0.5 : 0.42, grow ? 0.8 : 0.92);
     Object.assign(target, t);
     if (key !== viewKey || force) { swap(mode, act, t, dir); viewKey = key; }
 
@@ -157,26 +159,26 @@
     sp.h.t = target.h + s * 0.45;
     sp.r.t = target.r + Math.max(0, s) * 0.12;
     if (bubbleAct) {
-      sp.bx.t = W / 2 + target.w / 2 + 10 + 18;
-      sp.bs.t = 36;
+      sp.bx.t = W / 2 + target.w / 2 + 8 + H / 2;
+      sp.bs.t = H;
     } else {
-      sp.bx.t = W / 2 + target.w / 2 - 22;
+      sp.bx.t = W / 2 + target.w / 2 - H / 2 - 4;
       sp.bs.t = 0;
     }
   }
 
   /* ---------- quadro a quadro ---------- */
   function draw() {
-    const w = Math.max(24, sp.w.v), h = Math.max(20, sp.h.v);
+    const w = Math.max(20, sp.w.v), h = Math.max(18, sp.h.v);
     const r = Math.max(0, Math.min(sp.r.v, h / 2, w / 2));
     const tf = `translateX(calc(-50% + ${sp.x.v.toFixed(2)}px)) scale(${sp.s.v.toFixed(4)})`;
     const box = `width:${w.toFixed(2)}px;height:${h.toFixed(2)}px;border-radius:${r.toFixed(2)}px;transform:${tf}`;
-    island.style.cssText = box + `;--lift:${Math.min(1, (h - 36) / 140).toFixed(3)}`;
+    island.style.cssText = box + `;--lift:${Math.min(1, (h - H) / 90).toFixed(3)}`;
     gMain.style.cssText = box;
     glow.style.cssText = `width:${(w + 6).toFixed(2)}px;height:${(h + 6).toFixed(2)}px;border-radius:${(r + 3).toFixed(2)}px;transform:${tf}`;
     const bs = Math.max(0, sp.bs.v);
-    const bbox = `width:${bs.toFixed(2)}px;height:${bs.toFixed(2)}px;left:${sp.bx.v.toFixed(2)}px;top:calc(var(--top) + ${(18 - bs / 2).toFixed(2)}px)`;
-    bubble.style.cssText = bbox + `;--o:${Math.max(0, Math.min(1, (bs - 26) / 10)).toFixed(3)}`;
+    const bbox = `width:${bs.toFixed(2)}px;height:${bs.toFixed(2)}px;left:${sp.bx.v.toFixed(2)}px;top:calc(var(--top) + ${(H / 2 - bs / 2).toFixed(2)}px)`;
+    bubble.style.cssText = bbox + `;--o:${Math.max(0, Math.min(1, (bs - H + 8) / 8)).toFixed(3)}`;
     gBub.style.cssText = bbox;
   }
 
@@ -239,6 +241,7 @@
   }
   E.present = (sheet) => {
     sheet.uid = ++uid;
+    clearTimeout(alertT); st.alert = null; // painel aberto (chamada, Note) passa na frente de avisos
     if (st.sheet) closeSheet();
     st.sheet = sheet;
     st.expanded = false;
@@ -308,7 +311,7 @@
   function onLong() {
     const { mode } = current();
     N.haptic(14);
-    sp.s.vel += 2.2;
+    sp.s.vel += 1.2;
     if (mode === 'idle') E.present(N.create.overview());
     else if (mode === 'compact') E.expand();
     kick();
@@ -319,15 +322,15 @@
   function emitBounds(settled) {
     if (!boundsFns.length) return;
     const { mode } = current();
-    const small = settled && target.h <= 40 && mode !== 'expanded';
-    const mx = small ? 4 : 30, mb = small ? 4 : 56;
-    let half = Math.max(target.w, settled ? 0 : sp.w.v) / 2 + mx;
-    if (bubbleAct || (!settled && sp.bs.v > 1)) half = Math.max(half, Math.max(sp.bx.t, sp.bx.v) - W / 2 + 18 + mx);
-    const bottom = TOP + Math.max(target.h, settled ? 0 : sp.h.v) + mb;
-    const key = `${Math.ceil(half)}:${Math.ceil(bottom)}`;
+    // Parada e fina: só o tamanho exato. Animando ou aberta: largura total fixa (sem tremer).
+    const small = settled && target.h <= H + 4 && mode !== 'expanded';
+    let half = target.w / 2 + 4;
+    if (bubbleAct) half = Math.max(half, sp.bx.t - W / 2 + H / 2 + 4);
+    const bottom = TOP + (small ? target.h + 4 : Math.max(target.h, sp.h.v) + 56);
+    const key = small ? `${Math.ceil(half)}:${Math.ceil(bottom)}` : `F:${Math.ceil(bottom)}`;
     if (key === lastBounds) return;
     lastBounds = key;
-    boundsFns.forEach((f) => f(Math.ceil(half), Math.ceil(bottom), settled));
+    boundsFns.forEach((f) => f(Math.ceil(half), Math.ceil(bottom), !small));
   }
   E.onBounds = (f) => { boundsFns.push(f); lastBounds = ''; emitBounds(false); };
 
@@ -338,7 +341,7 @@
     press = { x: e.clientX, y: e.clientY, moved: false, long: false, mode, id: e.pointerId };
     lastBounds = ''; emitBounds(false);
     try { island.setPointerCapture(e.pointerId); } catch (err) { /* ok */ }
-    sp.s.t = mode === 'expanded' ? 0.985 : 0.94;
+    sp.s.t = mode === 'expanded' ? 0.99 : 0.96;
     if (mode !== 'expanded') lpT = setTimeout(() => { if (press && !press.moved) { press.long = true; sp.s.t = 1; onLong(); } }, 430);
     kick();
   }

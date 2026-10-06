@@ -10,15 +10,13 @@ body.overlay { font-family: system-ui, "Google Sans", Roboto, sans-serif; }
 
 /* Notificação no estilo HyperOS: app, título e texto. */
 .nt-ic {
-  width: 34px; height: 34px; flex: none;
+  width: 32px; height: 32px; flex: none;
   border-radius: 10px;
   display: grid; place-items: center;
   background: rgba(255, 255, 255, .12) center / cover no-repeat;
   font-weight: 700; font-size: 15px; color: var(--ink);
 }
 .nt-ic.img { background-color: transparent; color: transparent; }
-.exp-notice { padding: 10px 22px 14px; justify-content: flex-start; gap: 6px; }
-.exp-notice .col { min-width: 0; }
 .art.img { background: #222 center / cover no-repeat; }
 .art.img::after { display: none; }
 .gauge .ring-in small { font-size: 10px; color: var(--ink-2); margin-left: 1px; }
